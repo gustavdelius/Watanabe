@@ -103,8 +103,10 @@ def metropolis(Y, X, H, iters=50000, burn_in=20000):
 
 def run_trial(seed):
     """
-    Runs a single trial for an experiment comparing WAIC, LOO-CV (ISCV), AIC, and Ground Truth Generalization (GE).
-    This function generates a dataset according to the true generative process and fits models of varying complexity.
+    Runs a single trial for an experiment comparing WAIC, LOO-CV (ISCV), AIC, 
+    and Ground Truth Generalization (GE).
+    This function generates a dataset according to the true generative process and 
+    fits models of varying complexity.
     """
     trial_file = f'figures/trial_{seed}.pkl'
     if os.path.exists(trial_file):
@@ -119,9 +121,10 @@ def run_trial(seed):
     n = 200 # Training dataset size
     H_true = 3 # The true synthetic model has 3 hidden units
     # The true parameters: we use a fixed true network across all trials 
-    # to see consistent generalization behavior (like in the book)
-    rng_true = np.random.RandomState(42) 
-    w_true = rng_true.normal(0, 2.0, size=3*H_true)
+    # to see consistent generalization behavior (like in the book).
+    # Seed 100 with std=3.0 creates a robustly complex 3-unit network mapping.
+    rng_true = np.random.RandomState(100) 
+    w_true = rng_true.normal(0, 3.0, size=3*H_true)
     
     # Generate training data inputs and outputs 
     X = np.random.uniform(-2, 2, size=(n, 2))
