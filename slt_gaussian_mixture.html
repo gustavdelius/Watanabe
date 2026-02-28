@@ -170,6 +170,10 @@ window.Quarto = {
     <a class="nav-link active" href="./slt_gaussian_mixture.html" aria-current="page"> 
 <span class="menu-text">SLT Gaussian Mixture</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./neural_network_figure_2_7.html"> 
+<span class="menu-text">Neural Network (Figure 2.7)</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -240,7 +244,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="the-two-component-gaussian-mixture">The Two-Component Gaussian Mixture</h3>
 <p>Let’s define a simple 2-parameter Gaussian Mixture Model where one component is fixed at the origin: <span class="math display">\[ p(x|w) = (1-a) \mathcal{N}(x|0, 1) + a \mathcal{N}(x|\mu, 1) \]</span> Here, the parameter vector is <span class="math inline">\(w = (a, \mu) \in W = [0, 1] \times [-c, c]\)</span>.</p>
 <p>Suppose the <strong>true distribution</strong> is simply a standard normal distribution: <span class="math display">\[ q(x) = \mathcal{N}(x|0, 1) \]</span></p>
-<div id="cell-fig-distributions" class="cell" data-execution_count="1">
+<div id="cell-fig-distributions" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -285,7 +289,7 @@ Figure&nbsp;1: True Distribution vs Model
 <p>The log-likelihood ratio (empirical loss) is driven by the Kullback-Leibler (KL) divergence from <span class="math inline">\(q(x)\)</span> to <span class="math inline">\(p(x|w)\)</span>: <span class="math display">\[ K(w) = \int q(x) \log \frac{q(x)}{p(x|w)} dx \]</span></p>
 <p>Using a Taylor expansion for small <span class="math inline">\(a\)</span> and <span class="math inline">\(\mu\)</span>, we can approximate <span class="math inline">\(p(x|w)\)</span>: <span class="math display">\[ p(x|w) = \mathcal{N}(x|0, 1) \left[ 1 + a (e^{\mu x - \mu^2/2} - 1) \right] \approx \mathcal{N}(x|0, 1) \left[ 1 + a\left(\mu x + \frac{1}{2}\mu^2(x^2 - 1)\right) \right] \]</span></p>
 <p>Plugging this into the KL divergence and using <span class="math inline">\(-\log(1+z) \approx -z + z^2/2\)</span>, the linear terms integrate to 0 under <span class="math inline">\(q(x)\)</span>, leaving the leading non-zero term: <span class="math display">\[ K(w) \approx \frac{1}{2} a^2 \mu^2 \]</span></p>
-<div id="cell-fig-kl-divergence" class="cell" data-execution_count="2">
+<div id="cell-fig-kl-divergence" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">400</span>)</span>
@@ -362,7 +366,7 @@ Figure&nbsp;2: Parameter Space and KL Divergence. Notice how the valley of <span
 <p>Chapter 4 defines how the parameter posterior behaves under singular fluctuations. Using the algebraic invariants we just found, SLT proves that the free energy asymptotically expands as:</p>
 <p><span class="math display">\[ F_n \approx n L_n(w_0) + \lambda \log n - (m-1) \log \log n + O_p(1) \]</span></p>
 <p>For our two-component Gaussian Mixture Model: <span class="math display">\[ F_n \approx n L_n(w_0) + \frac{1}{2} \log n - \log \log n + O_p(1) \]</span></p>
-<div id="cell-fig-free-energy" class="cell" data-execution_count="3">
+<div id="cell-fig-free-energy" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> np.logspace(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">100</span>)</span>
@@ -414,7 +418,7 @@ Figure&nbsp;3: Asymptotic Free Energy. The penalty term for the singular model i
 <section id="calculating-waic-in-practice" class="level3">
 <h3 class="anchored" data-anchor-id="calculating-waic-in-practice">Calculating WAIC in Practice</h3>
 <p>To make this concrete, let’s generate a synthetic dataset from the true distribution <span class="math inline">\(q(x) = \mathcal{N}(0, 1)\)</span> and compute the WAIC for our toy GMM. By using a fine grid covering our parameter space <span class="math inline">\(W = [0, 1] \times [-2, 2]\)</span>, we can exactly compute the posterior and WAIC without relying on intricate MCMC setups.</p>
-<div id="waic-calculation" class="cell" data-execution_count="4">
+<div id="waic-calculation" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -505,7 +509,7 @@ Generalization Error = 1.4243</code></pre>
 <section id="visualizing-the-posterior" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-the-posterior">Visualizing the Posterior</h3>
 <p>We can also visualize the posterior distribution over our parameter grid to see how it concentrates around the true parameters. Because this is a singular model, the asymptotic distribution does not look like a neat Gaussian blob—instead, it concentrates along the non-identifiable manifold (the cross at <span class="math inline">\(a=0\)</span> or <span class="math inline">\(\mu=0\)</span>).</p>
-<div id="cell-fig-posterior" class="cell" data-execution_count="5">
+<div id="cell-fig-posterior" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -542,7 +546,7 @@ Figure&nbsp;4: Posterior Distribution of GMM Parameters. Notice how the probabil
 <p>In this case, the true parameters <span class="math inline">\((a_0, \mu_0)\)</span> lie in the interior of the parameter space, and there is exactly one parameter combination that matches the distribution. The true parameter space shrinks to a single, unique point. Because the true parameters are uniquely identifiable, the log-likelihood function has a strict minimum at <span class="math inline">\((a_0, \mu_0)\)</span>, and the Hessian (Fisher Information Matrix) becomes positive definite. <strong>Asymptotically (<span class="math inline">\(n \to \infty\)</span>), the model behaves as a standard regular model</strong>.</p>
 <p>In this theoretical asymptotic scenario: 1. The Real Log Canonical Threshold becomes <span class="math inline">\(\lambda = d/2 = 2/2 = 1.0\)</span>. 2. The multiplicity is <span class="math inline">\(m = 1\)</span>. 3. The Bayesian Occam’s Razor penalty term in WAIC should converge to roughly <span class="math inline">\(1.0\times (\log n)/n\)</span> for free energy, or <span class="math inline">\(1.0/n\)</span> for generalization error. We expect the functional variance <span class="math inline">\(V\)</span> to approximate this <span class="math inline">\(1.0\)</span> factor (rather than <span class="math inline">\(0.5\)</span>).</p>
 <p>Let’s test this by running our WAIC code again, but generating the data from <span class="math inline">\(a=0.5\)</span> and <span class="math inline">\(\mu=0.3\)</span>:</p>
-<div id="cell-waic-regular-case" class="cell" data-execution_count="6">
+<div id="cell-waic-regular-case" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Generate synthetic data from a true mixture model</span></span>
