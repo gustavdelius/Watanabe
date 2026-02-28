@@ -1,3 +1,6 @@
 watanabe.txt
 __pycache__/
 *.pyc
+
+/.quarto/
+**/*.quarto_ipynb

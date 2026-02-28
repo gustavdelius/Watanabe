@@ -10,6 +10,10 @@ website:
         text: Home
       - href: slt_gaussian_mixture.qmd
         text: SLT Gaussian Mixture
+      - href: regular_and_singular_models.qmd
+        text: Regular and Singular Models
+      - href: cheat_sheet.qmd
+        text: Cheat Sheet
 
 format:
   html:

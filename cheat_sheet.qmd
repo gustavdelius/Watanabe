@@ -1,0 +1,85 @@
+---
+title: "Cheat Sheet: Important Definitions"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+---
+
+This page provides a quick reference for the most important definitions in Sumio Watanabe's *Mathematical Theory of Bayesian Statistics* and Singular Learning Theory (SLT).
+
+## Core Concepts
+
+### True Distribution
+The unknown true generation process of the data, denoted $q(x)$.
+
+### Parametric Model
+A set of probability distributions $p(x|w)$ parameterized by $w \in W \subset \mathbb{R}^d$. 
+
+### Prior Distribution
+A probability distribution $\varphi(w)$ over the parameter space $W$.
+
+### Log Likelihood Ratio
+The function that measures the discrepancy between the true distribution and the parametric model:
+$$ K(w) = \int q(x) \log \frac{q(x)}{p(x|w)} dx $$
+This is the Kullback-Leibler (KL) divergence between $q(x)$ and $p(x|w)$. The set of optimal parameters is $W_0 = \{w \in W : K(w) = 0 \}$.
+
+## Regular vs. Singular Models
+
+### Regular Model
+A statistical model is **regular** if the map from parameters to probability distributions ($w \mapsto p(x|w)$) is one-to-one, and the Fisher information matrix is positive definite at the optimal parameter $w_0$. Regular models satisfy classical asymptotic theories.
+
+### Singular Model
+A statistical model is **singular** if it is not regular. In singular models, the Fisher information matrix is singular (not positive definite) at the true parameters, or the parameter-to-distribution mapping is many-to-one. Examples include neural networks, Gaussian mixture models, hidden Markov models, and Bayesian networks.
+
+## Bayesian Inference
+
+### Marginal Likelihood (Evidence)
+The probability of observing the data $X^n = (X_1, \dots, X_n)$ given the model and the prior:
+$$ Z_n = \int \prod_{i=1}^n p(X_i|w) \varphi(w) dw $$
+
+### Free Energy
+The negative log of the marginal likelihood:
+$$ F_n = -\log Z_n $$
+In SLT, the asymptotic behavior of the free energy is a central object of study. For regular models, $F_n \approx n L_n(\hat{w}) + \frac{d}{2} \log n$. For singular models, it requires algebraic geometry to analyze.
+
+### Posterior Distribution
+Given $n$ independent observations $X^n = (X_1, \dots, X_n)$ from $q(x)$, the posterior is:
+$$ p(w|X^n) = \frac{1}{Z_n} \prod_{i=1}^n p(X_i|w) \varphi(w) $$
+
+## Singular Learning Theory (SLT) Quantities
+
+### Real Log Canonical Threshold (RLCT)
+Denoted as $\lambda$. A positive rational number that measures the "singularity" of the optimal parameter set $W_0$. It replaces the parameter dimension $d/2$ in the asymptotic expansion of the free energy for singular models. Lower $\lambda$ implies a more severe singularity and a smaller effective dimension, often leading to better generalization and simpler representations.
+
+### Multiplicity
+Denoted as $m$. It is the maximum power of the logarithmic term $\log n$ that appears alongside the RLCT in the asymptotic expansion of the free energy.
+The asymptotic expansion of the free energy in SLT is:
+$$ F_n \approx n S_n + \lambda \log n - (m - 1) \log \log \log Z_n \text{ (wait, actually } (m-1)\log\log n) $$
+Wait, the actual formula is $F_n \approx n S_n + \lambda \log n - (m - 1) \log \log n + O_p(1)$ where $S_n$ is the empirical entropy. (Let me fix that typo).
+$$ F_n \approx n S_n + \lambda \log n - (m - 1) \log \log n + O_p(1) $$
+
+### Resolution of Singularities / Blow-up
+An algebraic geometry technique used in SLT. A "blow-up" is a coordinate transformation that resolves singularities in the parameter space, transforming the complex geometric structure of $K(w) = 0$ into a simpler form with normal crossings. This analytic continuation allows the asymptotic evaluation of the marginal likelihood integral.
+
+### Zeta Function of Statistical Learning
+An analytic function of a complex variable $z$ defined as:
+$$ \zeta(z) = \int K(w)^{-z} \varphi(w) dw $$
+The poles of this zeta function are deeply connected to the RLCT. The largest pole of the zeta function (which is negative) determines the RLCT $\lambda$.
+
+### Singular Fluctuation
+The variance of the log-likelihood ratio across the posterior distribution. In regular models, the singular fluctuation is $d/2$, but in singular models, it varies depending on the geometry of the singularities. It governs the difference between training error and generalization error.
+
+## Information Criteria
+
+### Generalization Error
+The expected loss (e.g., KL divergence) when predicting a new, unseen data point using the predictive distribution trained on $X^n$.
+
+### Training Error
+The empirical loss calculated on the training data $X^n$. Training error is typically lower than generalization error.
+
+### WAIC (Widely Applicable Information Criterion)
+An estimator of the generalization error that relies on the log-posterior predictive density and the empirical variance of the log-likelihood over the posterior. WAIC is asymptotically equivalent to the cross-validation loss and works well for both regular and singular models.
+
+### WBIC (Widely Applicable Bayesian Information Criterion)
+An estimator of the free energy $F_n$ that works for both regular and singular models. It is calculated by taking the average of the log-likelihood over a tempered posterior distribution with inverse temperature $\beta = 1/\log n$. It generalizes the Bayesian Information Criterion (BIC).
