@@ -1,0 +1,19 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Watanabe's Singular Learning Theory"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: slt_gaussian_mixture.qmd
+        text: SLT Gaussian Mixture
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    code-fold: true

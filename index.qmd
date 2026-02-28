@@ -1,0 +1,9 @@
+---
+title: "Watanabe's Singular Learning Theory"
+---
+
+Welcome to the companion website for exploring Sumio Watanabe's Mathematical Theory of Bayesian Statistics (Singular Learning Theory).
+
+## Contents
+
+- [Illustrating Watanabe's Singular Learning Theory with a Gaussian Mixture Model](slt_gaussian_mixture.qmd)
