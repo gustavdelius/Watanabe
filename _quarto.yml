@@ -5,15 +5,19 @@ project:
 website:
   title: "Watanabe's Singular Learning Theory"
   navbar:
+    search: true
+    tools:
+      - icon: github
+        href: https://github.com/gustavdelius/Watanabe
     left:
       - href: index.qmd
         text: Home
-      - href: slt_gaussian_mixture.qmd
-        text: SLT Gaussian Mixture
-      - href: regular_and_singular_models.qmd
-        text: Regular and Singular Models
       - href: cheat_sheet.qmd
         text: Cheat Sheet
+      - href: regular_and_singular_models.qmd
+        text: Regular and Singular Models
+      - href: slt_gaussian_mixture.qmd
+        text: SLT Gaussian Mixture
 
 format:
   html:
@@ -21,3 +25,6 @@ format:
     css: styles.css
     toc: true
     code-fold: true
+
+execute:
+  cache: true

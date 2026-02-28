@@ -6,7 +6,7 @@ format:
 jupyter: python3
 ---
 
-This document provides a walk-through of Sumio Watanabe's *Singular Learning Theory* (up to Chapter 6), using a two-component Gaussian Mixture Model (GMM) as a concrete pedagogical example. 
+This document provides a walk-through of Sumio Watanabe's *Singular Learning Theory* (up to Chapter 6), using a two-component Gaussian Mixture Model (GMM) as a concrete pedagogical example. We had already seen in [Regular and Singular Models](regular_and_singular_models.qmd#sec:singular-model) that this model is singular.
 
 ## 1. Introduction: The Model and the True Distribution (Chapter 1)
 

@@ -26,7 +26,6 @@ In our first model (Eq. 1.11), the data is drawn from a standard normal distribu
 $$p(x \mid a, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x - a)^2}{2\sigma^2}\right)$$
 The true parameters are $a = 0$ and $\sigma = 1$. The Fisher Information Matrix at the true parameters is positive definite, making this a **regular** model.
 
-Let's define the functions to generate data and plot the posterior distribution.
 
 ```{python}
 def generate_data_model1(n, num_datasets=12, seed=42):
@@ -87,14 +86,14 @@ plot_model1(50)
 ```
 
 
-## Model 2: A Singular Statistical Model
+## Model 2: A Singular Statistical Model {#sec:singular-model}
 
 Our second model (Eq. 1.12) fits a two-component Gaussian mixture to data. The data is generated as a 50/50 mix of $\mathcal{N}(0, 1)$ and $\mathcal{N}(0.3, 1)$. 
 Our model tries to learn the mixture proportions and the mean of the second component:
 $$p(x \mid a, b) = (1 - a) \mathcal{N}(x \mid 0, 1) + a \mathcal{N}(x \mid b, 1)$$
 
 The true distribution represents $a = 0.5$ and $b = 0.3$.
-This model is **singular**. The mapping from parameters to distribution is not identifiable or one-to-one at certain limits, and the Fisher information matrix rank decreases at these singularities. Consequently, standard statistical theory (like AIC or the Laplace approximation) fails because the posterior is not normally distributed.
+This model is **singular**. The mapping from parameters to distribution is not identifiable or one-to-one, and the Fisher information matrix rank decreases at these singularities. Consequently, standard statistical theory (like AIC or the Laplace approximation) fails because the posterior is not normally distributed.
 
 ```{python}
 def generate_data_model2(n, num_datasets=12, seed=42):
@@ -160,3 +159,5 @@ The unidentifiability limits parameter collapse in specific directions—demonst
 ```{python}
 plot_model2(1000)
 ```
+
+We will use this example to illustrate the concepts of singular learning theory in [SLT Gaussian Mixture](  slt_gaussian_mixture.qmd).
