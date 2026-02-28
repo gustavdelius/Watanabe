@@ -163,12 +163,33 @@ window.Quarto = {
   <li><a href="#regular-model" id="toc-regular-model" class="nav-link" data-scroll-target="#regular-model">Regular Model</a></li>
   <li><a href="#singular-model" id="toc-singular-model" class="nav-link" data-scroll-target="#singular-model">Singular Model</a></li>
   </ul></li>
+  <li><a href="#entropy" id="toc-entropy" class="nav-link" data-scroll-target="#entropy">Entropy</a>
+  <ul class="collapse">
+  <li><a href="#average-entropy" id="toc-average-entropy" class="nav-link" data-scroll-target="#average-entropy">Average Entropy</a></li>
+  <li><a href="#empirical-entropy" id="toc-empirical-entropy" class="nav-link" data-scroll-target="#empirical-entropy">Empirical Entropy</a></li>
+  </ul></li>
   <li><a href="#bayesian-inference" id="toc-bayesian-inference" class="nav-link" data-scroll-target="#bayesian-inference">Bayesian Inference</a>
   <ul class="collapse">
-  <li><a href="#marginal-likelihood-evidence" id="toc-marginal-likelihood-evidence" class="nav-link" data-scroll-target="#marginal-likelihood-evidence">Marginal Likelihood (Evidence)</a></li>
+  <li><a href="#partition-function-marginal-likelihood" id="toc-partition-function-marginal-likelihood" class="nav-link" data-scroll-target="#partition-function-marginal-likelihood">Partition Function (Marginal Likelihood)</a></li>
   <li><a href="#free-energy" id="toc-free-energy" class="nav-link" data-scroll-target="#free-energy">Free Energy</a></li>
   <li><a href="#posterior-distribution" id="toc-posterior-distribution" class="nav-link" data-scroll-target="#posterior-distribution">Posterior Distribution</a></li>
+  <li><a href="#predictive-distribution" id="toc-predictive-distribution" class="nav-link" data-scroll-target="#predictive-distribution">Predictive Distribution</a></li>
   </ul></li>
+  <li><a href="#losses-and-errors" id="toc-losses-and-errors" class="nav-link" data-scroll-target="#losses-and-errors">Losses and Errors</a>
+  <ul class="collapse">
+  <li><a href="#generalization-loss" id="toc-generalization-loss" class="nav-link" data-scroll-target="#generalization-loss">Generalization Loss</a></li>
+  <li><a href="#generalization-error" id="toc-generalization-error" class="nav-link" data-scroll-target="#generalization-error">Generalization Error</a></li>
+  <li><a href="#training-loss" id="toc-training-loss" class="nav-link" data-scroll-target="#training-loss">Training Loss</a></li>
+  <li><a href="#training-error" id="toc-training-error" class="nav-link" data-scroll-target="#training-error">Training Error</a></li>
+  <li><a href="#cross-validation-loss" id="toc-cross-validation-loss" class="nav-link" data-scroll-target="#cross-validation-loss">Cross-Validation Loss</a></li>
+  <li><a href="#cross-validation-error" id="toc-cross-validation-error" class="nav-link" data-scroll-target="#cross-validation-error">Cross-Validation Error</a></li>
+  </ul></li>
+  <li><a href="#information-criteria" id="toc-information-criteria" class="nav-link" data-scroll-target="#information-criteria">Information Criteria</a>
+  <ul class="collapse">
+  <li><a href="#waic-widely-applicable-information-criterion" id="toc-waic-widely-applicable-information-criterion" class="nav-link" data-scroll-target="#waic-widely-applicable-information-criterion">WAIC (Widely Applicable Information Criterion)</a></li>
+  <li><a href="#wbic-widely-applicable-bayesian-information-criterion" id="toc-wbic-widely-applicable-bayesian-information-criterion" class="nav-link" data-scroll-target="#wbic-widely-applicable-bayesian-information-criterion">WBIC (Widely Applicable Bayesian Information Criterion)</a></li>
+  </ul></li>
+  <li><a href="#relational-properties" id="toc-relational-properties" class="nav-link" data-scroll-target="#relational-properties">Relational Properties</a></li>
   <li><a href="#singular-learning-theory-slt-quantities" id="toc-singular-learning-theory-slt-quantities" class="nav-link" data-scroll-target="#singular-learning-theory-slt-quantities">Singular Learning Theory (SLT) Quantities</a>
   <ul class="collapse">
   <li><a href="#real-log-canonical-threshold-rlct" id="toc-real-log-canonical-threshold-rlct" class="nav-link" data-scroll-target="#real-log-canonical-threshold-rlct">Real Log Canonical Threshold (RLCT)</a></li>
@@ -176,13 +197,6 @@ window.Quarto = {
   <li><a href="#resolution-of-singularities-blow-up" id="toc-resolution-of-singularities-blow-up" class="nav-link" data-scroll-target="#resolution-of-singularities-blow-up">Resolution of Singularities / Blow-up</a></li>
   <li><a href="#zeta-function-of-statistical-learning" id="toc-zeta-function-of-statistical-learning" class="nav-link" data-scroll-target="#zeta-function-of-statistical-learning">Zeta Function of Statistical Learning</a></li>
   <li><a href="#singular-fluctuation" id="toc-singular-fluctuation" class="nav-link" data-scroll-target="#singular-fluctuation">Singular Fluctuation</a></li>
-  </ul></li>
-  <li><a href="#information-criteria" id="toc-information-criteria" class="nav-link" data-scroll-target="#information-criteria">Information Criteria</a>
-  <ul class="collapse">
-  <li><a href="#generalization-error" id="toc-generalization-error" class="nav-link" data-scroll-target="#generalization-error">Generalization Error</a></li>
-  <li><a href="#training-error" id="toc-training-error" class="nav-link" data-scroll-target="#training-error">Training Error</a></li>
-  <li><a href="#waic-widely-applicable-information-criterion" id="toc-waic-widely-applicable-information-criterion" class="nav-link" data-scroll-target="#waic-widely-applicable-information-criterion">WAIC (Widely Applicable Information Criterion)</a></li>
-  <li><a href="#wbic-widely-applicable-bayesian-information-criterion" id="toc-wbic-widely-applicable-bayesian-information-criterion" class="nav-link" data-scroll-target="#wbic-widely-applicable-bayesian-information-criterion">WBIC (Widely Applicable Bayesian Information Criterion)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -240,20 +254,84 @@ window.Quarto = {
 <p>A statistical model is <strong>singular</strong> if it is not regular. In singular models, the Fisher information matrix is singular (not positive definite) at the true parameters, or the parameter-to-distribution mapping is many-to-one. Examples include neural networks, Gaussian mixture models, hidden Markov models, and Bayesian networks.</p>
 </section>
 </section>
+<section id="entropy" class="level2">
+<h2 class="anchored" data-anchor-id="entropy">Entropy</h2>
+<section id="average-entropy" class="level3">
+<h3 class="anchored" data-anchor-id="average-entropy">Average Entropy</h3>
+<p>The true entropy of the data-generating distribution: <span class="math display">\[ S = -\int q(x) \log q(x) dx \]</span></p>
+</section>
+<section id="empirical-entropy" class="level3">
+<h3 class="anchored" data-anchor-id="empirical-entropy">Empirical Entropy</h3>
+<p>The empirical counterpart of the average entropy based on a sample of size <span class="math inline">\(n\)</span>, <span class="math inline">\(X^n = (X_1, \dots, X_n)\)</span>: <span class="math display">\[ S_n = -\frac{1}{n} \sum_{i=1}^n \log q(X_i) \]</span></p>
+</section>
+</section>
 <section id="bayesian-inference" class="level2">
 <h2 class="anchored" data-anchor-id="bayesian-inference">Bayesian Inference</h2>
-<section id="marginal-likelihood-evidence" class="level3">
-<h3 class="anchored" data-anchor-id="marginal-likelihood-evidence">Marginal Likelihood (Evidence)</h3>
+<section id="partition-function-marginal-likelihood" class="level3">
+<h3 class="anchored" data-anchor-id="partition-function-marginal-likelihood">Partition Function (Marginal Likelihood)</h3>
 <p>The probability of observing the data <span class="math inline">\(X^n = (X_1, \dots, X_n)\)</span> given the model and the prior: <span class="math display">\[ Z_n = \int \prod_{i=1}^n p(X_i|w) \varphi(w) dw \]</span></p>
 </section>
 <section id="free-energy" class="level3">
 <h3 class="anchored" data-anchor-id="free-energy">Free Energy</h3>
-<p>The negative log of the marginal likelihood: <span class="math display">\[ F_n = -\log Z_n \]</span> In SLT, the asymptotic behavior of the free energy is a central object of study. For regular models, <span class="math inline">\(F_n \approx n L_n(\hat{w}) + \frac{d}{2} \log n\)</span>. For singular models, it requires algebraic geometry to analyze.</p>
+<p>The negative log of the marginal likelihood: <span class="math display">\[ F_n = -\log Z_n \]</span> In SLT, the asymptotic behavior of the free energy is a central object of study. For regular models, <span class="math inline">\(F_n \approx n T_n(\hat{w}) + \frac{d}{2} \log n\)</span>. For singular models, it requires algebraic geometry to analyze.</p>
 </section>
 <section id="posterior-distribution" class="level3">
 <h3 class="anchored" data-anchor-id="posterior-distribution">Posterior Distribution</h3>
 <p>Given <span class="math inline">\(n\)</span> independent observations <span class="math inline">\(X^n = (X_1, \dots, X_n)\)</span> from <span class="math inline">\(q(x)\)</span>, the posterior is: <span class="math display">\[ p(w|X^n) = \frac{1}{Z_n} \prod_{i=1}^n p(X_i|w) \varphi(w) \]</span></p>
 </section>
+<section id="predictive-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="predictive-distribution">Predictive Distribution</h3>
+<p>The distribution of a new, unseen data point <span class="math inline">\(x\)</span> given the observed data <span class="math inline">\(X^n\)</span>: <span class="math display">\[ p(x|X^n) = \int p(x|w) p(w|X^n) dw \]</span></p>
+</section>
+</section>
+<section id="losses-and-errors" class="level2">
+<h2 class="anchored" data-anchor-id="losses-and-errors">Losses and Errors</h2>
+<section id="generalization-loss" class="level3">
+<h3 class="anchored" data-anchor-id="generalization-loss">Generalization Loss</h3>
+<p>The expected negative log-likelihood of a new data point <span class="math inline">\(X\)</span> drawn from <span class="math inline">\(q(x)\)</span>, evaluated using the predictive distribution: <span class="math display">\[ G_n = -\int q(x) \log p(x|X^n) dx \]</span></p>
+</section>
+<section id="generalization-error" class="level3">
+<h3 class="anchored" data-anchor-id="generalization-error">Generalization Error</h3>
+<p>The difference between the generalization loss and the true entropy: <span class="math display">\[ \text{Generalization Error} = G_n - S \]</span></p>
+</section>
+<section id="training-loss" class="level3">
+<h3 class="anchored" data-anchor-id="training-loss">Training Loss</h3>
+<p>The empirical negative log-likelihood of the training data <span class="math inline">\(X^n\)</span>, evaluated using the predictive distribution: <span class="math display">\[ T_n = -\frac{1}{n} \sum_{i=1}^n \log p(X_i|X^n) \]</span></p>
+</section>
+<section id="training-error" class="level3">
+<h3 class="anchored" data-anchor-id="training-error">Training Error</h3>
+<p>The difference between the training loss and the empirical entropy: <span class="math display">\[ \text{Training Error} = T_n - S_n \]</span></p>
+</section>
+<section id="cross-validation-loss" class="level3">
+<h3 class="anchored" data-anchor-id="cross-validation-loss">Cross-Validation Loss</h3>
+<p>The leave-one-out cross-validation loss estimates generalization loss by evaluating each training point on the predictive distribution formed by the remaining <span class="math inline">\(n-1\)</span> points: <span class="math display">\[ C_n = -\frac{1}{n} \sum_{i=1}^n \log p(X_i|X^n \setminus \{X_i\}) \]</span></p>
+</section>
+<section id="cross-validation-error" class="level3">
+<h3 class="anchored" data-anchor-id="cross-validation-error">Cross-Validation Error</h3>
+<p>The difference between the cross-validation loss and the empirical entropy: <span class="math display">\[ \text{Cross-Validation Error} = C_n - S_n \]</span></p>
+</section>
+</section>
+<section id="information-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="information-criteria">Information Criteria</h2>
+<section id="waic-widely-applicable-information-criterion" class="level3">
+<h3 class="anchored" data-anchor-id="waic-widely-applicable-information-criterion">WAIC (Widely Applicable Information Criterion)</h3>
+<p>An estimator of the generalization loss that relies on the log-posterior predictive density (training loss) and the empirical variance of the log-likelihood over the posterior. WAIC is asymptotically equivalent to the leave-one-out cross-validation loss and works well for both regular and singular models. <span class="math display">\[ WAIC_n = T_n + \frac{V_n}{n} \]</span> where the functional variance <span class="math inline">\(V_n\)</span> is: <span class="math display">\[ V_n = \sum_{i=1}^n \left( \mathbb{E}_{w|X^n}[(\log p(X_i|w))^2] - (\mathbb{E}_{w|X^n}[\log p(X_i|w)])^2 \right) \]</span></p>
+</section>
+<section id="wbic-widely-applicable-bayesian-information-criterion" class="level3">
+<h3 class="anchored" data-anchor-id="wbic-widely-applicable-bayesian-information-criterion">WBIC (Widely Applicable Bayesian Information Criterion)</h3>
+<p>An estimator of the free energy <span class="math inline">\(F_n\)</span> that works for both regular and singular models. It is calculated by taking the average of the log-likelihood over a tempered posterior distribution with inverse temperature <span class="math inline">\(\beta = 1/\log n\)</span>. It generalizes the Bayesian Information Criterion (BIC).</p>
+</section>
+</section>
+<section id="relational-properties" class="level2">
+<h2 class="anchored" data-anchor-id="relational-properties">Relational Properties</h2>
+<p>There are key theoretical relationships between these quantities in Bayesian learning (expectations <span class="math inline">\(\mathbb{E}[]\)</span> are taken over the true distribution of datasets <span class="math inline">\(X^n\)</span>):</p>
+<ul>
+<li><strong>Expected Generalization and Free Energy</strong>: The expected generalization loss is exactly the difference in expected free energies. <span class="math display">\[ \mathbb{E}[G_n] = \mathbb{E}[F_{n+1}] - \mathbb{E}[F_n] \]</span></li>
+<li><strong>Expected Cross-Validation vs Generalization</strong>: Cross-validation estimates the generalization loss of a model trained on <span class="math inline">\(n-1\)</span> samples. <span class="math display">\[ \mathbb{E}[C_n] = \mathbb{E}[G_{n-1}] \]</span></li>
+<li><strong>Expected WAIC vs Generalization</strong>: WAIC is an asymptotically unbiased estimator of the expected generalization loss. <span class="math display">\[ \mathbb{E}[WAIC_n] = \mathbb{E}[G_n] + O(1/n^2) \]</span></li>
+<li><strong>WAIC vs Cross-Validation</strong>: WAIC and Cross-validation loss are asymptotically equivalent estimators. <span class="math display">\[ \mathbb{E}[WAIC_n] = \mathbb{E}[C_n] + O(1/n^2) \]</span></li>
+<li><strong>Generalization vs Training Loss</strong>: In general, training loss underestimates generalization loss due to overfitting to the specific sample. <span class="math display">\[ \mathbb{E}[T_n] &lt; \mathbb{E}[G_n] \]</span></li>
+</ul>
 </section>
 <section id="singular-learning-theory-slt-quantities" class="level2">
 <h2 class="anchored" data-anchor-id="singular-learning-theory-slt-quantities">Singular Learning Theory (SLT) Quantities</h2>
@@ -263,7 +341,7 @@ window.Quarto = {
 </section>
 <section id="multiplicity" class="level3">
 <h3 class="anchored" data-anchor-id="multiplicity">Multiplicity</h3>
-<p>Denoted as <span class="math inline">\(m\)</span>. It is the maximum power of the logarithmic term <span class="math inline">\(\log n\)</span> that appears alongside the RLCT in the asymptotic expansion of the free energy. The asymptotic expansion of the free energy in SLT is: <span class="math display">\[ F_n \approx n S_n + \lambda \log n - (m - 1) \log \log \log Z_n \text{ (wait, actually } (m-1)\log\log n) \]</span> Wait, the actual formula is <span class="math inline">\(F_n \approx n S_n + \lambda \log n - (m - 1) \log \log n + O_p(1)\)</span> where <span class="math inline">\(S_n\)</span> is the empirical entropy. (Let me fix that typo). <span class="math display">\[ F_n \approx n S_n + \lambda \log n - (m - 1) \log \log n + O_p(1) \]</span></p>
+<p>Denoted as <span class="math inline">\(m\)</span>. It is the maximum power of the logarithmic term <span class="math inline">\(\log n\)</span> that appears alongside the RLCT in the asymptotic expansion of the free energy. The asymptotic expansion of the free energy in SLT is: <span class="math display">\[ F_n \approx n S_n + \lambda \log n - (m - 1) \log \log n + O_p(1) \]</span></p>
 </section>
 <section id="resolution-of-singularities-blow-up" class="level3">
 <h3 class="anchored" data-anchor-id="resolution-of-singularities-blow-up">Resolution of Singularities / Blow-up</h3>
@@ -276,25 +354,6 @@ window.Quarto = {
 <section id="singular-fluctuation" class="level3">
 <h3 class="anchored" data-anchor-id="singular-fluctuation">Singular Fluctuation</h3>
 <p>The variance of the log-likelihood ratio across the posterior distribution. In regular models, the singular fluctuation is <span class="math inline">\(d/2\)</span>, but in singular models, it varies depending on the geometry of the singularities. It governs the difference between training error and generalization error.</p>
-</section>
-</section>
-<section id="information-criteria" class="level2">
-<h2 class="anchored" data-anchor-id="information-criteria">Information Criteria</h2>
-<section id="generalization-error" class="level3">
-<h3 class="anchored" data-anchor-id="generalization-error">Generalization Error</h3>
-<p>The expected loss (e.g., KL divergence) when predicting a new, unseen data point using the predictive distribution trained on <span class="math inline">\(X^n\)</span>.</p>
-</section>
-<section id="training-error" class="level3">
-<h3 class="anchored" data-anchor-id="training-error">Training Error</h3>
-<p>The empirical loss calculated on the training data <span class="math inline">\(X^n\)</span>. Training error is typically lower than generalization error.</p>
-</section>
-<section id="waic-widely-applicable-information-criterion" class="level3">
-<h3 class="anchored" data-anchor-id="waic-widely-applicable-information-criterion">WAIC (Widely Applicable Information Criterion)</h3>
-<p>An estimator of the generalization error that relies on the log-posterior predictive density and the empirical variance of the log-likelihood over the posterior. WAIC is asymptotically equivalent to the cross-validation loss and works well for both regular and singular models.</p>
-</section>
-<section id="wbic-widely-applicable-bayesian-information-criterion" class="level3">
-<h3 class="anchored" data-anchor-id="wbic-widely-applicable-bayesian-information-criterion">WBIC (Widely Applicable Bayesian Information Criterion)</h3>
-<p>An estimator of the free energy <span class="math inline">\(F_n\)</span> that works for both regular and singular models. It is calculated by taking the average of the log-likelihood over a tempered posterior distribution with inverse temperature <span class="math inline">\(\beta = 1/\log n\)</span>. It generalizes the Bayesian Information Criterion (BIC).</p>
 
 
 </section>
