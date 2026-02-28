@@ -148,3 +148,29 @@ The poles of this zeta function are deeply connected to the RLCT. The largest po
 
 ### Singular Fluctuation
 The variance of the log-likelihood ratio across the posterior distribution. In regular models, the singular fluctuation is $d/2$, but in singular models, it varies depending on the geometry of the singularities. It governs the difference between training error and generalization error.
+
+## Main Asymptotic Theorems
+
+Watanabe establishes several groundbreaking theoretical results for Bayesian inference in singular models, connecting algebraic geometry to statistical learning:
+
+### 1. Asymptotic Expansion of Free Energy
+The Free Energy $F_n$ has the following asymptotic expression in probability, determined by the RLCT $\lambda$ and multiplicity $m$:
+$$ F_n = n S_n + \lambda \log n - (m-1) \log \log n + O_p(1) $$
+This shows that $\lambda$ replaces the dimension-based penalty $d/2$ found in regular models (like in BIC).
+
+### 2. Generalization and Training Errors
+The expected Generalization Error ($G_n - S$) and Training Error ($T_n - S_n$) display a beautiful symmetry determined by $\lambda$:
+$$ \mathbb{E}[G_n - S] = \frac{\lambda}{n} + o\left(\frac{1}{n}\right) $$
+$$ \mathbb{E}[T_n - S_n] = \frac{\lambda}{n} - \frac{\nu}{n} + o\left(\frac{1}{n}\right) $$
+where $\nu$ is the expected singular fluctuation.
+
+### 3. WAIC Asymptotic Equivalence
+WAIC is an asymptotically unbiased estimator of the Generalization Loss even in singular models:
+$$ \mathbb{E}[WAIC_n] = \mathbb{E}[G_n] + O\left(\frac{1}{n^2}\right) $$
+Additionally, WAIC and the Leave-One-Out Cross-Validation Loss are asymptotically equivalent:
+$$ WAIC_n = C_n + O_p\left(\frac{1}{n^2}\right) $$
+
+### 4. WBIC Estimates Free Energy
+The WBIC with an inverse temperature of $\beta = 1/\log n$ provides an asymptotically accurate approximation of the marginal likelihood / free energy:
+$$ WBIC_n = \lambda \log n + O_p(1) $$
+This generalizes the Bayesian Information Criterion (BIC) to singular models, allowing for model selection by choosing the one that minimizes WBIC.
