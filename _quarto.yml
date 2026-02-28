@@ -18,6 +18,8 @@ website:
         text: Regular and Singular Models
       - href: slt_gaussian_mixture.qmd
         text: SLT Gaussian Mixture
+      - href: neural_network_figure_2_7.qmd
+        text: Neural Network (Figure 2.7)
 
 format:
   html:
