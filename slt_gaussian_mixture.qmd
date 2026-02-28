@@ -6,7 +6,7 @@ format:
 jupyter: python3
 ---
 
-This document provides a walk-through of Sumio Watanabe's *Singular Learning Theory* (up to Chapter 6), using a two-component Gaussian Mixture Model (GMM) as a concrete pedagogical example. We had already seen in [Regular and Singular Models](regular_and_singular_models.qmd#sec:singular-model) that this model is singular.
+This document provides a walk-through of Sumio Watanabe's *Singular Learning Theory*, using a two-component Gaussian Mixture Model (GMM) as a concrete pedagogical example. We had already seen in [Regular and Singular Models](regular_and_singular_models.qmd#sec:singular-model) that this model is singular.
 
 ## 1. Introduction: The Model and the True Distribution (Chapter 1)
 
@@ -136,13 +136,15 @@ This expression clearly has a pole exactly when the denominator is zero, i.e., a
 By separating the variables, the blow-up perfectly isolates the poles of the zeta function!
 
 Using our specific factors from the GMM blow-up:
+
 1. Divergence function: $K(u) = u_1^4 u_2^2$ (so $k_1 = 2$, $k_2 = 1$)
-2. Prior measure / Jacobian: $\Phi(u) = u_1^1 u_2^0$ (so $h_1 = 1$, $h_2 = 0$)
+2. Prior measure / Jacobian: $\Phi(u) = u_1^1 u_2^0$ (so $h_1 = 1$, $h_2 = 0$). *Note: This assumes a prior $\varphi(w)$ that does not vanish at the origin, such as a uniform prior $\varphi(w) \propto 1$. For such a prior, the only algebraic zeros in the integral's measure come from the Jacobian of the blow-up $|u_1|$. This gives us $u_1^1 u_2^0$, resulting in $h_1 = 1, h_2 = 0$.*
 
 The candidate poles $z = -\lambda_j$ along each coordinate axis $j$ give us:
 $$ \lambda_j = \frac{h_j + 1}{2k_j} $$
 
 For our $u_1$ and $u_2$:
+
 - $\lambda_1 = \frac{1 + 1}{4} = \frac{1}{2}$
 - $\lambda_2 = \frac{0 + 1}{2} = \frac{1}{2}$
 
@@ -207,6 +209,7 @@ $$ \mathbb{E}[G_n] = L(w_0) + \frac{\lambda}{n} $$
 $$ \mathbb{E}[T_n] = L(w_0) - \frac{\lambda}{n} $$
 
 For our continuous GMM, $\lambda = 1/2$. Therefore:
+
 - Expected Generalization Error converges with rate $\frac{0.5}{n}$.
 - Expected Training Error converges with rate $-\frac{0.5}{n}$.
 
@@ -445,3 +448,231 @@ Classical criteria like DIC rely on a *point estimate* of the parameter (usually
 
 WAIC, on the other hand, averages the likelihood over the *entire* posterior distribution and calculates the functional variance point-by-point. It entirely avoids point estimation.
 
+---
+
+## 7. Phase Transition in a Hierarchical Model (Chapter 9)
+
+In Chapter 9, Watanabe describes a **Phase Transition** in Bayesian statistics. A phase transition occurs when the structure of the posterior distribution changes drastically depending on a generalized hyperparameter. At this critical point, the free energy is often discontinuous or non-differentiable.
+
+### Example 67: Normal Mixture Phase Transition
+Let's adapt Example 67 from the book (pages 279-281) to our 1D model formulation. Consider the same normal mixture model for $x \in \mathbb{R}$ with parameter $w=(a,\mu)$:
+$$ p(x|w) = (1 - a) \mathcal{N}(x|0, 1) + a \mathcal{N}(x|\mu, 1) $$
+
+Suppose the true distribution is simply the standard normal:
+$$ q(x) = \mathcal{N}(x|0, 1) $$
+
+We place a Dirichlet prior on $a$ with hyperparameter $\alpha > 0$:
+$$ \varphi(a) \propto (a(1 - a))^{\alpha - 1} $$
+And a wide Gaussian prior on $\mu$:
+$$ \varphi(\mu) \propto \exp \left( -\frac{\mu^2}{2\sigma^2} \right) $$
+with $\sigma = 10$. We will investigate how the hyperparameter $\alpha$ induces a phase transition.
+
+### The Two Modes of the Model
+To perfectly match the true distribution $q(x) = \mathcal{N}(x|0, 1)$, the model requires either:
+
+1. $a = 0$: In this case, the first component perfectly matches $q(x)$, and the parameter $\mu$ can be absolutely anything (it is completely "free" because its component has zero weight).
+2. $\mu = 0$: In this case, both components are centered at the origin, matching $q(x)$, and the mixing proportion $a$ can be absolutely anything ($a$ is "free").
+
+These two regimes represent two intersecting singular manifolds in the parameter space. The Real Log Canonical Threshold (RLCT) is dictated by whichever singularity is "stronger", which depends on the prior concentration $\alpha$.
+
+### Calculating the RLCT
+
+The true parameters are given by the union of two branches: $a=0$ (with any $\mu$) and $\mu=0$ (with any $a$). The overall RLCT is obtained by evaluating the poles along each branch and taking the minimum.
+
+1. **Along the branch $a=0$ (where $\mu \neq 0$ is free):**
+   Locally, $\mu$ is practically a non-zero constant $c$. The KL divergence $$K(a, \mu) \approx \frac{1}{2} a^2 \mu^2 \approx \frac{1}{2} c^2 a^2 \propto a^2.$$ Thus, the polynomial power is $k=1$. 
+   The prior contains $(a(1-a))^{\alpha-1}$, which behaves like $a^{\alpha-1}$ as $a \to 0$. Thus, the measure has a polynomial power $h=\alpha-1$.
+   The candidate RLCT for this branch is $$\lambda_1 = \frac{h+1}{2k} = \frac{(\alpha-1)+1}{2(1)} = \alpha/2$$.
+
+2. **Along the branch $\mu=0$ (where $a \neq 0$ is free):**
+   Locally, $a$ is practically a non-zero constant $c$. The KL divergence behaves like $$K(a, \mu) \approx \frac{1}{2} c^2 \mu^2 \propto \mu^2,$$ so $k=1$.
+   The prior behaves like a constant locally with respect to $\mu$ (since $a$ is near $c$ and $\mu \approx 0$), so $h=0$.
+   The candidate RLCT for this branch is $$\lambda_2 = \frac{h+1}{2k} = \frac{0+1}{2(1)} = 1/2.$$
+
+**At the intersection $(a=0, \mu=0)$:**
+A rigorous calculation using Hironaka's blow-up at the origin produces additional candidate poles (specifically $\frac{\alpha+1}{4}$). However, this intersection pole is never strictly less than the minimum of the two individual branches for any $\alpha > 0$.
+
+Therefore, the global RLCT is dictated purely by the minimum of the two branches:
+$$ \lambda = \min(\lambda_1, \lambda_2) = \min(\alpha/2, 1/2) $$
+
+This reveals a profound structural shift exactly at **$\alpha = 1$**:
+
+- For **$\alpha < 1$** ($\lambda = \alpha/2$), the strongest singularity comes from the first branch. The posterior concentrates around $a \approx 0$, leaving the parameter $\mu$ completely free to wander across the wide prior space.
+- For **$\alpha > 1$** ($\lambda = 1/2$), the strongest singularity comes from the second branch. The prior naturally pulls $a$ away from the edges, closing off the first strategy. The posterior is forced to satisfy $\mu \approx 0$, leaving $a$ free to vary.
+
+This abrupt change from "$\mu$ is free" to "$a$ is free" at $\alpha = 1$ is the **phase transition**. Let's visualize this drastic change in the shape of the posterior distribution.
+
+```{python}
+#| label: phase-transition-posterior
+#| fig-cap: "Phase Transition in the Posterior Distribution. As $\\alpha$ crosses the critical point $\\alpha=1$, the posterior drastically flips from a regime where $\\mu$ is free (large spread) to a regime where $a$ is free (spread across [0,1])."
+#| cache: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def log_prior(a, mu, alpha):
+    if a <= 0 or a >= 1: return -np.inf
+    lp_a = (alpha - 1) * np.log(a * (1 - a))
+    lp_mu = -0.5 * (mu / 10.0)**2
+    return lp_a + lp_mu
+
+def log_likelihood(X, a, mu):
+    p0 = np.exp(-0.5 * X**2) / np.sqrt(2 * np.pi)
+    pmu = np.exp(-0.5 * (X - mu)**2) / np.sqrt(2 * np.pi)
+    p = (1 - a) * p0 + a * pmu + 1e-15
+    return np.sum(np.log(p))
+
+def sample_mcmc(alpha, n=100, iters=25000):
+    np.random.seed(42)
+    X = np.random.normal(0, 1, n)
+    
+    # Initialize near the regular manifold to avoid getting stuck early
+    a = 0.5
+    mu = 1.0
+    
+    ll = log_likelihood(X, a, mu)
+    lp = log_prior(a, mu, alpha)
+    
+    samples_a = np.zeros(iters)
+    samples_mu = np.zeros(iters)
+    
+    a_step, mu_step = 0.1, 0.5
+    for i in range(iters):
+        a_new = a + np.random.normal(0, a_step)
+        mu_new = mu + np.random.normal(0, mu_step)
+        
+        if 0 < a_new < 1:
+            lp_new = log_prior(a_new, mu_new, alpha)
+            ll_new = log_likelihood(X, a_new, mu_new)
+            
+            if np.log(np.random.rand()) < (ll_new + lp_new - ll - lp):
+                a, mu = a_new, mu_new
+                ll, lp = ll_new, lp_new
+                
+        samples_a[i] = a
+        samples_mu[i] = mu
+        
+    # Discard burn-in
+    return samples_a[5000:], samples_mu[5000:]
+
+fig, axes = plt.subplots(2, 3, figsize=(10, 6), sharey='row')
+alphas_to_test = [0.2, 1.0, 3.0]
+
+for i, alpha in enumerate(alphas_to_test):
+    sa, smu = sample_mcmc(alpha)
+    
+    axes[0, i].hist(sa, bins=40, density=True, color='skyblue', edgecolor='black')
+    axes[0, i].set_title(rf"$\alpha = {alpha}$")
+    axes[0, i].set_xlim(0, 1)
+    if i == 0: axes[0, i].set_ylabel("Posterior of $a$")
+    
+    axes[1, i].hist(np.abs(smu), bins=40, density=True, color='salmon', edgecolor='black')
+    axes[1, i].set_xlim(0, 6)
+    if i == 0: axes[1, i].set_ylabel(r"Posterior of $|\mu|$")
+    axes[1, i].set_xlabel(r"$|\mu|$")
+
+plt.tight_layout()
+plt.show()
+```
+
+### Reproducing Figures 9.1 and 9.2: Error Metric Phase Transition
+
+Watanabe shows that this geometric phase transition directly causes a kink in the generalization error and WAIC. The theoretical errors are:
+$$ \mathbb{E}[G_n - S] \approx \frac{\min(\alpha/2, 1/2)}{n} , \quad \mathbb{E}[\text{WAIC} - S_n] \approx \frac{\min(\alpha/2, 1/2)}{n} $$
+Since WAIC correctly estimates the generalization error, it will also exhibit a broken derivative at $\alpha=1$. The following code simulates this across multiple trials (analogous to Figures 9.1 and 9.2 of the book) to show the average criteria values as a function of the hyperparameter. Unfortunately we would need to work with a larger number of trials to reduce the variance and make the kink really visible.
+
+```{python}
+#| label: phase-transition-errors
+#| fig-cap: "Phase Transition in Average Errors. The Generalization Error and WAIC linearly increase until the critical point $\\alpha=1$, after which they plateau as the model switches to the generic regular-equivalent manifold."
+#| cache: true
+
+alphas = np.linspace(0.25, 2.5, 10)
+n_trials = 20
+n = 100
+
+mean_ge = []
+mean_waic = []
+
+# Using 20 trials with 10k MCMC steps smooths out the variance to reveal the kink.
+# Rendering this cell may take a minute or two, so it is cached.
+for alpha in alphas:
+    alpha_ge = []
+    alpha_waic = []
+    
+    for trial in range(n_trials):
+        np.random.seed(42 + trial)
+        X = np.random.normal(0, 1, n)
+        X_test = np.random.normal(0, 1, 5000)
+        
+        # Empirical entropy of true distribution
+        p0_train = np.exp(-0.5 * X**2) / np.sqrt(2 * np.pi)
+        S_n = -np.mean(np.log(p0_train))
+        
+        # True entropy
+        p0_test = np.exp(-0.5 * X_test**2) / np.sqrt(2 * np.pi)
+        S = -np.mean(np.log(p0_test))
+        
+        a = 0.5; mu = 0.0
+        ll = log_likelihood(X, a, mu); lp = log_prior(a, mu, alpha)
+        
+        samples_a = []
+        samples_mu = []
+        
+        # MCMC Sampling
+        for i in range(10000):
+            a_new = a + np.random.normal(0, 0.1)
+            mu_new = mu + np.random.normal(0, 0.5)
+            if 0 < a_new < 1:
+                lp_new = log_prior(a_new, mu_new, alpha)
+                ll_new = log_likelihood(X, a_new, mu_new)
+                if np.log(np.random.rand()) < (ll_new + lp_new - ll - lp):
+                    a, mu = a_new, mu_new
+                    ll, lp = ll_new, lp_new
+            if i >= 4000 and i % 10 == 0:
+                samples_a.append(a)
+                samples_mu.append(mu)
+                
+        samples_a = np.array(samples_a)
+        samples_mu = np.array(samples_mu)
+        
+        # Vectorized WAIC Calculation
+        diff_sq_tr = (X[:, None] - samples_mu[None, :])**2
+        pmu_tr = np.exp(-0.5 * diff_sq_tr) / np.sqrt(2 * np.pi)
+        p_train = (1 - samples_a[None, :]) * p0_train[:, None] + samples_a[None, :] * pmu_tr + 1e-15
+        
+        p_train_mean = np.mean(p_train, axis=1)
+        T_n = -np.mean(np.log(p_train_mean))
+        V_n = np.mean(np.var(np.log(p_train), axis=1))
+        waic = T_n + V_n - S_n
+        
+        # Vectorized GE Calculation
+        diff_sq_ts = (X_test[:, None] - samples_mu[None, :])**2
+        pmu_ts = np.exp(-0.5 * diff_sq_ts) / np.sqrt(2 * np.pi)
+        p_test_all = (1 - samples_a[None, :]) * p0_test[:, None] + samples_a[None, :] * pmu_ts + 1e-15
+        
+        p_test_mean = np.mean(p_test_all, axis=1)
+        ge = -np.mean(np.log(p_test_mean)) - S
+        
+        alpha_ge.append(ge)
+        alpha_waic.append(waic)
+        
+    mean_ge.append(np.mean(alpha_ge))
+    mean_waic.append(np.mean(alpha_waic))
+
+plt.figure(figsize=(8, 5))
+plt.plot(alphas, mean_ge, 'o-', color='blue', label='Empirical GE - S')
+plt.plot(alphas, mean_waic, 's--', color='green', label='Empirical WAIC - Sn')
+
+# Theoretical curve: min(alpha/2, 1/2) / n
+theoretical = np.minimum(alphas / 2, 0.5) / n
+plt.plot(alphas, theoretical, 'k-', linewidth=2, label=r'Theoretical $\lambda/n$')
+
+plt.axvline(1.0, color='red', linestyle=':', label='Critical Point $\\alpha=1$')
+plt.title("Phase Transition in Errors (Analogous to Fig 9.1 & 9.2)")
+plt.xlabel(r"Dirichlet Hyperparameter $\alpha$")
+plt.ylabel("Error")
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
