@@ -10,19 +10,24 @@ This page provides a quick reference for the most important definitions in Sumio
 
 ## Core Concepts
 
-### True Distribution
-The unknown true generation process of the data, denoted $q(x)$.
+Throughout we will consider a triplet $(q, p, \varphi)$, where 
 
-### Parametric Model
-A set of probability distributions $p(x|w)$ parameterized by $w \in W \subset \mathbb{R}^d$. 
+- $q(x)$ is the **true distribution**, 
+- $p(x|w)$ is the **parametric model**, and 
+- $\varphi(w)$ is the **prior distribution** over the **parameter space** $W \subset \mathbb{R}^d$.
 
-### Prior Distribution
-A probability distribution $\varphi(w)$ over the parameter space $W$.
 
-### Log Likelihood Ratio
-The function that measures the discrepancy between the true distribution and the parametric model:
+The **Log Likelihood Ratio** $K(w)$ measures the discrepancy between the true distribution and the parametric model:
 $$ K(w) = \int q(x) \log \frac{q(x)}{p(x|w)} dx $$
-This is the Kullback-Leibler (KL) divergence between $q(x)$ and $p(x|w)$. The set of optimal parameters is $W_0 = \{w \in W : K(w) = 0 \}$.
+This is the Kullback-Leibler (KL) divergence between $q(x)$ and $p(x|w)$. 
+
+The **average loss function** is given by
+$$ L(w) = \int q(x) \log \frac{p(x|w)}{q(x)} dx = S + K(w)$$
+where 
+$$ S = -\int q(x) \log q(x) dx $$
+is the **true entropy**.
+
+We denote the **set of optimal parameters** by $W_0 = \{w \in W : K(w) = min_{w' \in W} K(w') \}$.
 
 ## Regular vs. Singular Models
 
@@ -36,7 +41,7 @@ $$ I_{ij}(w) = \frac{\partial^2 K(w)}{\partial w_i \partial w_j} $$
 
 
 ### Regular Model
-A statistical model is **regular** if the map from parameters to probability distributions ($w \mapsto p(x|w)$) is one-to-one, and the Fisher information matrix is positive definite at the optimal parameter $w_0$. Regular models satisfy classical asymptotic theories. 
+A statistical model is **regular** if the map from parameters to probability distributions ($w \mapsto p(x|w)$) is one-to-one, and the Fisher information matrix is positive definite at the unique optimal parameter $w_0$. Regular models satisfy classical asymptotic theories. 
 
 In a regular model, the Taylor expansion of $K(w)$ around the optimal parameter $w_0$ is dominated by the Fisher information matrix:
 $$ K(w) \approx \frac{1}{2} (w - w_0)^\top I(w_0) (w - w_0) $$
@@ -46,131 +51,87 @@ A statistical model is **singular** if it is not regular. In singular models, th
 
 In a singular model, $I(w_0)$ is singular, making the quadratic approximation to $K(w)$ degenerate.
 
-## Entropy
-
-### Average Entropy
-The true entropy of the data-generating distribution:
-$$ S = -\int q(x) \log q(x) dx $$
-
-### Empirical Entropy
-The empirical counterpart of the average entropy based on a sample of size $n$, $X^n = (X_1, \dots, X_n)$:
-$$ S_n = -\frac{1}{n} \sum_{i=1}^n \log q(X_i) $$
 
 ## Bayesian Inference
 
-### Partition Function (Marginal Likelihood)
-The probability of observing the data $X^n = (X_1, \dots, X_n)$ given the model and the prior:
+Given $n$ independent observations $X^n = (X_1, \dots, X_n)$ from $q(x)$, 
+the **Partition Function (Marginal Likelihood)** is
+the probability of observing the data $X^n = (X_1, \dots, X_n)$ given the model and the prior:
 $$ Z_n = \int \prod_{i=1}^n p(X_i|w) \varphi(w) dw $$
 
-### Free Energy
-The negative log of the marginal likelihood:
+The **Free Energy** is the negative log of the marginal likelihood:
 $$ F_n = -\log Z_n $$
 In SLT, the asymptotic behavior of the free energy is a central object of study. For regular models, $F_n \approx n T_n(\hat{w}) + \frac{d}{2} \log n$. For singular models, it requires algebraic geometry to analyze.
 
-### Posterior Distribution
-Given $n$ independent observations $X^n = (X_1, \dots, X_n)$ from $q(x)$, the posterior is:
+The **Posterior Distribution** is:
 $$ p(w|X^n) = \frac{1}{Z_n} \prod_{i=1}^n p(X_i|w) \varphi(w) $$
 
-### Predictive Distribution
-The distribution of a new, unseen data point $x$ given the observed data $X^n$:
+The **Predictive Distribution** is:
 $$ p(x|X^n) = \int p(x|w) p(w|X^n) dw $$
 
 ## Losses and Errors
 
-### Generalization Loss
-The expected negative log-likelihood of a new data point $X$ drawn from $q(x)$, evaluated using the predictive distribution:
+The **Generalization Loss** is the expected negative log-likelihood of a new data point $X$ drawn from $q(x)$, evaluated using the predictive distribution:
 $$ G_n = -\int q(x) \log p(x|X^n) dx $$
+The expected generalization loss is exactly the difference in expected free energies.
+  $$ \mathbb{E}[G_n] = \mathbb{E}[F_{n+1}] - \mathbb{E}[F_n] $$
 
-### Generalization Error
-The difference between the generalization loss and the true entropy:
-$$ \text{Generalization Error} = G_n - S $$
+The **Generalization Error** is the difference between the generalization loss and the true entropy:
+$$ \text{Generalization Error} = G_n - S = \int q(x) \log \frac{q(x)}{p(x|X^n)} dx = K(q(x)||p(x|X^n))$$
+where $K(q(x)||p(x|X^n))$ is the Kullback-Leibler divergence between $q(x)$ and $p(x|X^n)$.
 
-### Training Loss
-The empirical negative log-likelihood of the training data $X^n$, evaluated using the predictive distribution:
+The **Training Loss** is the empirical negative log-likelihood of the training data $X^n$, evaluated using the predictive distribution:
 $$ T_n = -\frac{1}{n} \sum_{i=1}^n \log p(X_i|X^n) $$
 
-### Training Error
-The difference between the training loss and the empirical entropy:
+The **Training Error** is the difference between the training loss and the empirical entropy:
 $$ \text{Training Error} = T_n - S_n $$
+where $S_n$ is the **empirical entropy**:
+$$ S_n = -\frac{1}{n} \sum_{i=1}^n \log q(X_i) $$
 
-### Cross-Validation Loss
-The leave-one-out cross-validation loss estimates generalization loss by evaluating each training point on the predictive distribution formed by the remaining $n-1$ points:
+In general, training loss underestimates generalization loss due to overfitting to the specific sample.
+  $$ \mathbb{E}[T_n] < \mathbb{E}[G_n] $$
+
+The **Cross-Validation Loss** estimates generalization loss by evaluating each training point on the predictive distribution formed by the remaining $n-1$ points:
 $$ C_n = -\frac{1}{n} \sum_{i=1}^n \log p(X_i|X^n \setminus \{X_i\}) $$
-
-### Cross-Validation Error
-The difference between the cross-validation loss and the empirical entropy:
+Cross-validation estimates the generalization loss of a model trained on $n-1$ samples.
+  $$ \mathbb{E}[C_n] = \mathbb{E}[G_{n-1}] $$
+The **Cross-Validation Error** is the difference between the cross-validation loss and the empirical entropy:
 $$ \text{Cross-Validation Error} = C_n - S_n $$
 
 
 ## Information Criteria
 
-### WAIC (Widely Applicable Information Criterion)
-An estimator of the generalization loss that relies on the log-posterior predictive density (training loss) and the empirical variance of the log-likelihood over the posterior. WAIC is asymptotically equivalent to the leave-one-out cross-validation loss and works well for both regular and singular models.
+The **WAIC (Widely Applicable Information Criterion)** is an estimator of the generalization loss that relies on the log-posterior predictive density (training loss) and the empirical variance of the log-likelihood over the posterior. WAIC is asymptotically equivalent to the leave-one-out cross-validation loss and works well for both regular and singular models.
 $$ WAIC_n = T_n + \frac{V_n}{n} $$
 where the functional variance $V_n$ is:
 $$ V_n = \sum_{i=1}^n \left( \mathbb{E}_{w|X^n}[(\log p(X_i|w))^2] - (\mathbb{E}_{w|X^n}[\log p(X_i|w)])^2 \right) $$
 
-### WBIC (Widely Applicable Bayesian Information Criterion)
-An estimator of the free energy $F_n$ that works for both regular and singular models. It is calculated by taking the average of the log-likelihood over a tempered posterior distribution with inverse temperature $\beta = 1/\log n$. It generalizes the Bayesian Information Criterion (BIC).
-
-## Relational Properties
-
-There are key theoretical relationships between these quantities in Bayesian learning (expectations $\mathbb{E}[]$ are taken over the true distribution of datasets $X^n$):
-
-* **Expected Generalization and Free Energy**: The expected generalization loss is exactly the difference in expected free energies.
-  $$ \mathbb{E}[G_n] = \mathbb{E}[F_{n+1}] - \mathbb{E}[F_n] $$
-* **Expected Cross-Validation vs Generalization**: Cross-validation estimates the generalization loss of a model trained on $n-1$ samples.
-  $$ \mathbb{E}[C_n] = \mathbb{E}[G_{n-1}] $$
-* **Expected WAIC vs Generalization**: WAIC is an asymptotically unbiased estimator of the expected generalization loss.
-  $$ \mathbb{E}[WAIC_n] = \mathbb{E}[G_n] + O(1/n^2) $$
-* **WAIC vs Cross-Validation**: WAIC and Cross-validation loss are asymptotically equivalent estimators.
-  $$ \mathbb{E}[WAIC_n] = \mathbb{E}[C_n] + O(1/n^2) $$
-* **Generalization vs Training Loss**: In general, training loss underestimates generalization loss due to overfitting to the specific sample.
-  $$ \mathbb{E}[T_n] < \mathbb{E}[G_n] $$
-
-## Singular Learning Theory (SLT) Quantities
-
-### Real Log Canonical Threshold (RLCT)
-Denoted as $\lambda$. A positive rational number that measures the "singularity" of the optimal parameter set $W_0$. It replaces the parameter dimension $d/2$ in the asymptotic expansion of the free energy for singular models. Lower $\lambda$ implies a more severe singularity and a smaller effective dimension, often leading to better generalization and simpler representations.
-
-### Multiplicity
-Denoted as $m$. It is the maximum power of the logarithmic term $\log n$ that appears alongside the RLCT in the asymptotic expansion of the free energy.
-The asymptotic expansion of the free energy in SLT is:
-$$ F_n \approx n S_n + \lambda \log n - (m - 1) \log \log n + O_p(1) $$
-
-### Resolution of Singularities / Blow-up
-An algebraic geometry technique used in SLT. A "blow-up" is a coordinate transformation that resolves singularities in the parameter space, transforming the complex geometric structure of $K(w) = 0$ into a simpler form with normal crossings. This analytic continuation allows the asymptotic evaluation of the marginal likelihood integral.
-
-### Zeta Function of Statistical Learning
-An analytic function of a complex variable $z$ defined as:
-$$ \zeta(z) = \int K(w)^{-z} \varphi(w) dw $$
-The poles of this zeta function are deeply connected to the RLCT. The largest pole of the zeta function (which is negative) determines the RLCT $\lambda$.
-
-### Singular Fluctuation
-The variance of the log-likelihood ratio across the posterior distribution. In regular models, the singular fluctuation is $d/2$, but in singular models, it varies depending on the geometry of the singularities. It governs the difference between training error and generalization error.
-
-## Main Asymptotic Theorems
-
-Watanabe establishes several groundbreaking theoretical results for Bayesian inference in singular models, connecting algebraic geometry to statistical learning:
-
-### 1. Asymptotic Expansion of Free Energy
-The Free Energy $F_n$ has the following asymptotic expression in probability, determined by the RLCT $\lambda$ and multiplicity $m$:
-$$ F_n = n S_n + \lambda \log n - (m-1) \log \log n + O_p(1) $$
-This shows that $\lambda$ replaces the dimension-based penalty $d/2$ found in regular models (like in BIC).
-
-### 2. Generalization and Training Errors
-The expected Generalization Error ($G_n - S$) and Training Error ($T_n - S_n$) display a beautiful symmetry determined by $\lambda$:
-$$ \mathbb{E}[G_n - S] = \frac{\lambda}{n} + o\left(\frac{1}{n}\right) $$
-$$ \mathbb{E}[T_n - S_n] = \frac{\lambda}{n} - \frac{\nu}{n} + o\left(\frac{1}{n}\right) $$
-where $\nu$ is the expected singular fluctuation.
-
-### 3. WAIC Asymptotic Equivalence
-WAIC is an asymptotically unbiased estimator of the Generalization Loss even in singular models:
+WAIC is an asymptotically unbiased estimator of the expected generalization Loss even in singular models:
 $$ \mathbb{E}[WAIC_n] = \mathbb{E}[G_n] + O\left(\frac{1}{n^2}\right) $$
 Additionally, WAIC and the Leave-One-Out Cross-Validation Loss are asymptotically equivalent:
 $$ WAIC_n = C_n + O_p\left(\frac{1}{n^2}\right) $$
 
-### 4. WBIC Estimates Free Energy
-The WBIC with an inverse temperature of $\beta = 1/\log n$ provides an asymptotically accurate approximation of the marginal likelihood / free energy:
+The **WBIC (Widely Applicable Bayesian Information Criterion)** is an estimator of the free energy $F_n$ that works for both regular and singular models. It is calculated by taking the average of the log-likelihood over a tempered posterior distribution with inverse temperature $\beta = 1/\log n$. It generalizes the Bayesian Information Criterion (BIC).
+
+The WBIC provides an asymptotically accurate approximation of the marginal likelihood / free energy:
 $$ WBIC_n = \lambda \log n + O_p(1) $$
 This generalizes the Bayesian Information Criterion (BIC) to singular models, allowing for model selection by choosing the one that minimizes WBIC.
+
+
+## Singular Learning Theory (SLT) Quantities
+
+The **Real Log Canonical Threshold (RLCT)** is denoted as $\lambda$. It is a positive rational number that measures the "singularity" of the optimal parameter set $W_0$. It replaces the parameter dimension $d/2$ in the asymptotic expansion of the free energy for singular models. Lower $\lambda$ implies a more severe singularity and a smaller effective dimension, often leading to better generalization and simpler representations.
+
+The **Multiplicity** is denoted as $m$. It is the maximum power of the logarithmic term $\log n$ that appears alongside the RLCT in the asymptotic expansion of the free energy.
+
+The asymptotic expansion of the free energy in SLT is:
+$$ F_n = n S_n + \lambda \log n - (m - 1) \log \log n + O_p(1) $$
+
+The **Resolution of Singularities / Blow-up** is an algebraic geometry technique used in SLT. A "blow-up" is a coordinate transformation that resolves singularities in the parameter space, transforming the complex geometric structure of $K(w) = 0$ into a simpler form with normal crossings. This analytic continuation allows the asymptotic evaluation of the marginal likelihood integral.
+
+The **Zeta Function of Statistical Learning** is an analytic function of a complex variable $z$ defined as:
+$$ \zeta(z) = \int K(w)^{-z} \varphi(w) dw $$
+The poles of this zeta function are deeply connected to the RLCT. The largest pole of the zeta function (which is negative) determines the RLCT $\lambda$.
+
+The **Singular Fluctuation** is the variance of the log-likelihood ratio across the posterior distribution. In regular models, the singular fluctuation is $d/2$, but in singular models, it varies depending on the geometry of the singularities. It governs the difference between training error and generalization error.
+
