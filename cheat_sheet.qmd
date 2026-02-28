@@ -26,26 +26,107 @@ This is the Kullback-Leibler (KL) divergence between $q(x)$ and $p(x|w)$. The se
 
 ## Regular vs. Singular Models
 
+### Fisher Information Matrix
+The Fisher information matrix $I(w)$ evaluated at parameter $w$ is a $d \times d$ matrix with entries:
+$$ I_{ij}(w) = \int q(x) \left( \frac{\partial \log p(x|w)}{\partial w_i} \right) \left( \frac{\partial \log p(x|w)}{\partial w_j} \right) dx $$
+Alternatively, under certain regularity conditions, it can be expressed as the expected negative Hessian of the log-likelihood:
+$$ I_{ij}(w) = -\int q(x) \frac{\partial^2 \log p(x|w)}{\partial w_i \partial w_j} dx $$
+This is equivalent to the Hessian of the log-likelihood ratio $K(w)$:
+$$ I_{ij}(w) = \frac{\partial^2 K(w)}{\partial w_i \partial w_j} $$
+
+
 ### Regular Model
-A statistical model is **regular** if the map from parameters to probability distributions ($w \mapsto p(x|w)$) is one-to-one, and the Fisher information matrix is positive definite at the optimal parameter $w_0$. Regular models satisfy classical asymptotic theories.
+A statistical model is **regular** if the map from parameters to probability distributions ($w \mapsto p(x|w)$) is one-to-one, and the Fisher information matrix is positive definite at the optimal parameter $w_0$. Regular models satisfy classical asymptotic theories. 
+
+In a regular model, the Taylor expansion of $K(w)$ around the optimal parameter $w_0$ is dominated by the Fisher information matrix:
+$$ K(w) \approx \frac{1}{2} (w - w_0)^\top I(w_0) (w - w_0) $$
 
 ### Singular Model
 A statistical model is **singular** if it is not regular. In singular models, the Fisher information matrix is singular (not positive definite) at the true parameters, or the parameter-to-distribution mapping is many-to-one. Examples include neural networks, Gaussian mixture models, hidden Markov models, and Bayesian networks.
 
+In a singular model, $I(w_0)$ is singular, making the quadratic approximation to $K(w)$ degenerate.
+
+## Entropy
+
+### Average Entropy
+The true entropy of the data-generating distribution:
+$$ S = -\int q(x) \log q(x) dx $$
+
+### Empirical Entropy
+The empirical counterpart of the average entropy based on a sample of size $n$, $X^n = (X_1, \dots, X_n)$:
+$$ S_n = -\frac{1}{n} \sum_{i=1}^n \log q(X_i) $$
+
 ## Bayesian Inference
 
-### Marginal Likelihood (Evidence)
+### Partition Function (Marginal Likelihood)
 The probability of observing the data $X^n = (X_1, \dots, X_n)$ given the model and the prior:
 $$ Z_n = \int \prod_{i=1}^n p(X_i|w) \varphi(w) dw $$
 
 ### Free Energy
 The negative log of the marginal likelihood:
 $$ F_n = -\log Z_n $$
-In SLT, the asymptotic behavior of the free energy is a central object of study. For regular models, $F_n \approx n L_n(\hat{w}) + \frac{d}{2} \log n$. For singular models, it requires algebraic geometry to analyze.
+In SLT, the asymptotic behavior of the free energy is a central object of study. For regular models, $F_n \approx n T_n(\hat{w}) + \frac{d}{2} \log n$. For singular models, it requires algebraic geometry to analyze.
 
 ### Posterior Distribution
 Given $n$ independent observations $X^n = (X_1, \dots, X_n)$ from $q(x)$, the posterior is:
 $$ p(w|X^n) = \frac{1}{Z_n} \prod_{i=1}^n p(X_i|w) \varphi(w) $$
+
+### Predictive Distribution
+The distribution of a new, unseen data point $x$ given the observed data $X^n$:
+$$ p(x|X^n) = \int p(x|w) p(w|X^n) dw $$
+
+## Losses and Errors
+
+### Generalization Loss
+The expected negative log-likelihood of a new data point $X$ drawn from $q(x)$, evaluated using the predictive distribution:
+$$ G_n = -\int q(x) \log p(x|X^n) dx $$
+
+### Generalization Error
+The difference between the generalization loss and the true entropy:
+$$ \text{Generalization Error} = G_n - S $$
+
+### Training Loss
+The empirical negative log-likelihood of the training data $X^n$, evaluated using the predictive distribution:
+$$ T_n = -\frac{1}{n} \sum_{i=1}^n \log p(X_i|X^n) $$
+
+### Training Error
+The difference between the training loss and the empirical entropy:
+$$ \text{Training Error} = T_n - S_n $$
+
+### Cross-Validation Loss
+The leave-one-out cross-validation loss estimates generalization loss by evaluating each training point on the predictive distribution formed by the remaining $n-1$ points:
+$$ C_n = -\frac{1}{n} \sum_{i=1}^n \log p(X_i|X^n \setminus \{X_i\}) $$
+
+### Cross-Validation Error
+The difference between the cross-validation loss and the empirical entropy:
+$$ \text{Cross-Validation Error} = C_n - S_n $$
+
+
+## Information Criteria
+
+### WAIC (Widely Applicable Information Criterion)
+An estimator of the generalization loss that relies on the log-posterior predictive density (training loss) and the empirical variance of the log-likelihood over the posterior. WAIC is asymptotically equivalent to the leave-one-out cross-validation loss and works well for both regular and singular models.
+$$ WAIC_n = T_n + \frac{V_n}{n} $$
+where the functional variance $V_n$ is:
+$$ V_n = \sum_{i=1}^n \left( \mathbb{E}_{w|X^n}[(\log p(X_i|w))^2] - (\mathbb{E}_{w|X^n}[\log p(X_i|w)])^2 \right) $$
+
+### WBIC (Widely Applicable Bayesian Information Criterion)
+An estimator of the free energy $F_n$ that works for both regular and singular models. It is calculated by taking the average of the log-likelihood over a tempered posterior distribution with inverse temperature $\beta = 1/\log n$. It generalizes the Bayesian Information Criterion (BIC).
+
+## Relational Properties
+
+There are key theoretical relationships between these quantities in Bayesian learning (expectations $\mathbb{E}[]$ are taken over the true distribution of datasets $X^n$):
+
+* **Expected Generalization and Free Energy**: The expected generalization loss is exactly the difference in expected free energies.
+  $$ \mathbb{E}[G_n] = \mathbb{E}[F_{n+1}] - \mathbb{E}[F_n] $$
+* **Expected Cross-Validation vs Generalization**: Cross-validation estimates the generalization loss of a model trained on $n-1$ samples.
+  $$ \mathbb{E}[C_n] = \mathbb{E}[G_{n-1}] $$
+* **Expected WAIC vs Generalization**: WAIC is an asymptotically unbiased estimator of the expected generalization loss.
+  $$ \mathbb{E}[WAIC_n] = \mathbb{E}[G_n] + O(1/n^2) $$
+* **WAIC vs Cross-Validation**: WAIC and Cross-validation loss are asymptotically equivalent estimators.
+  $$ \mathbb{E}[WAIC_n] = \mathbb{E}[C_n] + O(1/n^2) $$
+* **Generalization vs Training Loss**: In general, training loss underestimates generalization loss due to overfitting to the specific sample.
+  $$ \mathbb{E}[T_n] < \mathbb{E}[G_n] $$
 
 ## Singular Learning Theory (SLT) Quantities
 
@@ -55,8 +136,6 @@ Denoted as $\lambda$. A positive rational number that measures the "singularity"
 ### Multiplicity
 Denoted as $m$. It is the maximum power of the logarithmic term $\log n$ that appears alongside the RLCT in the asymptotic expansion of the free energy.
 The asymptotic expansion of the free energy in SLT is:
-$$ F_n \approx n S_n + \lambda \log n - (m - 1) \log \log \log Z_n \text{ (wait, actually } (m-1)\log\log n) $$
-Wait, the actual formula is $F_n \approx n S_n + \lambda \log n - (m - 1) \log \log n + O_p(1)$ where $S_n$ is the empirical entropy. (Let me fix that typo).
 $$ F_n \approx n S_n + \lambda \log n - (m - 1) \log \log n + O_p(1) $$
 
 ### Resolution of Singularities / Blow-up
@@ -69,17 +148,3 @@ The poles of this zeta function are deeply connected to the RLCT. The largest po
 
 ### Singular Fluctuation
 The variance of the log-likelihood ratio across the posterior distribution. In regular models, the singular fluctuation is $d/2$, but in singular models, it varies depending on the geometry of the singularities. It governs the difference between training error and generalization error.
-
-## Information Criteria
-
-### Generalization Error
-The expected loss (e.g., KL divergence) when predicting a new, unseen data point using the predictive distribution trained on $X^n$.
-
-### Training Error
-The empirical loss calculated on the training data $X^n$. Training error is typically lower than generalization error.
-
-### WAIC (Widely Applicable Information Criterion)
-An estimator of the generalization error that relies on the log-posterior predictive density and the empirical variance of the log-likelihood over the posterior. WAIC is asymptotically equivalent to the cross-validation loss and works well for both regular and singular models.
-
-### WBIC (Widely Applicable Bayesian Information Criterion)
-An estimator of the free energy $F_n$ that works for both regular and singular models. It is calculated by taking the average of the log-likelihood over a tempered posterior distribution with inverse temperature $\beta = 1/\log n$. It generalizes the Bayesian Information Criterion (BIC).
