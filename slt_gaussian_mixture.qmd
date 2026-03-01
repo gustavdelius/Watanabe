@@ -8,7 +8,7 @@ jupyter: python3
 
 This document provides a walk-through of Sumio Watanabe's *Singular Learning Theory*, using a two-component Gaussian Mixture Model (GMM) as a concrete pedagogical example. We had already seen in [Regular and Singular Models](regular_and_singular_models.qmd#sec:singular-model) that this model is singular.
 
-## 1. Introduction: The Model and the True Distribution (Chapter 1)
+## Chapter 1. Introduction: The Model and the True Distribution
 
 In statistical formulation, we consider a learning machine defined by a parametric statistical model $p(x|w)$ and a true data-generating distribution $q(x)$.
 
@@ -87,7 +87,7 @@ plt.show()
 
 ---
 
-## 2. Resolution of Singularities (Chapter 2)
+## Chapter 2. Resolution of Singularities
 
 Because the set of true parameters $W_0$ has a singularity (an intersection forming a cross), standard asymptotic expansions (like the Laplace approximation) fail. Watanabe employs **Hironaka's Theorem on the Resolution of Singularities** from algebraic geometry to resolve this.
 
@@ -113,7 +113,7 @@ $$ dw = |g'(u)| du = \left| \det \begin{pmatrix} 1 & 0 \\ u_2 & u_1 \end{pmatrix
 
 ---
 
-## 3. Standard Form and Real Log Canonical Threshold (Chapter 3)
+## Chapter 3. Standard Form and Real Log Canonical Threshold
 
 In Chapter 3, Watanabe introduces the concept of the **Real Log Canonical Threshold (RLCT)**, denoted by $\lambda$, and its multiplicity $m$. These two algebraic invariants completely govern the asymptotic behavior of the learning machine.
 
@@ -158,7 +158,7 @@ $$ m = 2 $$
 
 ---
 
-## 4. Singular Fluctuation and Free Energy (Chapter 4)
+## Chapter 4. Singular Fluctuation and Free Energy
 
 In Bayesian evaluation, the **Stochastic Complexity** or **Free Energy** $F_n$ represents the negative log-marginal likelihood (evidence) of the data $X^n$:
 $$ F_n = -\log Z_n = -\log \int e^{-n L_n(w)} \varphi(w) dw $$
@@ -195,7 +195,7 @@ This result breaks the classical Bayesian Information Criterion (BIC), which ass
 
 ---
 
-## 5. Generalization and Training Errors (Chapter 5)
+## Chapter 5. Generalization and Training Errors
 
 Chapter 5 links the geometry of the parameter space to the average errors. 
 Let $G_n$ be the **Generalization Error** (expected loss on new data) and $T_n$ be the **Training Error** (empirical loss on the training set). 
@@ -217,7 +217,7 @@ This explains why heavily overparameterized singular models (like deep neural ne
 
 ---
 
-## 6. Asymptotic Expansion and WAIC (Chapter 6)
+## Chapter 6. Asymptotic Expansion and WAIC
 
 Finally, Chapter 6 resolves a crucial practical problem. Since calculating $\lambda$ analytically requires algebraic blow-ups (which is impossible for massive modern models like LLMs), we cannot use it directly to estimate the generalization error. Furthermore, cross-validation can be unstable in singular models.
 
@@ -448,7 +448,155 @@ Classical criteria like DIC rely on a *point estimate* of the parameter (usually
 
 WAIC, on the other hand, averages the likelihood over the *entire* posterior distribution and calculates the functional variance point-by-point. It entirely avoids point estimation.
 
-## 7. Comparing Information Criteria  (Chapter 8)
+## Chapter7. Gibbs Sampler for Gaussian Mixture
+
+A Gibbs sampler is often employed in mixture models. Let us derive a Gibbs sampler for the two-component Gaussian mixture model defined by
+$$
+p(x|a, b) = a \mathcal{N}(x|b_1) + (1-a) \mathcal{N}(x|b_2)
+$$
+where $a \in [0, 1]$ and $b = (b_1, b_2)$ are parameters. For the prior, we adopt a Beta distribution with index $(\alpha, \beta)$ and a normal distribution:
+$$
+\varphi(a) = \frac{1}{z_1} a^{\alpha - 1} (1-a)^{\beta - 1}
+$$
+$$
+\varphi(b) = \frac{1}{z_2} \exp\left(-\frac{b_1^2 + b_2^2}{2\sigma^2}\right)
+$$
+Let $y \in \{0, 1\}$ be a latent competitive variable indicating the component membership. Then a normal mixture $p(x|a, b)$ can be understood as a statistical model 
+$$p(x, y|a, b) = (a \mathcal{N}(x|b_1))^{y} ((1-a) \mathcal{N}(x|b_2))^{1-y}$$It follows that
+$$
+p(x|a, b) = \sum_{y \in \{0, 1\}} p(x, y|a, b)
+$$
+Therefore a normal mixture $p(x|a, b)$ can be understood as a statistical model $p(x, y|a, b)$ which has a latent or hidden variable $y \in \{0, 1\}$.
+
+Let $x^n = \{x_1, x_2, \dots, x_n\}$ be an independent sample and $y_i \in \{0, 1\}$ be the hidden variable which corresponds to a sample point $x_i$. We use a notation $y^n = \{y_1, y_2, \dots, y_n\}$. Then the Bayesian simultaneous probability is
+$$
+p(a, b, x^n, y^n) = \frac{1}{Z} \left(a^{\alpha - 1 + n_1} \exp(-H_1(b_1))\right) \left((1-a)^{\beta - 1 + n_2} \exp(-H_2(b_2))\right)
+$$
+where $Z$ is a normalizing constant and
+$$
+n_1 = \sum_{i=1}^n y_i, \quad n_2 = \sum_{i=1}^n (1 - y_i) = n - n_1
+$$
+$$
+H_1(b_1) = \frac{b_1^2}{2\sigma^2} + \frac{1}{2} \sum_{i=1}^n y_i (x_i - b_1)^2
+$$
+$$
+H_2(b_2) = \frac{b_2^2}{2\sigma^2} + \frac{1}{2} \sum_{i=1}^n (1-y_i) (x_i - b_2)^2
+$$
+
+In Bayesian estimation, we need the posterior parameters $(a, b)$ which are subject to $p(a, b|x^n)$. It is sufficient to make a Gibbs sampler for $(a, b)$ and $y^n$, in which the conditional probabilities we need are $p(y^n|a, b, x^n)$ and $p(a, b|x^n, y^n)$.
+
+By using these conditional probabilities, we can make a Gibbs sampler for $(a, b) \to y^n$ and $y^n \to (a, b)$. Under the probability distribution $p(y^n|a, b, x^n)$ the $y_1, y_2, \dots, y_n$ are independent and, for each $i$:
+$$
+p(y_i = 1 | a, b, x_i) = \frac{a \mathcal{N}(x_i|b_1)}{a \mathcal{N}(x_i|b_1) + (1-a) \mathcal{N}(x_i|b_2)}
+$$
+
+On the other hand, if $(a, b_1, b_2)$ is subject to the probability distribution $p(a, b|x^n, y^n)$, they are independent. Hence
+$$
+p(a, b|x^n, y^n) = p(a|x^n, y^n) p(b_1|x^n, y^n) p(b_2|x^n, y^n)
+$$
+The variable $a$ is subject to the Beta distribution with index $\alpha + n_1$ and $\beta + n_2$:
+$$
+p(a|x^n, y^n) \propto a^{\alpha + n_1 - 1} (1-a)^{\beta + n_2 - 1}
+$$
+
+The variable $b_1$ and $b_2$ are subject to the normal distribution with average $b_k^*$ and variance $(\sigma_k^*)^2$:
+$$
+p(b_k|x^n, y^n) = \mathcal{N}(b_k^*, (\sigma_k^*)^2) \quad \text{for } k=1, 2
+$$
+where
+$$
+b_1^* = \frac{\sum_{i=1}^n y_i x_i}{1/\sigma^2 + n_1}, \quad b_2^* = \frac{\sum_{i=1}^n (1-y_i) x_i}{1/\sigma^2 + n_2}
+$$
+$$
+(\sigma_1^*)^2 = \frac{1}{1/\sigma^2 + n_1}, \quad (\sigma_2^*)^2 = \frac{1}{1/\sigma^2 + n_2}
+$$
+
+In Bayesian estimation, it is sufficient to make a Gibbs sampler for $(a, b)$ and the latent states $y^n$. By isolating the conditional probabilities, the algorithm is defined by the following steps:
+
+(1) A parameter set $\{(a, b_1, b_2)\}$ is initialized.
+(2) A set of hidden variables $\{y_i\} \in \{0, 1\}^n$ is determined by the probability:
+$$
+P(y_i = 1|a, b, x_i) = \frac{a \mathcal{N}(x_i|b_1)}{a \mathcal{N}(x_i|b_1) + (1-a) \mathcal{N}(x_i|b_2)}
+$$
+(3) Using $n_1 = \sum_{i=1}^n y_i$ and $n_2 = n - n_1$, a parameter $a$ is generated by using the Beta distribution:
+$$
+a \sim \text{Beta}(\alpha + n_1, \beta + n_2)
+$$
+(4) A parameter $\{b_1, b_2\}$ is generated by the normal distribution $\mathcal{N}(b_k^*, (\sigma_k^*)^2)$ for $k=1, 2$ where
+$$
+b_1^* = \frac{\sum_{i=1}^n y_i x_i}{1/\sigma^2 + n_1}, \quad (\sigma_1^*)^2 = \frac{1}{1/\sigma^2 + n_1}
+$$
+$$
+b_2^* = \frac{\sum_{i=1}^n (1-y_i) x_i}{1/\sigma^2 + n_2}, \quad (\sigma_2^*)^2 = \frac{1}{1/\sigma^2 + n_2}
+$$
+(5) Return to (2).
+
+
+
+As en example use this Gibbs sampler to sample from the posterior resulting from distributions with true parameters $b_1 = 0.2B$ and $b_2 = -0.2B$. As $B$ goes from $4$ down to $1$, the components overlap more, and the posterior becomes singular.
+
+```{python}
+#| label: gibbs-sampler-example-52
+#| fig-cap: "Posterior parameter sample points of $b_1$ and $b_2$ for different true separation values $B$. As $B \\le 2$, the posterior distribution loses clear separation and becomes singular."
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def norm_pdf(x, mean, std=1.0):
+    return np.exp(-0.5 * ((x - mean) / std)**2) / (std * np.sqrt(2 * np.pi))
+
+def gibbs_sampler(X, num_iterations=2500, alpha=1.0, beta_prior=1.0, sigma2=1.0):
+    n = len(X)
+    a, b1, b2 = 0.5, 1.0, -1.0
+    
+    samples_a, samples_b1, samples_b2 = (np.zeros(num_iterations) for _ in range(3))
+    
+    for t in range(num_iterations):
+        p1 = a * norm_pdf(X, b1) + 1e-15
+        p2 = (1 - a) * norm_pdf(X, b2) + 1e-15
+        y = np.random.binomial(1, p1 / (p1 + p2))
+        
+        n1 = np.sum(y)
+        n2 = n - n1
+        a = np.random.beta(alpha + n1, beta_prior + n2)
+        
+        var_b1 = 1.0 / (1.0 / sigma2 + n1)
+        b1 = np.random.normal((np.sum(y * X)) * var_b1, np.sqrt(var_b1))
+        
+        var_b2 = 1.0 / (1.0 / sigma2 + n2)
+        b2 = np.random.normal((np.sum((1 - y) * X)) * var_b2, np.sqrt(var_b2))
+        
+        samples_a[t], samples_b1[t], samples_b2[t] = a, b1, b2
+        
+    return samples_a[500:], samples_b1[500:], samples_b2[500:]
+
+np.random.seed(42)
+B_values = [4, 3, 2, 1]
+fig, axes = plt.subplots(2, 2, figsize=(10, 10))
+
+for idx, B in enumerate(B_values):
+    b1_true, b2_true = 0.2 * B, -0.2 * B
+    z = np.random.binomial(1, 0.5, size=100)
+    X = np.where(z == 1, np.random.normal(b1_true, 1.0, 100), np.random.normal(b2_true, 1.0, 100))
+    
+    sa, sb1, sb2 = gibbs_sampler(X)
+    
+    ax = axes.flatten()[idx]
+    ax.scatter(sb1, sb2, alpha=0.3, s=5, c='blue', label='Posterior Samples')
+    ax.plot([b1_true, b2_true], [b2_true, b1_true], 'wo', markeredgecolor='black', markersize=10, label='True Centers')
+    ax.set_title(f"B = {B}")
+    ax.set_xlabel("$b_1$")
+    ax.set_ylabel("$b_2$")
+    limit = max(abs(np.concatenate([sb1, sb2]).max()), abs(b1_true) + 0.5)
+    ax.set_xlim(-limit, limit)
+    ax.set_ylim(-limit, limit)
+    if idx == 0: ax.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+## Chapter 8. Comparing Information Criteria
 
 In Chapter 8, Watanabe provides a sweeping experimental demonstration (Example 53) of how different information criteria behave across various geometric conditions in the parameter space. We will reproduce this study using our 1D Gaussian Mixture analog.
 
@@ -517,7 +665,7 @@ The experimental table provides crucial concrete evidence for Singular Learning 
 - **The Stability of WAIC and ISCV:** Watanabe proves that the cross-validation error functionally mimics the mathematical singularity structure. WAIC acts as an exact asymptotic estimator of the generalization error (and thus the cross-validation error) because the local geometric variance $V_n$ identically mirrors the true $\lambda$ without needing to calculate the intractable blow-up explicitly. **WAIC requires no point estimate, avoiding the fatal geometric traps of DIC.**
 
 
-## 8. Phase Transition in a Hierarchical Model (Chapter 9)
+## Chapter 9. Phase Transition in a Hierarchical Model
 
 In Chapter 9, Watanabe describes a **Phase Transition** in Bayesian statistics. A phase transition occurs when the structure of the posterior distribution changes drastically depending on a generalized hyperparameter. At this critical point, the free energy is often discontinuous or non-differentiable.
 
