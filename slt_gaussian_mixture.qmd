@@ -462,7 +462,10 @@ $$
 \varphi(b) = \frac{1}{z_2} \exp\left(-\frac{b_1^2 + b_2^2}{2\sigma^2}\right)
 $$
 Let $y \in \{0, 1\}$ be a latent competitive variable indicating the component membership. Then a normal mixture $p(x|a, b)$ can be understood as a statistical model 
-$$p(x, y|a, b) = (a \mathcal{N}(x|b_1))^{y} ((1-a) \mathcal{N}(x|b_2))^{1-y}$$It follows that
+$$
+p(x, y|a, b) = (a \mathcal{N}(x|b_1))^{y} ((1-a) \mathcal{N}(x|b_2))^{1-y}
+$$
+It follows that
 $$
 p(x|a, b) = \sum_{y \in \{0, 1\}} p(x, y|a, b)
 $$
@@ -545,7 +548,7 @@ import matplotlib.pyplot as plt
 def norm_pdf(x, mean, std=1.0):
     return np.exp(-0.5 * ((x - mean) / std)**2) / (std * np.sqrt(2 * np.pi))
 
-def gibbs_sampler(X, num_iterations=2500, alpha=1.0, beta_prior=1.0, sigma2=1.0):
+def gibbs_sampler(X, num_iterations=4500, alpha=1.0, beta_prior=1.0, sigma2=1.0):
     n = len(X)
     a, b1, b2 = 0.5, 1.0, -1.0
     
@@ -582,15 +585,108 @@ for idx, B in enumerate(B_values):
     sa, sb1, sb2 = gibbs_sampler(X)
     
     ax = axes.flatten()[idx]
-    ax.scatter(sb1, sb2, alpha=0.3, s=5, c='blue', label='Posterior Samples')
+    ax.scatter(sb1, sb2, alpha=0.1, s=5, c='blue', label='Posterior Samples')
     ax.plot([b1_true, b2_true], [b2_true, b1_true], 'wo', markeredgecolor='black', markersize=10, label='True Centers')
     ax.set_title(f"B = {B}")
     ax.set_xlabel("$b_1$")
     ax.set_ylabel("$b_2$")
-    limit = max(abs(np.concatenate([sb1, sb2]).max()), abs(b1_true) + 0.5)
+    limit = 2
     ax.set_xlim(-limit, limit)
     ax.set_ylim(-limit, limit)
     if idx == 0: ax.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+### Gibbs Sampler vs. Standard MCMC (Metropolis-Hastings)
+
+Which sampling method is better? In Chapter 1, we used a standard Metropolis-Hastings (MH) algorithm to sample from the posterior of a Gaussian Mixture Model. In this chapter, we derived a Gibbs sampler for the exact same model. The choice between them comes with important trade-offs, especially in the context of mixture models and Singular Learning Theory.
+
+**Advantages of the Gibbs Sampler:**
+
+1. **No Step-Size Tuning:** Standard MH requires tuning the proposal distribution variance (step size). If the steps are too small, the sampler moves too slowly; if they are too large, proposals are constantly rejected. Gibbs sampling draws directly from the exact conditional distributions, meaning every proposal is accepted (100% acceptance rate) without any tuning.
+2. **Discrete Latent Variables:** Gibbs sampling handles the discrete component assignment variables $y_i \in \{0, 1\}$ naturally. Continuous gradient-based MCMC methods (like Hamiltonian Monte Carlo) cannot easily handle discrete latent variables without marginalizing them out first.
+
+**Advantages of Standard MCMC (Metropolis-Hastings):**
+
+1. **Generality:** MH only requires that you can compute the log-likelihood $p(x|w)$ up to a constant. It applies universally to any model (neural networks, matrix factorization, etc.). Gibbs sampling requires you to explicitly derive the exact conditional distributions, which is only possible for models with *conjugate priors*.
+2. **Direct Exploration of the Singular Manifold:** SLT focuses on the continuous parameter space $W$ where $w = (a, \mu)$. MH explores this 2D continuous space directly, moving across the singularities (like $a=0$ or $\mu_1=\mu_2$) cleanly. A Gibbs sampler explores a much higher-dimensional space that includes all $n$ discrete hidden variables $(a, \mu, y_1, y_2, \dots, y_n)$. Near a singularity where components overlap, the latent assignments become completely unidentifiable, which often causes the Gibbs sampler's Markov chain to become highly correlated and stall.
+3. **Label Switching:** Because the mixture components are symmetric, the true posterior has multiple identical modes. A Gibbs sampler will often get stuck in one mode, whereas a well-tuned MH sampler may transition between them more fluidly.
+
+Let us run both algorithms on the same dataset generated with $B=2$ and compare their behavior:
+
+```{python}
+#| label: mcmc-vs-gibbs
+#| fig-cap: "Comparison of Metropolis-Hastings (left) and Gibbs Sampling (right) on the same GMM dataset (B=2). Notice how the Gibbs sampler appears to sample from a wider range of parameter values."
+#| cache: true
+
+def log_prior(a, mu1, mu2, alpha=1.0, beta=1.0, sigma2=1.0):
+    if not (0 < a < 1): return -np.inf
+    return (alpha - 1) * np.log(a) + (beta - 1) * np.log(1 - a) - 0.5 * (mu1**2 + mu2**2) / sigma2
+
+def mh_sampler(X, num_iterations=2500, alpha=1.0, beta_prior=1.0, sigma2=1.0):
+    a, b1, b2 = 0.5, 1.0, -1.0
+    p1, p2 = norm_pdf(X, b1), norm_pdf(X, b2)
+    ll = np.sum(np.log(a * p1 + (1 - a) * p2 + 1e-15)) + log_prior(a, b1, b2, alpha, beta_prior, sigma2)
+    
+    samples_a, samples_b1, samples_b2 = (np.zeros(num_iterations) for _ in range(3))
+    
+    for t in range(num_iterations):
+        a_prop = a + np.random.normal(0, 0.05)
+        b1_prop = b1 + np.random.normal(0, 0.2)
+        b2_prop = b2 + np.random.normal(0, 0.2)
+        
+        if a_prop < 0: a_prop = -a_prop
+        if a_prop > 1: a_prop = 2 - a_prop
+            
+        p1_prop, p2_prop = norm_pdf(X, b1_prop), norm_pdf(X, b2_prop)
+        ll_prop = np.sum(np.log(a_prop * p1_prop + (1 - a_prop) * p2_prop + 1e-15)) + log_prior(a_prop, b1_prop, b2_prop, alpha, beta_prior, sigma2)
+        
+        if np.log(np.random.rand()) < (ll_prop - ll):
+            a, b1, b2, ll = a_prop, b1_prop, b2_prop, ll_prop
+            
+        samples_a[t], samples_b1[t], samples_b2[t] = a, b1, b2
+        
+    return samples_a[500:], samples_b1[500:], samples_b2[500:]
+
+np.random.seed(42)
+B = 2
+b1_true, b2_true = 0.2 * B, -0.2 * B
+z = np.random.binomial(1, 0.5, size=100)
+X = np.where(z == 1, np.random.normal(b1_true, 1.0, 100), np.random.normal(b2_true, 1.0, 100))
+
+g_a, g_b1, g_b2 = gibbs_sampler(X, num_iterations=5500)
+m_a, m_b1, m_b2 = mh_sampler(X, num_iterations=5500)
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 6))
+alpha = 0.7
+axes[0, 0].plot(m_b1, label='b1', alpha=alpha)
+#axes[0, 0].plot(m_b2, label='b2', alpha=alpha)
+axes[0, 0].set_title("Metropolis-Hastings Trace")
+axes[0, 0].set_ylabel("Parameter Value")
+axes[0, 0].set_ylim(-2, 2)
+axes[0, 0].legend()
+
+axes[0, 1].plot(g_b1, label='b1', alpha=alpha)
+#axes[0, 1].plot(g_b2, label='b2', alpha=alpha)
+axes[0, 1].set_title("Gibbs Sampler Trace")
+axes[0, 1].set_ylim(-2, 2)
+axes[0, 1].legend()
+
+alpha = 0.05
+axes[1, 0].scatter(m_b1, m_b2, alpha=alpha, s=5, c='red')
+axes[1, 0].plot([b1_true, b2_true], [b2_true, b1_true], 'wo', markeredgecolor='black', markersize=10, label='True Centers')
+axes[1, 0].set_title("Metropolis-Hastings Posterior")
+axes[1, 0].set_xlabel("$b_1$")
+axes[1, 0].set_ylabel("$b_2$")
+axes[1, 0].set_xlim(-2, 2); axes[1, 0].set_ylim(-2, 2)
+
+axes[1, 1].scatter(g_b1, g_b2, alpha=alpha, s=5, c='blue')
+axes[1, 1].plot([b1_true, b2_true], [b2_true, b1_true], 'wo', markeredgecolor='black', markersize=10, label='True Centers')
+axes[1, 1].set_title("Gibbs Sampler Posterior")
+axes[1, 1].set_xlabel("$b_1$")
+axes[1, 1].set_xlim(-2, 2); axes[1, 1].set_ylim(-2, 2)
 
 plt.tight_layout()
 plt.show()
@@ -799,80 +895,91 @@ Since WAIC correctly estimates the generalization error, it will also exhibit a 
 ```{python}
 #| label: phase-transition-errors
 #| fig-cap: "Phase Transition in Average Errors. The Generalization Error and WAIC linearly increase until the critical point $\\alpha=1$, after which they plateau as the model switches to the generic regular-equivalent manifold."
-#| cache: true
+
+import os
 
 alphas = np.linspace(0.25, 2.5, 10)
 n_trials = 20
 n = 100
 
-mean_ge = []
-mean_waic = []
+results_file = "phase_transition_errors.npz"
 
-# Using 20 trials with 10k MCMC steps smooths out the variance to reveal the kink.
-# Rendering this cell may take a minute or two, so it is cached.
-for alpha in alphas:
-    alpha_ge = []
-    alpha_waic = []
-    
-    for trial in range(n_trials):
-        np.random.seed(42 + trial)
-        X = np.random.normal(0, 1, n)
-        X_test = np.random.normal(0, 1, 5000)
+if os.path.exists(results_file):
+    print("Loading saved results from disk...")
+    data = np.load(results_file)
+    mean_ge = data['mean_ge']
+    mean_waic = data['mean_waic']
+else:
+    mean_ge = []
+    mean_waic = []
+
+    # Using 20 trials with 10k MCMC steps smooths out the variance to reveal the kink.
+    # Rendering this cell may take a minute or two.
+    for alpha in alphas:
+        alpha_ge = []
+        alpha_waic = []
         
-        # Empirical entropy of true distribution
-        p0_train = np.exp(-0.5 * X**2) / np.sqrt(2 * np.pi)
-        S_n = -np.mean(np.log(p0_train))
-        
-        # True entropy
-        p0_test = np.exp(-0.5 * X_test**2) / np.sqrt(2 * np.pi)
-        S = -np.mean(np.log(p0_test))
-        
-        a = 0.5; mu = 0.0
-        ll = log_likelihood(X, a, mu); lp = log_prior(a, mu, alpha)
-        
-        samples_a = []
-        samples_mu = []
-        
-        # MCMC Sampling
-        for i in range(10000):
-            a_new = a + np.random.normal(0, 0.1)
-            mu_new = mu + np.random.normal(0, 0.5)
-            if 0 < a_new < 1:
-                lp_new = log_prior(a_new, mu_new, alpha)
-                ll_new = log_likelihood(X, a_new, mu_new)
-                if np.log(np.random.rand()) < (ll_new + lp_new - ll - lp):
-                    a, mu = a_new, mu_new
-                    ll, lp = ll_new, lp_new
-            if i >= 4000 and i % 10 == 0:
-                samples_a.append(a)
-                samples_mu.append(mu)
-                
-        samples_a = np.array(samples_a)
-        samples_mu = np.array(samples_mu)
-        
-        # Vectorized WAIC Calculation
-        diff_sq_tr = (X[:, None] - samples_mu[None, :])**2
-        pmu_tr = np.exp(-0.5 * diff_sq_tr) / np.sqrt(2 * np.pi)
-        p_train = (1 - samples_a[None, :]) * p0_train[:, None] + samples_a[None, :] * pmu_tr + 1e-15
-        
-        p_train_mean = np.mean(p_train, axis=1)
-        T_n = -np.mean(np.log(p_train_mean))
-        V_n = np.mean(np.var(np.log(p_train), axis=1))
-        waic = T_n + V_n - S_n
-        
-        # Vectorized GE Calculation
-        diff_sq_ts = (X_test[:, None] - samples_mu[None, :])**2
-        pmu_ts = np.exp(-0.5 * diff_sq_ts) / np.sqrt(2 * np.pi)
-        p_test_all = (1 - samples_a[None, :]) * p0_test[:, None] + samples_a[None, :] * pmu_ts + 1e-15
-        
-        p_test_mean = np.mean(p_test_all, axis=1)
-        ge = -np.mean(np.log(p_test_mean)) - S
-        
-        alpha_ge.append(ge)
-        alpha_waic.append(waic)
-        
-    mean_ge.append(np.mean(alpha_ge))
-    mean_waic.append(np.mean(alpha_waic))
+        for trial in range(n_trials):
+            np.random.seed(42 + trial)
+            X = np.random.normal(0, 1, n)
+            X_test = np.random.normal(0, 1, 5000)
+            
+            # Empirical entropy of true distribution
+            p0_train = np.exp(-0.5 * X**2) / np.sqrt(2 * np.pi)
+            S_n = -np.mean(np.log(p0_train))
+            
+            # True entropy
+            p0_test = np.exp(-0.5 * X_test**2) / np.sqrt(2 * np.pi)
+            S = -np.mean(np.log(p0_test))
+            
+            a = 0.5; mu = 0.0
+            ll = log_likelihood(X, a, mu); lp = log_prior(a, mu, alpha)
+            
+            samples_a = []
+            samples_mu = []
+            
+            # MCMC Sampling
+            for i in range(10000):
+                a_new = a + np.random.normal(0, 0.1)
+                mu_new = mu + np.random.normal(0, 0.5)
+                if 0 < a_new < 1:
+                    lp_new = log_prior(a_new, mu_new, alpha)
+                    ll_new = log_likelihood(X, a_new, mu_new)
+                    if np.log(np.random.rand()) < (ll_new + lp_new - ll - lp):
+                        a, mu = a_new, mu_new
+                        ll, lp = ll_new, lp_new
+                if i >= 4000 and i % 10 == 0:
+                    samples_a.append(a)
+                    samples_mu.append(mu)
+                    
+            samples_a = np.array(samples_a)
+            samples_mu = np.array(samples_mu)
+            
+            # Vectorized WAIC Calculation
+            diff_sq_tr = (X[:, None] - samples_mu[None, :])**2
+            pmu_tr = np.exp(-0.5 * diff_sq_tr) / np.sqrt(2 * np.pi)
+            p_train = (1 - samples_a[None, :]) * p0_train[:, None] + samples_a[None, :] * pmu_tr + 1e-15
+            
+            p_train_mean = np.mean(p_train, axis=1)
+            T_n = -np.mean(np.log(p_train_mean))
+            V_n = np.mean(np.var(np.log(p_train), axis=1))
+            waic = T_n + V_n - S_n
+            
+            # Vectorized GE Calculation
+            diff_sq_ts = (X_test[:, None] - samples_mu[None, :])**2
+            pmu_ts = np.exp(-0.5 * diff_sq_ts) / np.sqrt(2 * np.pi)
+            p_test_all = (1 - samples_a[None, :]) * p0_test[:, None] + samples_a[None, :] * pmu_ts + 1e-15
+            
+            p_test_mean = np.mean(p_test_all, axis=1)
+            ge = -np.mean(np.log(p_test_mean)) - S
+            
+            alpha_ge.append(ge)
+            alpha_waic.append(waic)
+            
+        mean_ge.append(np.mean(alpha_ge))
+        mean_waic.append(np.mean(alpha_waic))
+
+    np.savez(results_file, mean_ge=mean_ge, mean_waic=mean_waic)
 
 plt.figure(figsize=(8, 5))
 plt.plot(alphas, mean_ge, 'o-', color='blue', label='Empirical GE - S')
