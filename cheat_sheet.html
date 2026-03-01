@@ -166,7 +166,10 @@ window.Quarto = {
   <li><a href="#bayesian-inference" id="toc-bayesian-inference" class="nav-link" data-scroll-target="#bayesian-inference">Bayesian Inference</a></li>
   <li><a href="#losses-and-errors" id="toc-losses-and-errors" class="nav-link" data-scroll-target="#losses-and-errors">Losses and Errors</a></li>
   <li><a href="#information-criteria" id="toc-information-criteria" class="nav-link" data-scroll-target="#information-criteria">Information Criteria</a></li>
-  <li><a href="#singular-learning-theory-slt-quantities" id="toc-singular-learning-theory-slt-quantities" class="nav-link" data-scroll-target="#singular-learning-theory-slt-quantities">Singular Learning Theory (SLT) Quantities</a></li>
+  <li><a href="#singular-learning-theory-slt-quantities" id="toc-singular-learning-theory-slt-quantities" class="nav-link" data-scroll-target="#singular-learning-theory-slt-quantities">Singular Learning Theory (SLT) Quantities</a>
+  <ul class="collapse">
+  <li><a href="#matrix-i-and-matrix-j" id="toc-matrix-i-and-matrix-j" class="nav-link" data-scroll-target="#matrix-i-and-matrix-j">Matrix I and Matrix J</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -202,14 +205,14 @@ window.Quarto = {
 <li><span class="math inline">\(\varphi(w)\)</span> is the <strong>prior distribution</strong> over the <strong>parameter space</strong> <span class="math inline">\(W \subset \mathbb{R}^d\)</span>.</li>
 </ul>
 <p>The <strong>Log Likelihood Ratio</strong> <span class="math inline">\(K(w)\)</span> measures the discrepancy between the true distribution and the parametric model (See page 78): <span class="math display">\[ K(w) = \int q(x) \log \frac{q(x)}{p(x|w)} dx \]</span> This is the Kullback-Leibler (KL) divergence between <span class="math inline">\(q(x)\)</span> and <span class="math inline">\(p(x|w)\)</span>.</p>
-<p>The <strong>average loss function</strong> is given by (See page 68): <span class="math display">\[ L(w) = \int q(x) \log \frac{p(x|w)}{q(x)} dx = S + K(w)\]</span> where <span class="math display">\[ S = -\int q(x) \log q(x) dx \]</span> is the <strong>true entropy</strong> (See page 17).</p>
+<p>The <strong>average loss function</strong> is given by (See page 68): <span class="math display">\[ L(w) = \int q(x) \log p(x|w) dx = S + K(w)\]</span> where <span class="math display">\[ S = -\int q(x) \log q(x) dx \]</span> is the <strong>true entropy</strong> (See page 17).</p>
 <p>We denote the <strong>set of optimal parameters</strong> by <span class="math inline">\(W_0 = \{w \in W : K(w) = min_{w' \in W} K(w') \}\)</span> (See page 68).</p>
 </section>
 <section id="regular-vs.-singular-models" class="level2">
 <h2 class="anchored" data-anchor-id="regular-vs.-singular-models">Regular vs.&nbsp;Singular Models</h2>
 <section id="fisher-information-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="fisher-information-matrix">Fisher Information Matrix</h3>
-<p>The Fisher information matrix <span class="math inline">\(I(w)\)</span> evaluated at parameter <span class="math inline">\(w\)</span> is a <span class="math inline">\(d \times d\)</span> matrix with entries (See page 32): <span class="math display">\[ I_{ij}(w) = \int q(x) \left( \frac{\partial \log p(x|w)}{\partial w_i} \right) \left( \frac{\partial \log p(x|w)}{\partial w_j} \right) dx \]</span> Alternatively, under certain regularity conditions, it can be expressed as the expected negative Hessian of the log-likelihood (See page 32): <span class="math display">\[ I_{ij}(w) = -\int q(x) \frac{\partial^2 \log p(x|w)}{\partial w_i \partial w_j} dx \]</span> This is equivalent to the Hessian of the log-likelihood ratio <span class="math inline">\(K(w)\)</span> (See page 107): <span class="math display">\[ I_{ij}(w) = \frac{\partial^2 K(w)}{\partial w_i \partial w_j} \]</span></p>
+<p>The Fisher information matrix <span class="math inline">\(I(w)\)</span> evaluated at parameter <span class="math inline">\(w\)</span> is a <span class="math inline">\(d \times d\)</span> matrix with entries (See page 32): <span class="math display">\[ I_{ij}(w) = \int q(x) \left( \frac{\partial \log p(x|w)}{\partial w_i} \right) \left( \frac{\partial \log p(x|w)}{\partial w_j} \right) dx.\]</span></p>
 </section>
 <section id="regular-model" class="level3">
 <h3 class="anchored" data-anchor-id="regular-model">Regular Model</h3>
@@ -253,8 +256,16 @@ window.Quarto = {
 <p>The <strong>Resolution of Singularities / Blow-up</strong> is an algebraic geometry technique used in SLT. A “blow-up” is a coordinate transformation that resolves singularities in the parameter space, transforming the complex geometric structure of <span class="math inline">\(K(w) = 0\)</span> into a simpler form with normal crossings. This analytic continuation allows the asymptotic evaluation of the marginal likelihood integral.</p>
 <p>The <strong>Zeta Function of Statistical Learning</strong> is an analytic function of a complex variable <span class="math inline">\(z\)</span> defined as (See page 151): <span class="math display">\[ \zeta(z) = \int K(w)^{-z} \varphi(w) dw \]</span> The poles of this zeta function are deeply connected to the RLCT. The largest pole of the zeta function (which is negative) determines the RLCT <span class="math inline">\(\lambda\)</span>.</p>
 <p>The <strong>Singular Fluctuation</strong> is the variance of the log-likelihood ratio across the posterior distribution. In regular models, the singular fluctuation is <span class="math inline">\(d/2\)</span>, but in singular models, it varies depending on the geometry of the singularities. It governs the difference between training error and generalization error (See page 153).</p>
+<section id="matrix-i-and-matrix-j" class="level3">
+<h3 class="anchored" data-anchor-id="matrix-i-and-matrix-j">Matrix I and Matrix J</h3>
+<p>In classical statistics, the <strong>Fisher Information Matrix</strong> is defined by taking the expectation over the <em>model distribution</em> <span class="math inline">\(p(x|w)\)</span> (See page 32). In this case, under regularity conditions, the expected outer product of gradients and the expected negative Hessian are equivalent for all <span class="math inline">\(w\)</span>: <span class="math display">\[ \int p(x|w) \left( \frac{\partial \log p(x|w)}{\partial w_i} \right) \left( \frac{\partial \log p(x|w)}{\partial w_j} \right) dx = -\int p(x|w) \frac{\partial^2 \log p(x|w)}{\partial w_i \partial w_j} dx \]</span></p>
+<p>In Singular Learning Theory, expectations are typically taken over the <strong>true distribution</strong> <span class="math inline">\(q(x)\)</span>. Here, these two concepts are no longer generally equivalent, and are defined as two separate matrices, <span class="math inline">\(I\)</span> and <span class="math inline">\(J\)</span>, evaluated at the optimal parameter <span class="math inline">\(w_0\)</span> (See page 107):</p>
+<p><strong>Matrix I</strong> is the expected outer product of the gradients: <span class="math display">\[ I_{ij} = \int q(x) \left( \frac{\partial \log p(x|w_0)}{\partial w_i} \right) \left( \frac{\partial \log p(x|w_0)}{\partial w_j} \right) dx \]</span></p>
+<p><strong>Matrix J</strong> is the expected negative Hessian of the log-likelihood (which is always identically equal to the Hessian of <span class="math inline">\(K(w)\)</span> at <span class="math inline">\(w_0\)</span>): <span class="math display">\[ J_{ij} = -\int q(x) \frac{\partial^2 \log p(x|w_0)}{\partial w_i \partial w_j} dx = \frac{\partial^2 K(w_0)}{\partial w_i \partial w_j} \]</span></p>
+<p><strong>Crucially</strong>: <span class="math inline">\(I = J\)</span> holds <strong>only if the model is realizable</strong> (<span class="math inline">\(q(x) = p(x|w_0)\)</span>). In general unrealizable cases, <span class="math inline">\(I \neq J\)</span>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
