@@ -592,7 +592,6 @@ def gibbs_sampler(X, num_iterations=4500, alpha=1.0, beta=1.0, sigma2=1.0):
     return samples_a[500:], samples_b1[500:], samples_b2[500:]
 ```
 
-
 As an example we use this Gibbs sampler to sample from the posterior resulting from distributions with true parameters $b_1 = 0.2B$ and $b_2 = -0.2B$. As $B$ goes from $4$ down to $1$, the components overlap more, and the posterior becomes singular.
 
 ```{python}
@@ -789,7 +788,7 @@ The experimental table provides crucial concrete evidence for Singular Learning 
 - **The Stability of WAIC and ISCV:** Watanabe proves that the cross-validation error functionally mimics the mathematical singularity structure. WAIC acts as an exact asymptotic estimator of the generalization error (and thus the cross-validation error) because the local geometric variance $V_n$ identically mirrors the true $\lambda$ without needing to calculate the intractable blow-up explicitly. **WAIC requires no point estimate, avoiding the fatal geometric traps of DIC.**
 
 
-## Chapter 9. Phase Transition in a Hierarchical Model
+## Chapter 9. Phase Transitions
 
 In Chapter 9, Watanabe describes a **Phase Transition** in Bayesian statistics. A phase transition occurs when the structure of the posterior distribution changes drastically depending on a generalized hyperparameter. At this critical point, the free energy is often discontinuous or non-differentiable.
 
