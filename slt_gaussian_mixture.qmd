@@ -448,9 +448,76 @@ Classical criteria like DIC rely on a *point estimate* of the parameter (usually
 
 WAIC, on the other hand, averages the likelihood over the *entire* posterior distribution and calculates the functional variance point-by-point. It entirely avoids point estimation.
 
----
+## 7. Comparing Information Criteria  (Chapter 8)
 
-## 7. Phase Transition in a Hierarchical Model (Chapter 9)
+In Chapter 8, Watanabe provides a sweeping experimental demonstration (Example 53) of how different information criteria behave across various geometric conditions in the parameter space. We will reproduce this study using our 1D Gaussian Mixture analog.
+
+We consider the 3-parameter model:
+$$ p(x|a, b, c) = a \mathcal{N}(x|b, 1) + (1-a) \mathcal{N}(x|c, 1) $$
+
+Watanabe categorizes standard machine learning datasets into distinct regimes depending on whether the true distribution is **Regular** (identifiable parameters, bounded inverse Hessian) vs **Nonregular** (singular), and **Realizable** (true distribution is perfectly reachable by the model) vs **Unrealizable**:
+
+1. **Regular & Realizable**: $q(x) = 0.5 \mathcal{N}(x|2, 1) + 0.5 \mathcal{N}(x|-2, 1)$. The two modes are far apart, meaning the parameters $(a,b,c)$ are uniquely identifiable.
+2. **Regular & Unrealizable**: $q(x) = 0.5\mathcal{N}(x|2, \sigma^2) + 0.5\mathcal{N}(x|-2, \sigma^2)$ where $\sigma=0.8$. The model cannot output variance $\neq 1$, but it can still uniquely find the means of the separated modes.
+3. **Nonregular & Realizable**: $q(x) = \mathcal{N}(x|0, 1)$. The true parameters lie exactly on the intersecting singular manifolds ($a \in \{0, 1\}$ or $b=c$).
+4. **Nonregular & Unrealizable**: $q(x) = \mathcal{N}(x|0, \sigma^2)$. The true parameters are pulled into the singularity, but the variance prevents perfect realization.
+5. **Delicate**: $q(x) = 0.5 \mathcal{N}(x|0.5, 0.95^2) + 0.5 \mathcal{N}(x|-0.5, 0.95^2)$. The two components $b=0.5$ and $c=-0.5$ are extremely close to the $b=c$ singularity, straining finite-sample resolution.
+6. **Unbalanced**: $q(x) = 0.01 \mathcal{N}(x|2, 1) + 0.99 \mathcal{N}(x|-2, 1)$. The parameter $b$ is effectively non-identifiable because component $a=0.01$ has so little weight.
+
+Because calculating the posterior for 100 trials across 6 cases requires heavy MCMC simulation, the following table loads pre-computed results from a separate Python run mimicking Watanabe's numerical study. The values show the averaged deviation from the empirical entropy (lower variance and unbiased scaling is better). 
+
+```{python}
+#| label: calculate-criteria
+#| echo: true
+import pandas as pd
+import json
+
+# Load the cached results from the separate multiprocessing script
+try:
+    with open('example_53_results.json', 'r') as f:
+        results = json.load(f)
+        
+    data = []
+    index_labels = []
+    
+    for c_id in ["1", "2", "3", "4", "5", "6"]:
+        r = results[c_id]
+        name = r["name"]
+        
+        # We append two rows for each case: Average and Std Dev
+        data.append([
+            r['G_mean'], r['ISCV_mean'], r['AIC_mean'], r['DIC_mean'], r['WAIC_mean']
+        ])
+        data.append([
+            r['G_std'], r['ISCV_std'], r['AIC_std'], r['DIC_std'], r['WAIC_std']
+        ])
+        
+        index_labels.append((name, 'Ave'))
+        index_labels.append(('', 'Std'))
+
+    # Format into a Multi-index dataframe to match the book's exact table style
+    mi = pd.MultiIndex.from_tuples(index_labels, names=['Cases', 'Stat'])
+    df = pd.DataFrame(data, index=mi, columns=['G', 'ISCV', 'AIC_b', 'DIC', 'WAIC'])
+    
+    # Format the float output
+    display(df.style.format("{:.4f}"))
+
+except FileNotFoundError:
+    print("Pre-calculated results example_53_results.json not found.")
+    print("Run `python3 run_example_53.py` to generate the MCMC data table.")
+```
+
+### Interpretation of Results
+
+The experimental table provides crucial concrete evidence for Singular Learning Theory:
+
+- **Regular Cases (1 & 2):** When the model is regular and identifiable, **all criteria work well**. AIC uses $d/2$, which is correct here because $\lambda=d/2$, and the posterior represents a distinct Gaussian shape around the unique true parameters, making DIC's point-estimation valid.
+- **Failures of AIC in Singularity:** In the delicate and nonregular cases (3 through 6), the model acts singular. AIC assumes the penalty is $d/n$, overestimating the error because singular models have a smaller geometrical volume ($\lambda < d/2$).
+- **Failures of DIC in Singularity:** DIC structurally relies on taking the deviance at the *posterior mean*. In nonregular (3/4) and unbalanced (6) cases, the parameter singularity forms an elongated manifold rather than a Gaussian blob. Therefore, the numerical mean often falls into an empty low-probability valley separating two valid coordinate modes. This causes DIC to generate wildly inaccurate penalties and enormous variance (as seen in the huge standard deviations).
+- **The Stability of WAIC and ISCV:** Watanabe proves that the cross-validation error functionally mimics the mathematical singularity structure. WAIC acts as an exact asymptotic estimator of the generalization error (and thus the cross-validation error) because the local geometric variance $V_n$ identically mirrors the true $\lambda$ without needing to calculate the intractable blow-up explicitly. **WAIC requires no point estimate, avoiding the fatal geometric traps of DIC.**
+
+
+## 8. Phase Transition in a Hierarchical Model (Chapter 9)
 
 In Chapter 9, Watanabe describes a **Phase Transition** in Bayesian statistics. A phase transition occurs when the structure of the posterior distribution changes drastically depending on a generalized hyperparameter. At this critical point, the free energy is often discontinuous or non-differentiable.
 
@@ -676,3 +743,4 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.show()
 ```
+
