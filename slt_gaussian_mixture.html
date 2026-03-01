@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -103,6 +103,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -191,27 +194,35 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-the-model-and-the-true-distribution-chapter-1" id="toc-introduction-the-model-and-the-true-distribution-chapter-1" class="nav-link active" data-scroll-target="#introduction-the-model-and-the-true-distribution-chapter-1">1. Introduction: The Model and the True Distribution (Chapter 1)</a>
+  <li><a href="#chapter-1.-introduction-the-model-and-the-true-distribution" id="toc-chapter-1.-introduction-the-model-and-the-true-distribution" class="nav-link active" data-scroll-target="#chapter-1.-introduction-the-model-and-the-true-distribution">Chapter 1. Introduction: The Model and the True Distribution</a>
   <ul class="collapse">
   <li><a href="#the-two-component-gaussian-mixture" id="toc-the-two-component-gaussian-mixture" class="nav-link" data-scroll-target="#the-two-component-gaussian-mixture">The Two-Component Gaussian Mixture</a></li>
   <li><a href="#the-set-of-true-parameters" id="toc-the-set-of-true-parameters" class="nav-link" data-scroll-target="#the-set-of-true-parameters">The Set of True Parameters</a></li>
   <li><a href="#the-kullback-leibler-divergence" id="toc-the-kullback-leibler-divergence" class="nav-link" data-scroll-target="#the-kullback-leibler-divergence">The Kullback-Leibler Divergence</a></li>
   </ul></li>
-  <li><a href="#resolution-of-singularities-chapter-2" id="toc-resolution-of-singularities-chapter-2" class="nav-link" data-scroll-target="#resolution-of-singularities-chapter-2">2. Resolution of Singularities (Chapter 2)</a>
+  <li><a href="#chapter-2.-resolution-of-singularities" id="toc-chapter-2.-resolution-of-singularities" class="nav-link" data-scroll-target="#chapter-2.-resolution-of-singularities">Chapter 2. Resolution of Singularities</a>
   <ul class="collapse">
   <li><a href="#the-blow-up-transformation" id="toc-the-blow-up-transformation" class="nav-link" data-scroll-target="#the-blow-up-transformation">The Blow-Up Transformation</a></li>
   </ul></li>
-  <li><a href="#standard-form-and-real-log-canonical-threshold-chapter-3" id="toc-standard-form-and-real-log-canonical-threshold-chapter-3" class="nav-link" data-scroll-target="#standard-form-and-real-log-canonical-threshold-chapter-3">3. Standard Form and Real Log Canonical Threshold (Chapter 3)</a></li>
-  <li><a href="#singular-fluctuation-and-free-energy-chapter-4" id="toc-singular-fluctuation-and-free-energy-chapter-4" class="nav-link" data-scroll-target="#singular-fluctuation-and-free-energy-chapter-4">4. Singular Fluctuation and Free Energy (Chapter 4)</a></li>
-  <li><a href="#generalization-and-training-errors-chapter-5" id="toc-generalization-and-training-errors-chapter-5" class="nav-link" data-scroll-target="#generalization-and-training-errors-chapter-5">5. Generalization and Training Errors (Chapter 5)</a></li>
-  <li><a href="#asymptotic-expansion-and-waic-chapter-6" id="toc-asymptotic-expansion-and-waic-chapter-6" class="nav-link" data-scroll-target="#asymptotic-expansion-and-waic-chapter-6">6. Asymptotic Expansion and WAIC (Chapter 6)</a>
+  <li><a href="#chapter-3.-standard-form-and-real-log-canonical-threshold" id="toc-chapter-3.-standard-form-and-real-log-canonical-threshold" class="nav-link" data-scroll-target="#chapter-3.-standard-form-and-real-log-canonical-threshold">Chapter 3. Standard Form and Real Log Canonical Threshold</a></li>
+  <li><a href="#chapter-4.-singular-fluctuation-and-free-energy" id="toc-chapter-4.-singular-fluctuation-and-free-energy" class="nav-link" data-scroll-target="#chapter-4.-singular-fluctuation-and-free-energy">Chapter 4. Singular Fluctuation and Free Energy</a></li>
+  <li><a href="#chapter-5.-generalization-and-training-errors" id="toc-chapter-5.-generalization-and-training-errors" class="nav-link" data-scroll-target="#chapter-5.-generalization-and-training-errors">Chapter 5. Generalization and Training Errors</a></li>
+  <li><a href="#chapter-6.-asymptotic-expansion-and-waic" id="toc-chapter-6.-asymptotic-expansion-and-waic" class="nav-link" data-scroll-target="#chapter-6.-asymptotic-expansion-and-waic">Chapter 6. Asymptotic Expansion and WAIC</a>
   <ul class="collapse">
   <li><a href="#calculating-waic-in-practice" id="toc-calculating-waic-in-practice" class="nav-link" data-scroll-target="#calculating-waic-in-practice">Calculating WAIC in Practice</a></li>
   <li><a href="#visualizing-the-posterior" id="toc-visualizing-the-posterior" class="nav-link" data-scroll-target="#visualizing-the-posterior">Visualizing the Posterior</a></li>
   <li><a href="#contrast-asymptotic-regularity-vs.-finite-sample-singularity" id="toc-contrast-asymptotic-regularity-vs.-finite-sample-singularity" class="nav-link" data-scroll-target="#contrast-asymptotic-regularity-vs.-finite-sample-singularity">Contrast: Asymptotic Regularity vs.&nbsp;Finite-Sample Singularity</a></li>
   <li><a href="#is-waic-still-good-for-small-samples" id="toc-is-waic-still-good-for-small-samples" class="nav-link" data-scroll-target="#is-waic-still-good-for-small-samples">Is WAIC Still Good for Small Samples?</a></li>
   </ul></li>
-  <li><a href="#phase-transition-in-a-hierarchical-model-chapter-9" id="toc-phase-transition-in-a-hierarchical-model-chapter-9" class="nav-link" data-scroll-target="#phase-transition-in-a-hierarchical-model-chapter-9">7. Phase Transition in a Hierarchical Model (Chapter 9)</a>
+  <li><a href="#chapter7.-gibbs-sampler-for-gaussian-mixture" id="toc-chapter7.-gibbs-sampler-for-gaussian-mixture" class="nav-link" data-scroll-target="#chapter7.-gibbs-sampler-for-gaussian-mixture">Chapter7. Gibbs Sampler for Gaussian Mixture</a>
+  <ul class="collapse">
+  <li><a href="#gibbs-sampler-vs.-standard-mcmc-metropolis-hastings" id="toc-gibbs-sampler-vs.-standard-mcmc-metropolis-hastings" class="nav-link" data-scroll-target="#gibbs-sampler-vs.-standard-mcmc-metropolis-hastings">Gibbs Sampler vs.&nbsp;Standard MCMC (Metropolis-Hastings)</a></li>
+  </ul></li>
+  <li><a href="#chapter-8.-comparing-information-criteria" id="toc-chapter-8.-comparing-information-criteria" class="nav-link" data-scroll-target="#chapter-8.-comparing-information-criteria">Chapter 8. Comparing Information Criteria</a>
+  <ul class="collapse">
+  <li><a href="#interpretation-of-results" id="toc-interpretation-of-results" class="nav-link" data-scroll-target="#interpretation-of-results">Interpretation of Results</a></li>
+  </ul></li>
+  <li><a href="#chapter-9.-phase-transition-in-a-hierarchical-model" id="toc-chapter-9.-phase-transition-in-a-hierarchical-model" class="nav-link" data-scroll-target="#chapter-9.-phase-transition-in-a-hierarchical-model">Chapter 9. Phase Transition in a Hierarchical Model</a>
   <ul class="collapse">
   <li><a href="#example-67-normal-mixture-phase-transition" id="toc-example-67-normal-mixture-phase-transition" class="nav-link" data-scroll-target="#example-67-normal-mixture-phase-transition">Example 67: Normal Mixture Phase Transition</a></li>
   <li><a href="#the-two-modes-of-the-model" id="toc-the-two-modes-of-the-model" class="nav-link" data-scroll-target="#the-two-modes-of-the-model">The Two Modes of the Model</a></li>
@@ -222,7 +233,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -244,8 +255,9 @@ window.Quarto = {
 
 
 <p>This document provides a walk-through of Sumio Watanabe’s <em>Singular Learning Theory</em>, using a two-component Gaussian Mixture Model (GMM) as a concrete pedagogical example. We had already seen in <a href="./regular_and_singular_models.html#sec:singular-model">Regular and Singular Models</a> that this model is singular.</p>
-<section id="introduction-the-model-and-the-true-distribution-chapter-1" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-the-model-and-the-true-distribution-chapter-1">1. Introduction: The Model and the True Distribution (Chapter 1)</h2>
+<p>Each section in this document corresponds to one of the chapters in Watanabe’s book and illustrates some aspect of that chapter with the help of the Gaussian Mixture Model.</p>
+<section id="chapter-1.-introduction-the-model-and-the-true-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-1.-introduction-the-model-and-the-true-distribution">Chapter 1. Introduction: The Model and the True Distribution</h2>
 <p>In statistical formulation, we consider a learning machine defined by a parametric statistical model <span class="math inline">\(p(x|w)\)</span> and a true data-generating distribution <span class="math inline">\(q(x)\)</span>.</p>
 <section id="the-two-component-gaussian-mixture" class="level3">
 <h3 class="anchored" data-anchor-id="the-two-component-gaussian-mixture">The Two-Component Gaussian Mixture</h3>
@@ -332,8 +344,8 @@ Figure&nbsp;2: Parameter Space and KL Divergence. Notice how the valley of <span
 <hr>
 </section>
 </section>
-<section id="resolution-of-singularities-chapter-2" class="level2">
-<h2 class="anchored" data-anchor-id="resolution-of-singularities-chapter-2">2. Resolution of Singularities (Chapter 2)</h2>
+<section id="chapter-2.-resolution-of-singularities" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-2.-resolution-of-singularities">Chapter 2. Resolution of Singularities</h2>
 <p>Because the set of true parameters <span class="math inline">\(W_0\)</span> has a singularity (an intersection forming a cross), standard asymptotic expansions (like the Laplace approximation) fail. Watanabe employs <strong>Hironaka’s Theorem on the Resolution of Singularities</strong> from algebraic geometry to resolve this.</p>
 <p>The theorem states that there exists a real analytic manifold <span class="math inline">\(\mathcal{M}\)</span> and a proper analytic map <span class="math inline">\(g: \mathcal{M} \to W\)</span> (a “blow-up”) such that the composition <span class="math inline">\(K(g(u))\)</span> has a simple normal crossing form.</p>
 <section id="the-blow-up-transformation" class="level3">
@@ -350,8 +362,8 @@ Figure&nbsp;2: Parameter Space and KL Divergence. Notice how the valley of <span
 <hr>
 </section>
 </section>
-<section id="standard-form-and-real-log-canonical-threshold-chapter-3" class="level2">
-<h2 class="anchored" data-anchor-id="standard-form-and-real-log-canonical-threshold-chapter-3">3. Standard Form and Real Log Canonical Threshold (Chapter 3)</h2>
+<section id="chapter-3.-standard-form-and-real-log-canonical-threshold" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-3.-standard-form-and-real-log-canonical-threshold">Chapter 3. Standard Form and Real Log Canonical Threshold</h2>
 <p>In Chapter 3, Watanabe introduces the concept of the <strong>Real Log Canonical Threshold (RLCT)</strong>, denoted by <span class="math inline">\(\lambda\)</span>, and its multiplicity <span class="math inline">\(m\)</span>. These two algebraic invariants completely govern the asymptotic behavior of the learning machine.</p>
 <p>To understand why the blow-up was a strictly necessary algebraic maneuver, we have to look at how <span class="math inline">\(\lambda\)</span> is formally calculated. By definition, the RLCT is found by examining the analytic continuation of the <strong>zeta function</strong> of the statistical model, given by the integral: <span class="math display">\[ \zeta(z) = \int (K(w))^z \varphi(w) dw \]</span> where <span class="math inline">\(\varphi(w)\)</span> is the prior distribution and <span class="math inline">\(z \in \mathbb{C}\)</span> (<span class="math inline">\(\Re(z) &gt; 0\)</span>). The RLCT <span class="math inline">\(\lambda\)</span> is defined such that <span class="math inline">\(-\lambda\)</span> is the largest (closest to zero) real pole of this function, and its multiplicity <span class="math inline">\(m\)</span> is the order of this pole.</p>
 <p>Without the blow-up, evaluating this integral and finding its poles is mathematically intractable. The true KL divergence <span class="math inline">\(K(w)\)</span> isn’t just a simple polynomial like <span class="math inline">\(a^2\mu^2\)</span>; it contains an infinite series of higher-order terms from the Taylor expansion. Because the variables are coupled in a highly non-linear way at the singularity (the cross <span class="math inline">\(a=0, \mu=0\)</span>), you cannot separate the variables to evaluate the integral.</p>
@@ -375,8 +387,8 @@ Figure&nbsp;2: Parameter Space and KL Divergence. Notice how the valley of <span
 <p><em>Note: In a regular model with parameter dimension <span class="math inline">\(d=2\)</span>, the RLCT is always <span class="math inline">\(\lambda = d/2 = 1\)</span>. Our singular GMM has <span class="math inline">\(\lambda = 1/2 &lt; 1\)</span>, showcasing the mathematical definition of a singular learning machine.</em></p>
 <hr>
 </section>
-<section id="singular-fluctuation-and-free-energy-chapter-4" class="level2">
-<h2 class="anchored" data-anchor-id="singular-fluctuation-and-free-energy-chapter-4">4. Singular Fluctuation and Free Energy (Chapter 4)</h2>
+<section id="chapter-4.-singular-fluctuation-and-free-energy" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-4.-singular-fluctuation-and-free-energy">Chapter 4. Singular Fluctuation and Free Energy</h2>
 <p>In Bayesian evaluation, the <strong>Stochastic Complexity</strong> or <strong>Free Energy</strong> <span class="math inline">\(F_n\)</span> represents the negative log-marginal likelihood (evidence) of the data <span class="math inline">\(X^n\)</span>: <span class="math display">\[ F_n = -\log Z_n = -\log \int e^{-n L_n(w)} \varphi(w) dw \]</span> where <span class="math inline">\(L_n(w) = -\frac{1}{n} \sum \log p(X_i|w)\)</span> is the empirical loss.</p>
 <p>Chapter 4 defines how the parameter posterior behaves under singular fluctuations. Using the algebraic invariants we just found, SLT proves that the free energy asymptotically expands as:</p>
 <p><span class="math display">\[ F_n \approx n L_n(w_0) + \lambda \log n - (m-1) \log \log n + O_p(1) \]</span></p>
@@ -415,8 +427,8 @@ Figure&nbsp;3: Asymptotic Free Energy. The penalty term for the singular model i
 <p>This result breaks the classical Bayesian Information Criterion (BIC), which assumes a penalty of <span class="math inline">\(\frac{d}{2} \log n\)</span>. BIC would have penalized this 2-parameter model by <span class="math inline">\(1.0 \log n\)</span>, entirely missing the true Bayesian Occam’s Razor effect on the singular manifold.</p>
 <hr>
 </section>
-<section id="generalization-and-training-errors-chapter-5" class="level2">
-<h2 class="anchored" data-anchor-id="generalization-and-training-errors-chapter-5">5. Generalization and Training Errors (Chapter 5)</h2>
+<section id="chapter-5.-generalization-and-training-errors" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-5.-generalization-and-training-errors">Chapter 5. Generalization and Training Errors</h2>
 <p>Chapter 5 links the geometry of the parameter space to the average errors. Let <span class="math inline">\(G_n\)</span> be the <strong>Generalization Error</strong> (expected loss on new data) and <span class="math inline">\(T_n\)</span> be the <strong>Training Error</strong> (empirical loss on the training set).</p>
 <p>In traditional regular statistics (like AIC), the expectation of these errors relies on <span class="math inline">\(d\)</span>: <span class="math display">\[ \mathbb{E}[G_n] = L(w_0) + \frac{d}{2n} \]</span> <span class="math display">\[ \mathbb{E}[T_n] = L(w_0) - \frac{d}{2n} \]</span></p>
 <p>In Singular Learning Theory, Watanabe elegantly proves a symmetry relation using <span class="math inline">\(\lambda\)</span>: <span class="math display">\[ \mathbb{E}[G_n] = L(w_0) + \frac{\lambda}{n} \]</span> <span class="math display">\[ \mathbb{E}[T_n] = L(w_0) - \frac{\lambda}{n} \]</span></p>
@@ -428,8 +440,8 @@ Figure&nbsp;3: Asymptotic Free Energy. The penalty term for the singular model i
 <p>This explains why heavily overparameterized singular models (like deep neural networks and complex mixtures) often generalize better than their parameter count <span class="math inline">\(d\)</span> would imply; their learning dynamics are constrained by the smaller geometric invariant <span class="math inline">\(\lambda &lt; d/2\)</span>.</p>
 <hr>
 </section>
-<section id="asymptotic-expansion-and-waic-chapter-6" class="level2">
-<h2 class="anchored" data-anchor-id="asymptotic-expansion-and-waic-chapter-6">6. Asymptotic Expansion and WAIC (Chapter 6)</h2>
+<section id="chapter-6.-asymptotic-expansion-and-waic" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-6.-asymptotic-expansion-and-waic">Chapter 6. Asymptotic Expansion and WAIC</h2>
 <p>Finally, Chapter 6 resolves a crucial practical problem. Since calculating <span class="math inline">\(\lambda\)</span> analytically requires algebraic blow-ups (which is impossible for massive modern models like LLMs), we cannot use it directly to estimate the generalization error. Furthermore, cross-validation can be unstable in singular models.</p>
 <p>Watanabe introduces the <strong>Widely Applicable Information Criterion (WAIC)</strong>: <span class="math display">\[ \text{WAIC} = T_n + \frac{1}{n} \sum_{i=1}^n V_w \left( \log p(X_i | w) \right) \]</span> Where <span class="math inline">\(V_w\)</span> is the posterior variance of the log-likelihood for data point <span class="math inline">\(X_i\)</span>.</p>
 <p>The core theorem of Chapter 6 proves that WAIC is an asymptotically unbiased estimator of the generalization error, <strong>even for singular models</strong>: <span class="math display">\[ \mathbb{E}[\text{WAIC}] \approx \mathbb{E}[G_n] \]</span></p>
@@ -670,11 +682,463 @@ Generalization Error = 1.4317</code></pre>
 <p>A natural follow-up question is whether WAIC remains a good estimator of generalization error when the sample size <span class="math inline">\(n\)</span> is very small. <strong>The short answer is yes</strong>, and this is exactly where WAIC shines compared to classical criteria like the Deviance Information Criterion (DIC).</p>
 <p>Classical criteria like DIC rely on a <em>point estimate</em> of the parameter (usually the posterior mean or mode). In a singular model, the posterior is highly non-Gaussian and often stretched along a non-identifiable manifold (like the cross at <span class="math inline">\(\mu=0\)</span> or <span class="math inline">\(a=0\)</span>). For a small sample, the posterior mean might land in a region of very low actual probability mass (e.g., in the empty space between two dense arms of the posterior). Because DIC evaluates the likelihood at this single mathematically awkward point, it can wildly misestimate the generalization error.</p>
 <p>WAIC, on the other hand, averages the likelihood over the <em>entire</em> posterior distribution and calculates the functional variance point-by-point. It entirely avoids point estimation.</p>
-<hr>
 </section>
 </section>
-<section id="phase-transition-in-a-hierarchical-model-chapter-9" class="level2">
-<h2 class="anchored" data-anchor-id="phase-transition-in-a-hierarchical-model-chapter-9">7. Phase Transition in a Hierarchical Model (Chapter 9)</h2>
+<section id="chapter7.-gibbs-sampler-for-gaussian-mixture" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="chapter7.-gibbs-sampler-for-gaussian-mixture">Chapter7. Gibbs Sampler for Gaussian Mixture</h2>
+<p>A Gibbs sampler is often employed in mixture models. Let us derive a Gibbs sampler for the two-component Gaussian mixture model defined by <span class="math display">\[
+p(x|a, b) = a \mathcal{N}(x|b_1) + (1-a) \mathcal{N}(x|b_2)
+\]</span> where <span class="math inline">\(a \in [0, 1]\)</span> and <span class="math inline">\(b = (b_1, b_2)\)</span> are parameters. For the prior, we adopt a Beta distribution with index <span class="math inline">\((\alpha, \beta)\)</span> and a normal distribution: <span class="math display">\[
+\varphi(a) = \frac{1}{z_1} a^{\alpha - 1} (1-a)^{\beta - 1}
+\]</span> <span class="math display">\[
+\varphi(b) = \frac{1}{z_2} \exp\left(-\frac{b_1^2 + b_2^2}{2\sigma^2}\right)
+\]</span> Let <span class="math inline">\(y \in \{0, 1\}\)</span> be a latent competitive variable indicating the component membership. Then a normal mixture <span class="math inline">\(p(x|a, b)\)</span> can be understood as a statistical model <span class="math display">\[
+p(x, y|a, b) = (a \mathcal{N}(x|b_1))^{y} ((1-a) \mathcal{N}(x|b_2))^{1-y}
+\]</span> It follows that <span class="math display">\[
+p(x|a, b) = \sum_{y \in \{0, 1\}} p(x, y|a, b)
+\]</span> Therefore a normal mixture <span class="math inline">\(p(x|a, b)\)</span> can be understood as a statistical model <span class="math inline">\(p(x, y|a, b)\)</span> which has a latent or hidden variable <span class="math inline">\(y \in \{0, 1\}\)</span>.</p>
+<p>Let <span class="math inline">\(x^n = \{x_1, x_2, \dots, x_n\}\)</span> be an independent sample and <span class="math inline">\(y_i \in \{0, 1\}\)</span> be the hidden variable which corresponds to a sample point <span class="math inline">\(x_i\)</span>. We use a notation <span class="math inline">\(y^n = \{y_1, y_2, \dots, y_n\}\)</span>. Then the joint probability is <span class="math display">\[
+p(a, b, x^n, y^n) = \frac{1}{Z} \left(a^{\alpha - 1 + n_1} \exp(-H_1(b_1))\right) \left((1-a)^{\beta - 1 + n_2} \exp(-H_2(b_2))\right)
+\]</span> where <span class="math inline">\(Z\)</span> is a normalizing constant and <span class="math display">\[
+n_1 = \sum_{i=1}^n y_i, \quad n_2 = \sum_{i=1}^n (1 - y_i) = n - n_1
+\]</span> <span class="math display">\[
+H_1(b_1) = \frac{b_1^2}{2\sigma^2} + \frac{1}{2} \sum_{i=1}^n y_i (x_i - b_1)^2
+\]</span> <span class="math display">\[
+H_2(b_2) = \frac{b_2^2}{2\sigma^2} + \frac{1}{2} \sum_{i=1}^n (1-y_i) (x_i - b_2)^2
+\]</span></p>
+<p>In Bayesian estimation, we need the posterior parameters <span class="math inline">\((a, b)\)</span> which are subject to <span class="math inline">\(p(a, b|x^n)\)</span>. It is sufficient to make a Gibbs sampler for <span class="math inline">\((a, b)\)</span> and <span class="math inline">\(y^n\)</span>, in which the conditional probabilities we need are <span class="math inline">\(p(y^n|a, b, x^n)\)</span> and <span class="math inline">\(p(a, b|x^n, y^n)\)</span>.</p>
+<p>Under the probability distribution <span class="math inline">\(p(y^n|a, b, x^n)\)</span> the <span class="math inline">\(y_1, y_2, \dots, y_n\)</span> are independent and, for each <span class="math inline">\(i\)</span>: <span class="math display">\[
+p(y_i = 1 | a, b, x_i) = \frac{a \mathcal{N}(x_i|b_1)}{a \mathcal{N}(x_i|b_1) + (1-a) \mathcal{N}(x_i|b_2)}
+\]</span></p>
+<p>On the other hand, if <span class="math inline">\((a, b_1, b_2)\)</span> is subject to the probability distribution <span class="math inline">\(p(a, b|x^n, y^n)\)</span>, they are independent. Hence <span class="math display">\[
+p(a, b|x^n, y^n) = p(a|x^n, y^n) p(b_1|x^n, y^n) p(b_2|x^n, y^n)
+\]</span> The variable <span class="math inline">\(a\)</span> is subject to the Beta distribution with index <span class="math inline">\(\alpha + n_1\)</span> and <span class="math inline">\(\beta + n_2\)</span>: <span class="math display">\[
+p(a|x^n, y^n) \propto a^{\alpha + n_1 - 1} (1-a)^{\beta + n_2 - 1}
+\]</span></p>
+<p>The variable <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> are subject to the normal distribution with average <span class="math inline">\(b_k^*\)</span> and variance <span class="math inline">\((\sigma_k^*)^2\)</span>: <span class="math display">\[
+p(b_k|x^n, y^n) = \mathcal{N}(b_k^*, (\sigma_k^*)^2) \quad \text{for } k=1, 2
+\]</span> where <span class="math display">\[
+b_1^* = \frac{\sum_{i=1}^n y_i x_i}{1/\sigma^2 + n_1}, \quad b_2^* = \frac{\sum_{i=1}^n (1-y_i) x_i}{1/\sigma^2 + n_2}
+\]</span> <span class="math display">\[
+(\sigma_1^*)^2 = \frac{1}{1/\sigma^2 + n_1}, \quad (\sigma_2^*)^2 = \frac{1}{1/\sigma^2 + n_2}
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Derivation of the Normal Distribution Parameters for <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>From the joint probability, the full conditional posterior for <span class="math inline">\(b_1\)</span> is proportional to the <span class="math inline">\(\exp(-H_1(b_1))\)</span> term: <span class="math display">\[
+p(b_1|x^n, y^n) \propto \exp(-H_1(b_1))
+\]</span> Expanding <span class="math inline">\(H_1(b_1)\)</span>: <span class="math display">\[
+H_1(b_1) = \frac{b_1^2}{2\sigma^2} + \frac{1}{2} \sum_{i=1}^n y_i (x_i - b_1)^2 = \frac{b_1^2}{2\sigma^2} + \frac{1}{2} \sum_{i=1}^n y_i (x_i^2 - 2x_i b_1 + b_1^2)
+\]</span> Grouping the terms by powers of <span class="math inline">\(b_1\)</span> and ignoring terms that do not depend on <span class="math inline">\(b_1\)</span> (which get absorbed into the normalization constant): <span class="math display">\[
+H_1(b_1) = \frac{1}{2} \left[ \left(\frac{1}{\sigma^2} + \sum_{i=1}^n y_i\right) b_1^2 - 2 \left(\sum_{i=1}^n y_i x_i\right) b_1 \right] + \text{const}
+\]</span> Using <span class="math inline">\(n_1 = \sum_{i=1}^n y_i\)</span>, we can complete the square to match the form of a Gaussian exponent <span class="math inline">\(\frac{1}{2(\sigma_1^*)^2} (b_1 - b_1^*)^2\)</span>: <span class="math display">\[
+\frac{1}{2(\sigma_1^*)^2} = \frac{1}{2} \left(\frac{1}{\sigma^2} + n_1\right) \implies (\sigma_1^*)^2 = \frac{1}{1/\sigma^2 + n_1}
+\]</span> <span class="math display">\[
+\frac{b_1^*}{(\sigma_1^*)^2} = \sum_{i=1}^n y_i x_i \implies b_1^* = \frac{\sum_{i=1}^n y_i x_i}{1/\sigma^2 + n_1}
+\]</span> The exact same algebraic steps apply to <span class="math inline">\(H_2(b_2)\)</span>, swapping <span class="math inline">\(y_i\)</span> for <span class="math inline">\((1-y_i)\)</span> and <span class="math inline">\(n_1\)</span> for <span class="math inline">\(n_2\)</span>.</p>
+</div>
+</div>
+</div>
+<p>Hence the algorithm for the Gibbs sampler is defined by the following steps:</p>
+<ol type="1">
+<li>A parameter set <span class="math inline">\((a, b_1, b_2)\)</span> is initialized.</li>
+<li>A set of hidden variables <span class="math inline">\(\{y_i\} \in \{0, 1\}^n\)</span> is drawn from the probability distribution <span class="math display">\[
+P(y_i = 1|a, b, x_i) = \frac{a \mathcal{N}(x_i|b_1)}{a \mathcal{N}(x_i|b_1) + (1-a) \mathcal{N}(x_i|b_2)}
+\]</span></li>
+<li>Using <span class="math inline">\(n_1 = \sum_{i=1}^n y_i\)</span> and <span class="math inline">\(n_2 = n - n_1\)</span>, a parameter <span class="math inline">\(a\)</span> is drawn from the Beta distribution: <span class="math display">\[
+a \sim \text{Beta}(\alpha + n_1, \beta + n_2)
+\]</span></li>
+<li>Parameters <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> are drawn from the normal distributions <span class="math display">\[
+b_k \sim \mathcal{N}(b_k^*, (\sigma_k^*)^2)
+\]</span> for <span class="math inline">\(k=1, 2\)</span>.</li>
+<li>Return to (2).</li>
+</ol>
+<div id="21d27e71" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> norm_pdf(x, mean, std<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> ((x <span class="op">-</span> mean) <span class="op">/</span> std)<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> (std <span class="op">*</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gibbs_sampler(X, num_iterations<span class="op">=</span><span class="dv">4500</span>, alpha<span class="op">=</span><span class="fl">1.0</span>, beta<span class="op">=</span><span class="fl">1.0</span>, sigma2<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(X)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    a, b1, b2 <span class="op">=</span> <span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="op">-</span><span class="fl">1.0</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    samples_a, samples_b1, samples_b2 <span class="op">=</span> (np.zeros(num_iterations) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>))</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(num_iterations):</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        p1 <span class="op">=</span> a <span class="op">*</span> norm_pdf(X, b1) <span class="op">+</span> <span class="fl">1e-15</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        p2 <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> a) <span class="op">*</span> norm_pdf(X, b2) <span class="op">+</span> <span class="fl">1e-15</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p1 <span class="op">/</span> (p1 <span class="op">+</span> p2))</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        n1 <span class="op">=</span> np.<span class="bu">sum</span>(y)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        n2 <span class="op">=</span> n <span class="op">-</span> n1</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        a <span class="op">=</span> np.random.beta(alpha <span class="op">+</span> n1, beta <span class="op">+</span> n2)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        var_b1 <span class="op">=</span> <span class="fl">1.0</span> <span class="op">/</span> (<span class="fl">1.0</span> <span class="op">/</span> sigma2 <span class="op">+</span> n1)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        b1 <span class="op">=</span> np.random.normal((np.<span class="bu">sum</span>(y <span class="op">*</span> X)) <span class="op">*</span> var_b1, np.sqrt(var_b1))</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        var_b2 <span class="op">=</span> <span class="fl">1.0</span> <span class="op">/</span> (<span class="fl">1.0</span> <span class="op">/</span> sigma2 <span class="op">+</span> n2)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        b2 <span class="op">=</span> np.random.normal((np.<span class="bu">sum</span>((<span class="dv">1</span> <span class="op">-</span> y) <span class="op">*</span> X)) <span class="op">*</span> var_b2, np.sqrt(var_b2))</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        samples_a[t], samples_b1[t], samples_b2[t] <span class="op">=</span> a, b1, b2</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> samples_a[<span class="dv">500</span>:], samples_b1[<span class="dv">500</span>:], samples_b2[<span class="dv">500</span>:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>As an example we use this Gibbs sampler to sample from the posterior resulting from distributions with true parameters <span class="math inline">\(b_1 = 0.2B\)</span> and <span class="math inline">\(b_2 = -0.2B\)</span>. As <span class="math inline">\(B\)</span> goes from <span class="math inline">\(4\)</span> down to <span class="math inline">\(1\)</span>, the components overlap more, and the posterior becomes singular.</p>
+<div id="cell-gibbs-sampler-example-52" class="cell page-columns page-full" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>B_values <span class="op">=</span> [<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">10</span>))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, B <span class="kw">in</span> <span class="bu">enumerate</span>(B_values):</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    b1_true, b2_true <span class="op">=</span> <span class="fl">0.2</span> <span class="op">*</span> B, <span class="op">-</span><span class="fl">0.2</span> <span class="op">*</span> B</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, <span class="fl">0.5</span>, size<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.where(z <span class="op">==</span> <span class="dv">1</span>, np.random.normal(b1_true, <span class="fl">1.0</span>, <span class="dv">100</span>), np.random.normal(b2_true, <span class="fl">1.0</span>, <span class="dv">100</span>))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    sa, sb1, sb2 <span class="op">=</span> gibbs_sampler(X)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes.flatten()[idx]</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    ax.scatter(sb1, sb2, alpha<span class="op">=</span><span class="fl">0.1</span>, s<span class="op">=</span><span class="dv">5</span>, c<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Posterior Samples'</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    ax.plot([b1_true, b2_true], [b2_true, b1_true], <span class="st">'wo'</span>, markeredgecolor<span class="op">=</span><span class="st">'black'</span>, markersize<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'True Centers'</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"B = </span><span class="sc">{</span>B<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"$b_1$"</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"$b_2$"</span>)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    limit <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span>limit, limit)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="op">-</span>limit, limit)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> idx <span class="op">==</span> <span class="dv">0</span>: ax.legend()</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="gibbs-sampler-example-52" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="slt_gaussian_mixture_files/figure-html/gibbs-sampler-example-52-output-1.png" width="948" height="949" class="figure-img column-page"></p>
+<figcaption>Posterior parameter sample points of <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> for different true separation values <span class="math inline">\(B\)</span>. As <span class="math inline">\(B \le 2\)</span>, the posterior distribution loses clear separation and becomes singular.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="gibbs-sampler-vs.-standard-mcmc-metropolis-hastings" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="gibbs-sampler-vs.-standard-mcmc-metropolis-hastings">Gibbs Sampler vs.&nbsp;Standard MCMC (Metropolis-Hastings)</h3>
+<p>Which sampling method is better? In Chapter 1, we used a standard Metropolis-Hastings (MH) algorithm to sample from the posterior of a Gaussian Mixture Model. In this chapter, we derived a Gibbs sampler for the exact same model. The choice between them comes with important trade-offs, especially in the context of mixture models and Singular Learning Theory.</p>
+<p><strong>Advantages of the Gibbs Sampler:</strong></p>
+<ol type="1">
+<li><strong>No Step-Size Tuning:</strong> Standard MH requires tuning the proposal distribution variance (step size). If the steps are too small, the sampler moves too slowly; if they are too large, proposals are constantly rejected. Gibbs sampling draws directly from the exact conditional distributions, meaning every proposal is accepted (100% acceptance rate) without any tuning.</li>
+<li><strong>Discrete Latent Variables:</strong> Gibbs sampling handles the discrete component assignment variables <span class="math inline">\(y_i \in \{0, 1\}\)</span> naturally. Continuous gradient-based MCMC methods (like Hamiltonian Monte Carlo) cannot easily handle discrete latent variables without marginalizing them out first.</li>
+</ol>
+<p><strong>Advantages of Standard MCMC (Metropolis-Hastings):</strong></p>
+<ol type="1">
+<li><strong>Generality:</strong> MH only requires that you can compute the log-likelihood <span class="math inline">\(p(x|w)\)</span> up to a constant. It applies universally to any model (neural networks, matrix factorization, etc.). Gibbs sampling requires you to explicitly derive the exact conditional distributions, which is only possible for models with <em>conjugate priors</em>.</li>
+<li><strong>Direct Exploration of the Singular Manifold:</strong> SLT focuses on the continuous parameter space <span class="math inline">\(W\)</span> where <span class="math inline">\(w = (a, \mu)\)</span>. MH explores this 2D continuous space directly, moving across the singularities (like <span class="math inline">\(a=0\)</span> or <span class="math inline">\(\mu_1=\mu_2\)</span>) cleanly. A Gibbs sampler explores a much higher-dimensional space that includes all <span class="math inline">\(n\)</span> discrete hidden variables <span class="math inline">\((a, \mu, y_1, y_2, \dots, y_n)\)</span>. Near a singularity where components overlap, the latent assignments become completely unidentifiable, which often causes the Gibbs sampler’s Markov chain to become highly correlated and stall.</li>
+<li><strong>Label Switching:</strong> Because the mixture components are symmetric, the true posterior has multiple identical modes. A Gibbs sampler will often get stuck in one mode, whereas a well-tuned MH sampler may transition between them more fluidly.</li>
+</ol>
+<p>Let us run both algorithms on the same dataset generated with <span class="math inline">\(B=2\)</span> and compare their behavior:</p>
+<div id="cell-mcmc-vs-gibbs" class="cell page-columns page-full" data-cache="true" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_prior(a, mu1, mu2, alpha<span class="op">=</span><span class="fl">1.0</span>, beta<span class="op">=</span><span class="fl">1.0</span>, sigma2<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> (<span class="dv">0</span> <span class="op">&lt;</span> a <span class="op">&lt;</span> <span class="dv">1</span>): <span class="cf">return</span> <span class="op">-</span>np.inf</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (alpha <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> np.log(a) <span class="op">+</span> (beta <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> np.log(<span class="dv">1</span> <span class="op">-</span> a) <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> (mu1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> mu2<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> sigma2</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mh_sampler(X, num_iterations<span class="op">=</span><span class="dv">2500</span>, alpha<span class="op">=</span><span class="fl">1.0</span>, beta_prior<span class="op">=</span><span class="fl">1.0</span>, sigma2<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    a, b1, b2 <span class="op">=</span> <span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="op">-</span><span class="fl">1.0</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    p1, p2 <span class="op">=</span> norm_pdf(X, b1), norm_pdf(X, b2)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    ll <span class="op">=</span> np.<span class="bu">sum</span>(np.log(a <span class="op">*</span> p1 <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> a) <span class="op">*</span> p2 <span class="op">+</span> <span class="fl">1e-15</span>)) <span class="op">+</span> log_prior(a, b1, b2, alpha, beta_prior, sigma2)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    samples_a, samples_b1, samples_b2 <span class="op">=</span> (np.zeros(num_iterations) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>))</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(num_iterations):</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>        a_prop <span class="op">=</span> a <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.05</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>        b1_prop <span class="op">=</span> b1 <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.2</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        b2_prop <span class="op">=</span> b2 <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.2</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a_prop <span class="op">&lt;</span> <span class="dv">0</span>: a_prop <span class="op">=</span> <span class="op">-</span>a_prop</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a_prop <span class="op">&gt;</span> <span class="dv">1</span>: a_prop <span class="op">=</span> <span class="dv">2</span> <span class="op">-</span> a_prop</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>        p1_prop, p2_prop <span class="op">=</span> norm_pdf(X, b1_prop), norm_pdf(X, b2_prop)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>        ll_prop <span class="op">=</span> np.<span class="bu">sum</span>(np.log(a_prop <span class="op">*</span> p1_prop <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> a_prop) <span class="op">*</span> p2_prop <span class="op">+</span> <span class="fl">1e-15</span>)) <span class="op">+</span> log_prior(a_prop, b1_prop, b2_prop, alpha, beta_prior, sigma2)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.log(np.random.rand()) <span class="op">&lt;</span> (ll_prop <span class="op">-</span> ll):</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>            a, b1, b2, ll <span class="op">=</span> a_prop, b1_prop, b2_prop, ll_prop</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>        samples_a[t], samples_b1[t], samples_b2[t] <span class="op">=</span> a, b1, b2</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> samples_a[<span class="dv">500</span>:], samples_b1[<span class="dv">500</span>:], samples_b2[<span class="dv">500</span>:]</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>b1_true, b2_true <span class="op">=</span> <span class="fl">0.2</span> <span class="op">*</span> B, <span class="op">-</span><span class="fl">0.2</span> <span class="op">*</span> B</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, <span class="fl">0.5</span>, size<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.where(z <span class="op">==</span> <span class="dv">1</span>, np.random.normal(b1_true, <span class="fl">1.0</span>, <span class="dv">100</span>), np.random.normal(b2_true, <span class="fl">1.0</span>, <span class="dv">100</span>))</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>g_a, g_b1, g_b2 <span class="op">=</span> gibbs_sampler(X, num_iterations<span class="op">=</span><span class="dv">5500</span>)</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>m_a, m_b1, m_b2 <span class="op">=</span> mh_sampler(X, num_iterations<span class="op">=</span><span class="dv">5500</span>)</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.7</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].plot(m_b1, label<span class="op">=</span><span class="st">'b1'</span>, alpha<span class="op">=</span>alpha)</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="co">#axes[0, 0].plot(m_b2, label='b2', alpha=alpha)</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">"Metropolis-Hastings Trace"</span>)</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_ylabel(<span class="st">"Parameter Value"</span>)</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_ylim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].legend()</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].plot(g_b1, label<span class="op">=</span><span class="st">'b1'</span>, alpha<span class="op">=</span>alpha)</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a><span class="co">#axes[0, 1].plot(g_b2, label='b2', alpha=alpha)</span></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">"Gibbs Sampler Trace"</span>)</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_ylim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].legend()</span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].scatter(m_b1, m_b2, alpha<span class="op">=</span>alpha, s<span class="op">=</span><span class="dv">5</span>, c<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].plot([b1_true, b2_true], [b2_true, b1_true], <span class="st">'wo'</span>, markeredgecolor<span class="op">=</span><span class="st">'black'</span>, markersize<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'True Centers'</span>)</span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_title(<span class="st">"Metropolis-Hastings Posterior"</span>)</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_xlabel(<span class="st">"$b_1$"</span>)</span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_ylabel(<span class="st">"$b_2$"</span>)</span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_xlim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)<span class="op">;</span> axes[<span class="dv">1</span>, <span class="dv">0</span>].set_ylim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].scatter(g_b1, g_b2, alpha<span class="op">=</span>alpha, s<span class="op">=</span><span class="dv">5</span>, c<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].plot([b1_true, b2_true], [b2_true, b1_true], <span class="st">'wo'</span>, markeredgecolor<span class="op">=</span><span class="st">'black'</span>, markersize<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'True Centers'</span>)</span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_title(<span class="st">"Gibbs Sampler Posterior"</span>)</span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_xlabel(<span class="st">"$b_1$"</span>)</span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_xlim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)<span class="op">;</span> axes[<span class="dv">1</span>, <span class="dv">1</span>].set_ylim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="mcmc-vs-gibbs" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="slt_gaussian_mixture_files/figure-html/mcmc-vs-gibbs-output-1.png" width="961" height="565" class="figure-img column-page"></p>
+<figcaption>Comparison of Metropolis-Hastings (left) and Gibbs Sampling (right) on the same GMM dataset (B=2). Notice how the Gibbs sampler appears to sample from a wider range of parameter values.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="chapter-8.-comparing-information-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-8.-comparing-information-criteria">Chapter 8. Comparing Information Criteria</h2>
+<p>In Chapter 8, Watanabe provides a sweeping experimental demonstration (Example 53) of how different information criteria behave across various geometric conditions in the parameter space. We will reproduce this study using our 1D Gaussian Mixture analog.</p>
+<p>We consider the 3-parameter model: <span class="math display">\[ p(x|a, b, c) = a \mathcal{N}(x|b, 1) + (1-a) \mathcal{N}(x|c, 1) \]</span></p>
+<p>Watanabe categorizes standard machine learning datasets into distinct regimes depending on whether the true distribution is <strong>Regular</strong> (identifiable parameters, bounded inverse Hessian) vs <strong>Nonregular</strong> (singular), and <strong>Realizable</strong> (true distribution is perfectly reachable by the model) vs <strong>Unrealizable</strong>:</p>
+<ol type="1">
+<li><strong>Regular &amp; Realizable</strong>: <span class="math inline">\(q(x) = 0.5 \mathcal{N}(x|2, 1) + 0.5 \mathcal{N}(x|-2, 1)\)</span>. The two modes are far apart, meaning the parameters <span class="math inline">\((a,b,c)\)</span> are uniquely identifiable.</li>
+<li><strong>Regular &amp; Unrealizable</strong>: <span class="math inline">\(q(x) = 0.5\mathcal{N}(x|2, \sigma^2) + 0.5\mathcal{N}(x|-2, \sigma^2)\)</span> where <span class="math inline">\(\sigma=0.8\)</span>. The model cannot output variance <span class="math inline">\(\neq 1\)</span>, but it can still uniquely find the means of the separated modes.</li>
+<li><strong>Nonregular &amp; Realizable</strong>: <span class="math inline">\(q(x) = \mathcal{N}(x|0, 1)\)</span>. The true parameters lie exactly on the intersecting singular manifolds (<span class="math inline">\(a \in \{0, 1\}\)</span> or <span class="math inline">\(b=c\)</span>).</li>
+<li><strong>Nonregular &amp; Unrealizable</strong>: <span class="math inline">\(q(x) = \mathcal{N}(x|0, \sigma^2)\)</span>. The true parameters are pulled into the singularity, but the variance prevents perfect realization.</li>
+<li><strong>Delicate</strong>: <span class="math inline">\(q(x) = 0.5 \mathcal{N}(x|0.5, 0.95^2) + 0.5 \mathcal{N}(x|-0.5, 0.95^2)\)</span>. The two components <span class="math inline">\(b=0.5\)</span> and <span class="math inline">\(c=-0.5\)</span> are extremely close to the <span class="math inline">\(b=c\)</span> singularity, straining finite-sample resolution.</li>
+<li><strong>Unbalanced</strong>: <span class="math inline">\(q(x) = 0.01 \mathcal{N}(x|2, 1) + 0.99 \mathcal{N}(x|-2, 1)\)</span>. The parameter <span class="math inline">\(b\)</span> is effectively non-identifiable because component <span class="math inline">\(a=0.01\)</span> has so little weight.</li>
+</ol>
+<p>Because calculating the posterior for 100 trials across 6 cases requires heavy MCMC simulation, the following table loads pre-computed results from a separate Python run mimicking Watanabe’s numerical study. The values show the averaged deviation from the empirical entropy (lower variance and unbiased scaling is better).</p>
+<div id="cell-calculate-criteria" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the cached results from the separate multiprocessing script</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">'example_53_results.json'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        results <span class="op">=</span> json.load(f)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> []</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    index_labels <span class="op">=</span> []</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c_id <span class="kw">in</span> [<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"6"</span>]:</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> results[c_id]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        name <span class="op">=</span> r[<span class="st">"name"</span>]</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># We append two rows for each case: Average and Std Dev</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        data.append([</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>            r[<span class="st">'G_mean'</span>], r[<span class="st">'ISCV_mean'</span>], r[<span class="st">'AIC_mean'</span>], r[<span class="st">'DIC_mean'</span>], r[<span class="st">'WAIC_mean'</span>]</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        data.append([</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>            r[<span class="st">'G_std'</span>], r[<span class="st">'ISCV_std'</span>], r[<span class="st">'AIC_std'</span>], r[<span class="st">'DIC_std'</span>], r[<span class="st">'WAIC_std'</span>]</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>        index_labels.append((name, <span class="st">'Ave'</span>))</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>        index_labels.append((<span class="st">''</span>, <span class="st">'Std'</span>))</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format into a Multi-index dataframe to match the book's exact table style</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    mi <span class="op">=</span> pd.MultiIndex.from_tuples(index_labels, names<span class="op">=</span>[<span class="st">'Cases'</span>, <span class="st">'Stat'</span>])</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(data, index<span class="op">=</span>mi, columns<span class="op">=</span>[<span class="st">'G'</span>, <span class="st">'ISCV'</span>, <span class="st">'AIC_b'</span>, <span class="st">'DIC'</span>, <span class="st">'WAIC'</span>])</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format the float output</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    display(df.style.<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.4f}</span><span class="st">"</span>))</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">FileNotFoundError</span>:</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Pre-calculated results example_53_results.json not found."</span>)</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Run `python3 run_example_53.py` to generate the MCMC data table."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="calculate-criteria" class="cell-output cell-output-display">
+<style type="text/css">
+</style>
+
+<table id="T_f7487" class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th class="blank" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_f7487_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">G</th>
+<th id="T_f7487_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">ISCV</th>
+<th id="T_f7487_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">AIC_b</th>
+<th id="T_f7487_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">DIC</th>
+<th id="T_f7487_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">WAIC</th>
+</tr>
+<tr class="even">
+<th class="index_name level0" data-quarto-table-cell-role="th">Cases</th>
+<th class="index_name level1" data-quarto-table-cell-role="th">Stat</th>
+<th class="blank col0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col1" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col2" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col3" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col4" data-quarto-table-cell-role="th">&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th id="T_f7487_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Regular Realizable</th>
+<th id="T_f7487_level1_row0" class="row_heading level1 row0" data-quarto-table-cell-role="th">Ave</th>
+<td id="T_f7487_row0_col0" class="data row0 col0">0.0141</td>
+<td id="T_f7487_row0_col1" class="data row0 col1">0.0163</td>
+<td id="T_f7487_row0_col2" class="data row0 col2">0.0162</td>
+<td id="T_f7487_row0_col3" class="data row0 col3">0.0161</td>
+<td id="T_f7487_row0_col4" class="data row0 col4">0.0163</td>
+</tr>
+<tr class="even">
+<th id="T_f7487_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th"></th>
+<th id="T_f7487_level1_row1" class="row_heading level1 row1" data-quarto-table-cell-role="th">Std</th>
+<td id="T_f7487_row1_col0" class="data row1 col0">0.0105</td>
+<td id="T_f7487_row1_col1" class="data row1 col1">0.0101</td>
+<td id="T_f7487_row1_col2" class="data row1 col2">0.0101</td>
+<td id="T_f7487_row1_col3" class="data row1 col3">0.0102</td>
+<td id="T_f7487_row1_col4" class="data row1 col4">0.0101</td>
+</tr>
+<tr class="odd">
+<th id="T_f7487_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Regular Unrealizable</th>
+<th id="T_f7487_level1_row2" class="row_heading level1 row2" data-quarto-table-cell-role="th">Ave</th>
+<td id="T_f7487_row2_col0" class="data row2 col0">0.0548</td>
+<td id="T_f7487_row2_col1" class="data row2 col1">0.0543</td>
+<td id="T_f7487_row2_col2" class="data row2 col2">0.0580</td>
+<td id="T_f7487_row2_col3" class="data row2 col3">0.0578</td>
+<td id="T_f7487_row2_col4" class="data row2 col4">0.0543</td>
+</tr>
+<tr class="even">
+<th id="T_f7487_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th"></th>
+<th id="T_f7487_level1_row3" class="row_heading level1 row3" data-quarto-table-cell-role="th">Std</th>
+<td id="T_f7487_row3_col0" class="data row3 col0">0.0127</td>
+<td id="T_f7487_row3_col1" class="data row3 col1">0.0276</td>
+<td id="T_f7487_row3_col2" class="data row3 col2">0.0283</td>
+<td id="T_f7487_row3_col3" class="data row3 col3">0.0283</td>
+<td id="T_f7487_row3_col4" class="data row3 col4">0.0276</td>
+</tr>
+<tr class="odd">
+<th id="T_f7487_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Nonreg. Realizable</th>
+<th id="T_f7487_level1_row4" class="row_heading level1 row4" data-quarto-table-cell-role="th">Ave</th>
+<td id="T_f7487_row4_col0" class="data row4 col0">0.0081</td>
+<td id="T_f7487_row4_col1" class="data row4 col1">0.0063</td>
+<td id="T_f7487_row4_col2" class="data row4 col2">0.0198</td>
+<td id="T_f7487_row4_col3" class="data row4 col3">-0.0163</td>
+<td id="T_f7487_row4_col4" class="data row4 col4">0.0063</td>
+</tr>
+<tr class="even">
+<th id="T_f7487_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th"></th>
+<th id="T_f7487_level1_row5" class="row_heading level1 row5" data-quarto-table-cell-role="th">Std</th>
+<td id="T_f7487_row5_col0" class="data row5 col0">0.0098</td>
+<td id="T_f7487_row5_col1" class="data row5 col1">0.0102</td>
+<td id="T_f7487_row5_col2" class="data row5 col2">0.0136</td>
+<td id="T_f7487_row5_col3" class="data row5 col3">0.0347</td>
+<td id="T_f7487_row5_col4" class="data row5 col4">0.0101</td>
+</tr>
+<tr class="odd">
+<th id="T_f7487_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">Nonreg. Unrealizable</th>
+<th id="T_f7487_level1_row6" class="row_heading level1 row6" data-quarto-table-cell-role="th">Ave</th>
+<td id="T_f7487_row6_col0" class="data row6 col0">0.0533</td>
+<td id="T_f7487_row6_col1" class="data row6 col1">0.0538</td>
+<td id="T_f7487_row6_col2" class="data row6 col2">0.0722</td>
+<td id="T_f7487_row6_col3" class="data row6 col3">0.0376</td>
+<td id="T_f7487_row6_col4" class="data row6 col4">0.0538</td>
+</tr>
+<tr class="even">
+<th id="T_f7487_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th"></th>
+<th id="T_f7487_level1_row7" class="row_heading level1 row7" data-quarto-table-cell-role="th">Std</th>
+<td id="T_f7487_row7_col0" class="data row7 col0">0.0064</td>
+<td id="T_f7487_row7_col1" class="data row7 col1">0.0252</td>
+<td id="T_f7487_row7_col2" class="data row7 col2">0.0254</td>
+<td id="T_f7487_row7_col3" class="data row7 col3">0.0468</td>
+<td id="T_f7487_row7_col4" class="data row7 col4">0.0252</td>
+</tr>
+<tr class="odd">
+<th id="T_f7487_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">Delicate</th>
+<th id="T_f7487_level1_row8" class="row_heading level1 row8" data-quarto-table-cell-role="th">Ave</th>
+<td id="T_f7487_row8_col0" class="data row8 col0">0.0079</td>
+<td id="T_f7487_row8_col1" class="data row8 col1">0.0090</td>
+<td id="T_f7487_row8_col2" class="data row8 col2">0.0190</td>
+<td id="T_f7487_row8_col3" class="data row8 col3">-0.0223</td>
+<td id="T_f7487_row8_col4" class="data row8 col4">0.0091</td>
+</tr>
+<tr class="even">
+<th id="T_f7487_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th"></th>
+<th id="T_f7487_level1_row9" class="row_heading level1 row9" data-quarto-table-cell-role="th">Std</th>
+<td id="T_f7487_row9_col0" class="data row9 col0">0.0075</td>
+<td id="T_f7487_row9_col1" class="data row9 col1">0.0089</td>
+<td id="T_f7487_row9_col2" class="data row9 col2">0.0087</td>
+<td id="T_f7487_row9_col3" class="data row9 col3">0.0406</td>
+<td id="T_f7487_row9_col4" class="data row9 col4">0.0089</td>
+</tr>
+<tr class="odd">
+<th id="T_f7487_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">Unbalanced</th>
+<th id="T_f7487_level1_row10" class="row_heading level1 row10" data-quarto-table-cell-role="th">Ave</th>
+<td id="T_f7487_row10_col0" class="data row10 col0">0.0194</td>
+<td id="T_f7487_row10_col1" class="data row10 col1">0.0068</td>
+<td id="T_f7487_row10_col2" class="data row10 col2">0.0122</td>
+<td id="T_f7487_row10_col3" class="data row10 col3">-0.0317</td>
+<td id="T_f7487_row10_col4" class="data row10 col4">0.0067</td>
+</tr>
+<tr class="even">
+<th id="T_f7487_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th"></th>
+<th id="T_f7487_level1_row11" class="row_heading level1 row11" data-quarto-table-cell-role="th">Std</th>
+<td id="T_f7487_row11_col0" class="data row11 col0">0.0123</td>
+<td id="T_f7487_row11_col1" class="data row11 col1">0.0143</td>
+<td id="T_f7487_row11_col2" class="data row11 col2">0.0124</td>
+<td id="T_f7487_row11_col3" class="data row11 col3">0.0873</td>
+<td id="T_f7487_row11_col4" class="data row11 col4">0.0143</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="interpretation-of-results" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-results">Interpretation of Results</h3>
+<p>The experimental table provides crucial concrete evidence for Singular Learning Theory:</p>
+<ul>
+<li><strong>Regular Cases (1 &amp; 2):</strong> When the model is regular and identifiable, <strong>all criteria work well</strong>. AIC uses <span class="math inline">\(d/2\)</span>, which is correct here because <span class="math inline">\(\lambda=d/2\)</span>, and the posterior represents a distinct Gaussian shape around the unique true parameters, making DIC’s point-estimation valid.</li>
+<li><strong>Failures of AIC in Singularity:</strong> In the delicate and nonregular cases (3 through 6), the model acts singular. AIC assumes the penalty is <span class="math inline">\(d/n\)</span>, overestimating the error because singular models have a smaller geometrical volume (<span class="math inline">\(\lambda &lt; d/2\)</span>).</li>
+<li><strong>Failures of DIC in Singularity:</strong> DIC structurally relies on taking the deviance at the <em>posterior mean</em>. In nonregular (3/4) and unbalanced (6) cases, the parameter singularity forms an elongated manifold rather than a Gaussian blob. Therefore, the numerical mean often falls into an empty low-probability valley separating two valid coordinate modes. This causes DIC to generate wildly inaccurate penalties and enormous variance (as seen in the huge standard deviations).</li>
+<li><strong>The Stability of WAIC and ISCV:</strong> Watanabe proves that the cross-validation error functionally mimics the mathematical singularity structure. WAIC acts as an exact asymptotic estimator of the generalization error (and thus the cross-validation error) because the local geometric variance <span class="math inline">\(V_n\)</span> identically mirrors the true <span class="math inline">\(\lambda\)</span> without needing to calculate the intractable blow-up explicitly. <strong>WAIC requires no point estimate, avoiding the fatal geometric traps of DIC.</strong></li>
+</ul>
+</section>
+</section>
+<section id="chapter-9.-phase-transition-in-a-hierarchical-model" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="chapter-9.-phase-transition-in-a-hierarchical-model">Chapter 9. Phase Transition in a Hierarchical Model</h2>
 <p>In Chapter 9, Watanabe describes a <strong>Phase Transition</strong> in Bayesian statistics. A phase transition occurs when the structure of the posterior distribution changes drastically depending on a generalized hyperparameter. At this critical point, the free energy is often discontinuous or non-differentiable.</p>
 <section id="example-67-normal-mixture-phase-transition" class="level3">
 <h3 class="anchored" data-anchor-id="example-67-normal-mixture-phase-transition">Example 67: Normal Mixture Phase Transition</h3>
@@ -691,7 +1155,7 @@ Generalization Error = 1.4317</code></pre>
 </ol>
 <p>These two regimes represent two intersecting singular manifolds in the parameter space. The Real Log Canonical Threshold (RLCT) is dictated by whichever singularity is “stronger”, which depends on the prior concentration <span class="math inline">\(\alpha\)</span>.</p>
 </section>
-<section id="calculating-the-rlct" class="level3">
+<section id="calculating-the-rlct" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="calculating-the-rlct">Calculating the RLCT</h3>
 <p>The true parameters are given by the union of two branches: <span class="math inline">\(a=0\)</span> (with any <span class="math inline">\(\mu\)</span>) and <span class="math inline">\(\mu=0\)</span> (with any <span class="math inline">\(a\)</span>). The overall RLCT is obtained by evaluating the poles along each branch and taking the minimum.</p>
 <ol type="1">
@@ -706,80 +1170,80 @@ Generalization Error = 1.4317</code></pre>
 <li>For <strong><span class="math inline">\(\alpha &gt; 1\)</span></strong> (<span class="math inline">\(\lambda = 1/2\)</span>), the strongest singularity comes from the second branch. The prior naturally pulls <span class="math inline">\(a\)</span> away from the edges, closing off the first strategy. The posterior is forced to satisfy <span class="math inline">\(\mu \approx 0\)</span>, leaving <span class="math inline">\(a\)</span> free to vary.</li>
 </ul>
 <p>This abrupt change from “<span class="math inline">\(\mu\)</span> is free” to “<span class="math inline">\(a\)</span> is free” at <span class="math inline">\(\alpha = 1\)</span> is the <strong>phase transition</strong>. Let’s visualize this drastic change in the shape of the posterior distribution.</p>
-<div id="cell-phase-transition-posterior" class="cell" data-cache="true" data-execution_count="8">
+<div id="cell-phase-transition-posterior" class="cell page-columns page-full" data-cache="true" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_prior(a, mu, alpha):</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> a <span class="op">&lt;=</span> <span class="dv">0</span> <span class="kw">or</span> a <span class="op">&gt;=</span> <span class="dv">1</span>: <span class="cf">return</span> <span class="op">-</span>np.inf</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    lp_a <span class="op">=</span> (alpha <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> np.log(a <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> a))</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    lp_mu <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> (mu <span class="op">/</span> <span class="fl">10.0</span>)<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lp_a <span class="op">+</span> lp_mu</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_likelihood(X, a, mu):</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    p0 <span class="op">=</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> X<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    pmu <span class="op">=</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> (X <span class="op">-</span> mu)<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> a) <span class="op">*</span> p0 <span class="op">+</span> a <span class="op">*</span> pmu <span class="op">+</span> <span class="fl">1e-15</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(np.log(p))</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_mcmc(alpha, n<span class="op">=</span><span class="dv">100</span>, iters<span class="op">=</span><span class="dv">25000</span>):</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, n)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize near the regular manifold to avoid getting stuck early</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    ll <span class="op">=</span> log_likelihood(X, a, mu)</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    lp <span class="op">=</span> log_prior(a, mu, alpha)</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    samples_a <span class="op">=</span> np.zeros(iters)</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    samples_mu <span class="op">=</span> np.zeros(iters)</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    a_step, mu_step <span class="op">=</span> <span class="fl">0.1</span>, <span class="fl">0.5</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iters):</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        a_new <span class="op">=</span> a <span class="op">+</span> np.random.normal(<span class="dv">0</span>, a_step)</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>        mu_new <span class="op">=</span> mu <span class="op">+</span> np.random.normal(<span class="dv">0</span>, mu_step)</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;</span> a_new <span class="op">&lt;</span> <span class="dv">1</span>:</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>            lp_new <span class="op">=</span> log_prior(a_new, mu_new, alpha)</span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>            ll_new <span class="op">=</span> log_likelihood(X, a_new, mu_new)</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> np.log(np.random.rand()) <span class="op">&lt;</span> (ll_new <span class="op">+</span> lp_new <span class="op">-</span> ll <span class="op">-</span> lp):</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>                a, mu <span class="op">=</span> a_new, mu_new</span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>                ll, lp <span class="op">=</span> ll_new, lp_new</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>        samples_a[i] <span class="op">=</span> a</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>        samples_mu[i] <span class="op">=</span> mu</span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Discard burn-in</span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> samples_a[<span class="dv">5000</span>:], samples_mu[<span class="dv">5000</span>:]</span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>), sharey<span class="op">=</span><span class="st">'row'</span>)</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>alphas_to_test <span class="op">=</span> [<span class="fl">0.2</span>, <span class="fl">1.0</span>, <span class="fl">3.0</span>]</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, alpha <span class="kw">in</span> <span class="bu">enumerate</span>(alphas_to_test):</span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    sa, smu <span class="op">=</span> sample_mcmc(alpha)</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>, i].hist(sa, bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'skyblue'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>, i].set_title(<span class="vs">rf"</span><span class="dv">$</span><span class="ch">\a</span><span class="vs">lpha = </span><span class="sc">{</span>alpha<span class="sc">}</span><span class="dv">$</span><span class="vs">"</span>)</span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>, i].set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>: axes[<span class="dv">0</span>, i].set_ylabel(<span class="st">"Posterior of $a$"</span>)</span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>, i].hist(np.<span class="bu">abs</span>(smu), bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'salmon'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>, i].set_xlim(<span class="dv">0</span>, <span class="dv">6</span>)</span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>: axes[<span class="dv">1</span>, i].set_ylabel(<span class="vs">r"Posterior of </span><span class="dv">$</span><span class="cf">|</span><span class="dv">\m</span><span class="vs">u</span><span class="cf">|</span><span class="dv">$</span><span class="vs">"</span>)</span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>, i].set_xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="cf">|</span><span class="dv">\m</span><span class="vs">u</span><span class="cf">|</span><span class="dv">$</span><span class="vs">"</span>)</span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_prior(a, mu, alpha):</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> a <span class="op">&lt;=</span> <span class="dv">0</span> <span class="kw">or</span> a <span class="op">&gt;=</span> <span class="dv">1</span>: <span class="cf">return</span> <span class="op">-</span>np.inf</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    lp_a <span class="op">=</span> (alpha <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> np.log(a <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> a))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    lp_mu <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> (mu <span class="op">/</span> <span class="fl">10.0</span>)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lp_a <span class="op">+</span> lp_mu</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_likelihood(X, a, mu):</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    p0 <span class="op">=</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> X<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    pmu <span class="op">=</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> (X <span class="op">-</span> mu)<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> a) <span class="op">*</span> p0 <span class="op">+</span> a <span class="op">*</span> pmu <span class="op">+</span> <span class="fl">1e-15</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(np.log(p))</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_mcmc(alpha, n<span class="op">=</span><span class="dv">100</span>, iters<span class="op">=</span><span class="dv">25000</span>):</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, n)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize near the regular manifold to avoid getting stuck early</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    ll <span class="op">=</span> log_likelihood(X, a, mu)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    lp <span class="op">=</span> log_prior(a, mu, alpha)</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    samples_a <span class="op">=</span> np.zeros(iters)</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    samples_mu <span class="op">=</span> np.zeros(iters)</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    a_step, mu_step <span class="op">=</span> <span class="fl">0.1</span>, <span class="fl">0.5</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iters):</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>        a_new <span class="op">=</span> a <span class="op">+</span> np.random.normal(<span class="dv">0</span>, a_step)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        mu_new <span class="op">=</span> mu <span class="op">+</span> np.random.normal(<span class="dv">0</span>, mu_step)</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;</span> a_new <span class="op">&lt;</span> <span class="dv">1</span>:</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>            lp_new <span class="op">=</span> log_prior(a_new, mu_new, alpha)</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>            ll_new <span class="op">=</span> log_likelihood(X, a_new, mu_new)</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> np.log(np.random.rand()) <span class="op">&lt;</span> (ll_new <span class="op">+</span> lp_new <span class="op">-</span> ll <span class="op">-</span> lp):</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>                a, mu <span class="op">=</span> a_new, mu_new</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>                ll, lp <span class="op">=</span> ll_new, lp_new</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>        samples_a[i] <span class="op">=</span> a</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>        samples_mu[i] <span class="op">=</span> mu</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Discard burn-in</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> samples_a[<span class="dv">5000</span>:], samples_mu[<span class="dv">5000</span>:]</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>), sharey<span class="op">=</span><span class="st">'row'</span>)</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>alphas_to_test <span class="op">=</span> [<span class="fl">0.2</span>, <span class="fl">1.0</span>, <span class="fl">3.0</span>]</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, alpha <span class="kw">in</span> <span class="bu">enumerate</span>(alphas_to_test):</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>    sa, smu <span class="op">=</span> sample_mcmc(alpha)</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>, i].hist(sa, bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'skyblue'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>, i].set_title(<span class="vs">rf"</span><span class="dv">$</span><span class="ch">\a</span><span class="vs">lpha = </span><span class="sc">{</span>alpha<span class="sc">}</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>, i].set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>: axes[<span class="dv">0</span>, i].set_ylabel(<span class="st">"Posterior of $a$"</span>)</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>, i].hist(np.<span class="bu">abs</span>(smu), bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'salmon'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>, i].set_xlim(<span class="dv">0</span>, <span class="dv">6</span>)</span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>: axes[<span class="dv">1</span>, i].set_ylabel(<span class="vs">r"Posterior of </span><span class="dv">$</span><span class="cf">|</span><span class="dv">\m</span><span class="vs">u</span><span class="cf">|</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>, i].set_xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="cf">|</span><span class="dv">\m</span><span class="vs">u</span><span class="cf">|</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display">
-<div id="phase-transition-posterior" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="slt_gaussian_mixture_files/figure-html/phase-transition-posterior-output-1.png" width="949" height="564" class="figure-img"></p>
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="phase-transition-posterior" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="slt_gaussian_mixture_files/figure-html/phase-transition-posterior-output-1.png" width="949" height="564" class="figure-img column-page"></p>
 <figcaption>Phase Transition in the Posterior Distribution. As <span class="math inline">\(\alpha\)</span> crosses the critical point <span class="math inline">\(\alpha=1\)</span>, the posterior drastically flips from a regime where <span class="math inline">\(\mu\)</span> is free (large spread) to a regime where <span class="math inline">\(a\)</span> is free (spread across [0,1]).</figcaption>
 </figure>
 </div>
@@ -789,103 +1253,118 @@ Generalization Error = 1.4317</code></pre>
 <section id="reproducing-figures-9.1-and-9.2-error-metric-phase-transition" class="level3">
 <h3 class="anchored" data-anchor-id="reproducing-figures-9.1-and-9.2-error-metric-phase-transition">Reproducing Figures 9.1 and 9.2: Error Metric Phase Transition</h3>
 <p>Watanabe shows that this geometric phase transition directly causes a kink in the generalization error and WAIC. The theoretical errors are: <span class="math display">\[ \mathbb{E}[G_n - S] \approx \frac{\min(\alpha/2, 1/2)}{n} , \quad \mathbb{E}[\text{WAIC} - S_n] \approx \frac{\min(\alpha/2, 1/2)}{n} \]</span> Since WAIC correctly estimates the generalization error, it will also exhibit a broken derivative at <span class="math inline">\(\alpha=1\)</span>. The following code simulates this across multiple trials (analogous to Figures 9.1 and 9.2 of the book) to show the average criteria values as a function of the hyperparameter. Unfortunately we would need to work with a larger number of trials to reduce the variance and make the kink really visible.</p>
-<div id="cell-phase-transition-errors" class="cell" data-cache="true" data-execution_count="9">
+<div id="cell-phase-transition-errors" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>alphas <span class="op">=</span> np.linspace(<span class="fl">0.25</span>, <span class="fl">2.5</span>, <span class="dv">10</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>n_trials <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>mean_ge <span class="op">=</span> []</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>mean_waic <span class="op">=</span> []</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Using 20 trials with 10k MCMC steps smooths out the variance to reveal the kink.</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Rendering this cell may take a minute or two, so it is cached.</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> alpha <span class="kw">in</span> alphas:</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    alpha_ge <span class="op">=</span> []</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    alpha_waic <span class="op">=</span> []</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> trial <span class="kw">in</span> <span class="bu">range</span>(n_trials):</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        np.random.seed(<span class="dv">42</span> <span class="op">+</span> trial)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, n)</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        X_test <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">5000</span>)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Empirical entropy of true distribution</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        p0_train <span class="op">=</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> X<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        S_n <span class="op">=</span> <span class="op">-</span>np.mean(np.log(p0_train))</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># True entropy</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>        p0_test <span class="op">=</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> X_test<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        S <span class="op">=</span> <span class="op">-</span>np.mean(np.log(p0_test))</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        a <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span> mu <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        ll <span class="op">=</span> log_likelihood(X, a, mu)<span class="op">;</span> lp <span class="op">=</span> log_prior(a, mu, alpha)</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        samples_a <span class="op">=</span> []</span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>        samples_mu <span class="op">=</span> []</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># MCMC Sampling</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>            a_new <span class="op">=</span> a <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.1</span>)</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>            mu_new <span class="op">=</span> mu <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.5</span>)</span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;</span> a_new <span class="op">&lt;</span> <span class="dv">1</span>:</span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>                lp_new <span class="op">=</span> log_prior(a_new, mu_new, alpha)</span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>                ll_new <span class="op">=</span> log_likelihood(X, a_new, mu_new)</span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> np.log(np.random.rand()) <span class="op">&lt;</span> (ll_new <span class="op">+</span> lp_new <span class="op">-</span> ll <span class="op">-</span> lp):</span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>                    a, mu <span class="op">=</span> a_new, mu_new</span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>                    ll, lp <span class="op">=</span> ll_new, lp_new</span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">&gt;=</span> <span class="dv">4000</span> <span class="kw">and</span> i <span class="op">%</span> <span class="dv">10</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>                samples_a.append(a)</span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>                samples_mu.append(mu)</span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>        samples_a <span class="op">=</span> np.array(samples_a)</span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>        samples_mu <span class="op">=</span> np.array(samples_mu)</span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Vectorized WAIC Calculation</span></span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>        diff_sq_tr <span class="op">=</span> (X[:, <span class="va">None</span>] <span class="op">-</span> samples_mu[<span class="va">None</span>, :])<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>        pmu_tr <span class="op">=</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> diff_sq_tr) <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>        p_train <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> samples_a[<span class="va">None</span>, :]) <span class="op">*</span> p0_train[:, <span class="va">None</span>] <span class="op">+</span> samples_a[<span class="va">None</span>, :] <span class="op">*</span> pmu_tr <span class="op">+</span> <span class="fl">1e-15</span></span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>        p_train_mean <span class="op">=</span> np.mean(p_train, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>        T_n <span class="op">=</span> <span class="op">-</span>np.mean(np.log(p_train_mean))</span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>        V_n <span class="op">=</span> np.mean(np.var(np.log(p_train), axis<span class="op">=</span><span class="dv">1</span>))</span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>        waic <span class="op">=</span> T_n <span class="op">+</span> V_n <span class="op">-</span> S_n</span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Vectorized GE Calculation</span></span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>        diff_sq_ts <span class="op">=</span> (X_test[:, <span class="va">None</span>] <span class="op">-</span> samples_mu[<span class="va">None</span>, :])<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>        pmu_ts <span class="op">=</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> diff_sq_ts) <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span>
-<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>        p_test_all <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> samples_a[<span class="va">None</span>, :]) <span class="op">*</span> p0_test[:, <span class="va">None</span>] <span class="op">+</span> samples_a[<span class="va">None</span>, :] <span class="op">*</span> pmu_ts <span class="op">+</span> <span class="fl">1e-15</span></span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>        p_test_mean <span class="op">=</span> np.mean(p_test_all, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>        ge <span class="op">=</span> <span class="op">-</span>np.mean(np.log(p_test_mean)) <span class="op">-</span> S</span>
-<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>        alpha_ge.append(ge)</span>
-<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>        alpha_waic.append(waic)</span>
-<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>    mean_ge.append(np.mean(alpha_ge))</span>
-<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>    mean_waic.append(np.mean(alpha_waic))</span>
-<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
-<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>plt.plot(alphas, mean_ge, <span class="st">'o-'</span>, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Empirical GE - S'</span>)</span>
-<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>plt.plot(alphas, mean_waic, <span class="st">'s--'</span>, color<span class="op">=</span><span class="st">'green'</span>, label<span class="op">=</span><span class="st">'Empirical WAIC - Sn'</span>)</span>
-<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Theoretical curve: min(alpha/2, 1/2) / n</span></span>
-<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a>theoretical <span class="op">=</span> np.minimum(alphas <span class="op">/</span> <span class="dv">2</span>, <span class="fl">0.5</span>) <span class="op">/</span> n</span>
-<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a>plt.plot(alphas, theoretical, <span class="st">'k-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="vs">r'Theoretical </span><span class="dv">$</span><span class="er">\</span><span class="vs">lambda/n</span><span class="dv">$</span><span class="vs">'</span>)</span>
-<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a>plt.axvline(<span class="fl">1.0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">':'</span>, label<span class="op">=</span><span class="st">'Critical Point $</span><span class="ch">\\</span><span class="st">alpha=1$'</span>)</span>
-<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Phase Transition in Errors (Analogous to Fig 9.1 &amp; 9.2)"</span>)</span>
-<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"Dirichlet Hyperparameter </span><span class="dv">$</span><span class="ch">\a</span><span class="vs">lpha</span><span class="dv">$</span><span class="vs">"</span>)</span>
-<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Error"</span>)</span>
-<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>alphas <span class="op">=</span> np.linspace(<span class="fl">0.25</span>, <span class="fl">2.5</span>, <span class="dv">10</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>n_trials <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>results_file <span class="op">=</span> <span class="st">"phase_transition_errors.npz"</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> os.path.exists(results_file):</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Loading saved results from disk..."</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> np.load(results_file)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    mean_ge <span class="op">=</span> data[<span class="st">'mean_ge'</span>]</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    mean_waic <span class="op">=</span> data[<span class="st">'mean_waic'</span>]</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    mean_ge <span class="op">=</span> []</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    mean_waic <span class="op">=</span> []</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Using 20 trials with 10k MCMC steps smooths out the variance to reveal the kink.</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Rendering this cell may take a minute or two.</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> alpha <span class="kw">in</span> alphas:</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        alpha_ge <span class="op">=</span> []</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        alpha_waic <span class="op">=</span> []</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> trial <span class="kw">in</span> <span class="bu">range</span>(n_trials):</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>            np.random.seed(<span class="dv">42</span> <span class="op">+</span> trial)</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>            X <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, n)</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>            X_test <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">5000</span>)</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Empirical entropy of true distribution</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>            p0_train <span class="op">=</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> X<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>            S_n <span class="op">=</span> <span class="op">-</span>np.mean(np.log(p0_train))</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>            <span class="co"># True entropy</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>            p0_test <span class="op">=</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> X_test<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>            S <span class="op">=</span> <span class="op">-</span>np.mean(np.log(p0_test))</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>            a <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span> mu <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>            ll <span class="op">=</span> log_likelihood(X, a, mu)<span class="op">;</span> lp <span class="op">=</span> log_prior(a, mu, alpha)</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>            samples_a <span class="op">=</span> []</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>            samples_mu <span class="op">=</span> []</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>            <span class="co"># MCMC Sampling</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>                a_new <span class="op">=</span> a <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.1</span>)</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>                mu_new <span class="op">=</span> mu <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.5</span>)</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;</span> a_new <span class="op">&lt;</span> <span class="dv">1</span>:</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>                    lp_new <span class="op">=</span> log_prior(a_new, mu_new, alpha)</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>                    ll_new <span class="op">=</span> log_likelihood(X, a_new, mu_new)</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> np.log(np.random.rand()) <span class="op">&lt;</span> (ll_new <span class="op">+</span> lp_new <span class="op">-</span> ll <span class="op">-</span> lp):</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>                        a, mu <span class="op">=</span> a_new, mu_new</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>                        ll, lp <span class="op">=</span> ll_new, lp_new</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> i <span class="op">&gt;=</span> <span class="dv">4000</span> <span class="kw">and</span> i <span class="op">%</span> <span class="dv">10</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>                    samples_a.append(a)</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>                    samples_mu.append(mu)</span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>            samples_a <span class="op">=</span> np.array(samples_a)</span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>            samples_mu <span class="op">=</span> np.array(samples_mu)</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Vectorized WAIC Calculation</span></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>            diff_sq_tr <span class="op">=</span> (X[:, <span class="va">None</span>] <span class="op">-</span> samples_mu[<span class="va">None</span>, :])<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>            pmu_tr <span class="op">=</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> diff_sq_tr) <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>            p_train <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> samples_a[<span class="va">None</span>, :]) <span class="op">*</span> p0_train[:, <span class="va">None</span>] <span class="op">+</span> samples_a[<span class="va">None</span>, :] <span class="op">*</span> pmu_tr <span class="op">+</span> <span class="fl">1e-15</span></span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>            p_train_mean <span class="op">=</span> np.mean(p_train, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>            T_n <span class="op">=</span> <span class="op">-</span>np.mean(np.log(p_train_mean))</span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>            V_n <span class="op">=</span> np.mean(np.var(np.log(p_train), axis<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>            waic <span class="op">=</span> T_n <span class="op">+</span> V_n <span class="op">-</span> S_n</span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Vectorized GE Calculation</span></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>            diff_sq_ts <span class="op">=</span> (X_test[:, <span class="va">None</span>] <span class="op">-</span> samples_mu[<span class="va">None</span>, :])<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>            pmu_ts <span class="op">=</span> np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> diff_sq_ts) <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>            p_test_all <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> samples_a[<span class="va">None</span>, :]) <span class="op">*</span> p0_test[:, <span class="va">None</span>] <span class="op">+</span> samples_a[<span class="va">None</span>, :] <span class="op">*</span> pmu_ts <span class="op">+</span> <span class="fl">1e-15</span></span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>            p_test_mean <span class="op">=</span> np.mean(p_test_all, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>            ge <span class="op">=</span> <span class="op">-</span>np.mean(np.log(p_test_mean)) <span class="op">-</span> S</span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>            alpha_ge.append(ge)</span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>            alpha_waic.append(waic)</span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>        mean_ge.append(np.mean(alpha_ge))</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>        mean_waic.append(np.mean(alpha_waic))</span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>    np.savez(results_file, mean_ge<span class="op">=</span>mean_ge, mean_waic<span class="op">=</span>mean_waic)</span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>plt.plot(alphas, mean_ge, <span class="st">'o-'</span>, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Empirical GE - S'</span>)</span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>plt.plot(alphas, mean_waic, <span class="st">'s--'</span>, color<span class="op">=</span><span class="st">'green'</span>, label<span class="op">=</span><span class="st">'Empirical WAIC - Sn'</span>)</span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a><span class="co"># Theoretical curve: min(alpha/2, 1/2) / n</span></span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>theoretical <span class="op">=</span> np.minimum(alphas <span class="op">/</span> <span class="dv">2</span>, <span class="fl">0.5</span>) <span class="op">/</span> n</span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>plt.plot(alphas, theoretical, <span class="st">'k-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="vs">r'Theoretical </span><span class="dv">$</span><span class="er">\</span><span class="vs">lambda/n</span><span class="dv">$</span><span class="vs">'</span>)</span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>plt.axvline(<span class="fl">1.0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">':'</span>, label<span class="op">=</span><span class="st">'Critical Point $</span><span class="ch">\\</span><span class="st">alpha=1$'</span>)</span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Phase Transition in Errors (Analogous to Fig 9.1 &amp; 9.2)"</span>)</span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"Dirichlet Hyperparameter </span><span class="dv">$</span><span class="ch">\a</span><span class="vs">lpha</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Error"</span>)</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Loading saved results from disk...</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div id="phase-transition-errors" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="slt_gaussian_mixture_files/figure-html/phase-transition-errors-output-1.png" width="758" height="468" class="figure-img"></p>
+<p><img src="slt_gaussian_mixture_files/figure-html/phase-transition-errors-output-2.png" width="758" height="468" class="figure-img"></p>
 <figcaption>Phase Transition in Average Errors. The Generalization Error and WAIC linearly increase until the critical point <span class="math inline">\(\alpha=1\)</span>, after which they plateau as the model switches to the generic regular-equivalent manifold.</figcaption>
 </figure>
 </div>
