@@ -174,6 +174,10 @@ window.Quarto = {
 <span class="menu-text">SLT Gaussian Mixture</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./sgd_and_posterior.html"> 
+<span class="menu-text">SGD as Bayesian Inference</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./neural_network_figure_2_7.html"> 
 <span class="menu-text">Neural Network (Figure 2.7)</span></a>
   </li>  
@@ -222,12 +226,18 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#interpretation-of-results" id="toc-interpretation-of-results" class="nav-link" data-scroll-target="#interpretation-of-results">Interpretation of Results</a></li>
   </ul></li>
-  <li><a href="#chapter-9.-phase-transition-in-a-hierarchical-model" id="toc-chapter-9.-phase-transition-in-a-hierarchical-model" class="nav-link" data-scroll-target="#chapter-9.-phase-transition-in-a-hierarchical-model">Chapter 9. Phase Transition in a Hierarchical Model</a>
+  <li><a href="#chapter-9.-phase-transitions" id="toc-chapter-9.-phase-transitions" class="nav-link" data-scroll-target="#chapter-9.-phase-transitions">Chapter 9. Phase Transitions</a>
   <ul class="collapse">
   <li><a href="#example-67-normal-mixture-phase-transition" id="toc-example-67-normal-mixture-phase-transition" class="nav-link" data-scroll-target="#example-67-normal-mixture-phase-transition">Example 67: Normal Mixture Phase Transition</a></li>
   <li><a href="#the-two-modes-of-the-model" id="toc-the-two-modes-of-the-model" class="nav-link" data-scroll-target="#the-two-modes-of-the-model">The Two Modes of the Model</a></li>
   <li><a href="#calculating-the-rlct" id="toc-calculating-the-rlct" class="nav-link" data-scroll-target="#calculating-the-rlct">Calculating the RLCT</a></li>
   <li><a href="#reproducing-figures-9.1-and-9.2-error-metric-phase-transition" id="toc-reproducing-figures-9.1-and-9.2-error-metric-phase-transition" class="nav-link" data-scroll-target="#reproducing-figures-9.1-and-9.2-error-metric-phase-transition">Reproducing Figures 9.1 and 9.2: Error Metric Phase Transition</a></li>
+  </ul></li>
+  <li><a href="#discovery-process" id="toc-discovery-process" class="nav-link" data-scroll-target="#discovery-process">9.5 Discovery Process</a>
+  <ul class="collapse">
+  <li><a href="#case-1-regular-and-realizable" id="toc-case-1-regular-and-realizable" class="nav-link" data-scroll-target="#case-1-regular-and-realizable">Case (1): Regular and Realizable</a></li>
+  <li><a href="#case-2-singular-and-realizable" id="toc-case-2-singular-and-realizable" class="nav-link" data-scroll-target="#case-2-singular-and-realizable">Case (2): Singular and Realizable</a></li>
+  <li><a href="#case-3-discovery-process" id="toc-case-3-discovery-process" class="nav-link" data-scroll-target="#case-3-discovery-process">Case (3): Discovery Process</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -762,7 +772,7 @@ b_k \sim \mathcal{N}(b_k^*, (\sigma_k^*)^2)
 \]</span> for <span class="math inline">\(k=1, 2\)</span>.</li>
 <li>Return to (2).</li>
 </ol>
-<div id="21d27e71" class="cell" data-execution_count="8">
+<div id="528c065c" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -992,16 +1002,16 @@ b_k \sim \mathcal{N}(b_k^*, (\sigma_k^*)^2)
 <style type="text/css">
 </style>
 
-<table id="T_f7487" class="caption-top table table-sm table-striped small">
+<table id="T_a0572" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank" data-quarto-table-cell-role="th">&nbsp;</th>
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_f7487_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">G</th>
-<th id="T_f7487_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">ISCV</th>
-<th id="T_f7487_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">AIC_b</th>
-<th id="T_f7487_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">DIC</th>
-<th id="T_f7487_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">WAIC</th>
+<th id="T_a0572_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">G</th>
+<th id="T_a0572_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">ISCV</th>
+<th id="T_a0572_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">AIC_b</th>
+<th id="T_a0572_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">DIC</th>
+<th id="T_a0572_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">WAIC</th>
 </tr>
 <tr class="even">
 <th class="index_name level0" data-quarto-table-cell-role="th">Cases</th>
@@ -1015,112 +1025,112 @@ b_k \sim \mathcal{N}(b_k^*, (\sigma_k^*)^2)
 </thead>
 <tbody>
 <tr class="odd">
-<th id="T_f7487_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Regular Realizable</th>
-<th id="T_f7487_level1_row0" class="row_heading level1 row0" data-quarto-table-cell-role="th">Ave</th>
-<td id="T_f7487_row0_col0" class="data row0 col0">0.0141</td>
-<td id="T_f7487_row0_col1" class="data row0 col1">0.0163</td>
-<td id="T_f7487_row0_col2" class="data row0 col2">0.0162</td>
-<td id="T_f7487_row0_col3" class="data row0 col3">0.0161</td>
-<td id="T_f7487_row0_col4" class="data row0 col4">0.0163</td>
+<th id="T_a0572_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Regular Realizable</th>
+<th id="T_a0572_level1_row0" class="row_heading level1 row0" data-quarto-table-cell-role="th">Ave</th>
+<td id="T_a0572_row0_col0" class="data row0 col0">0.0141</td>
+<td id="T_a0572_row0_col1" class="data row0 col1">0.0163</td>
+<td id="T_a0572_row0_col2" class="data row0 col2">0.0162</td>
+<td id="T_a0572_row0_col3" class="data row0 col3">0.0161</td>
+<td id="T_a0572_row0_col4" class="data row0 col4">0.0163</td>
 </tr>
 <tr class="even">
-<th id="T_f7487_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th"></th>
-<th id="T_f7487_level1_row1" class="row_heading level1 row1" data-quarto-table-cell-role="th">Std</th>
-<td id="T_f7487_row1_col0" class="data row1 col0">0.0105</td>
-<td id="T_f7487_row1_col1" class="data row1 col1">0.0101</td>
-<td id="T_f7487_row1_col2" class="data row1 col2">0.0101</td>
-<td id="T_f7487_row1_col3" class="data row1 col3">0.0102</td>
-<td id="T_f7487_row1_col4" class="data row1 col4">0.0101</td>
+<th id="T_a0572_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th"></th>
+<th id="T_a0572_level1_row1" class="row_heading level1 row1" data-quarto-table-cell-role="th">Std</th>
+<td id="T_a0572_row1_col0" class="data row1 col0">0.0105</td>
+<td id="T_a0572_row1_col1" class="data row1 col1">0.0101</td>
+<td id="T_a0572_row1_col2" class="data row1 col2">0.0101</td>
+<td id="T_a0572_row1_col3" class="data row1 col3">0.0102</td>
+<td id="T_a0572_row1_col4" class="data row1 col4">0.0101</td>
 </tr>
 <tr class="odd">
-<th id="T_f7487_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Regular Unrealizable</th>
-<th id="T_f7487_level1_row2" class="row_heading level1 row2" data-quarto-table-cell-role="th">Ave</th>
-<td id="T_f7487_row2_col0" class="data row2 col0">0.0548</td>
-<td id="T_f7487_row2_col1" class="data row2 col1">0.0543</td>
-<td id="T_f7487_row2_col2" class="data row2 col2">0.0580</td>
-<td id="T_f7487_row2_col3" class="data row2 col3">0.0578</td>
-<td id="T_f7487_row2_col4" class="data row2 col4">0.0543</td>
+<th id="T_a0572_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Regular Unrealizable</th>
+<th id="T_a0572_level1_row2" class="row_heading level1 row2" data-quarto-table-cell-role="th">Ave</th>
+<td id="T_a0572_row2_col0" class="data row2 col0">0.0548</td>
+<td id="T_a0572_row2_col1" class="data row2 col1">0.0543</td>
+<td id="T_a0572_row2_col2" class="data row2 col2">0.0580</td>
+<td id="T_a0572_row2_col3" class="data row2 col3">0.0578</td>
+<td id="T_a0572_row2_col4" class="data row2 col4">0.0543</td>
 </tr>
 <tr class="even">
-<th id="T_f7487_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th"></th>
-<th id="T_f7487_level1_row3" class="row_heading level1 row3" data-quarto-table-cell-role="th">Std</th>
-<td id="T_f7487_row3_col0" class="data row3 col0">0.0127</td>
-<td id="T_f7487_row3_col1" class="data row3 col1">0.0276</td>
-<td id="T_f7487_row3_col2" class="data row3 col2">0.0283</td>
-<td id="T_f7487_row3_col3" class="data row3 col3">0.0283</td>
-<td id="T_f7487_row3_col4" class="data row3 col4">0.0276</td>
+<th id="T_a0572_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th"></th>
+<th id="T_a0572_level1_row3" class="row_heading level1 row3" data-quarto-table-cell-role="th">Std</th>
+<td id="T_a0572_row3_col0" class="data row3 col0">0.0127</td>
+<td id="T_a0572_row3_col1" class="data row3 col1">0.0276</td>
+<td id="T_a0572_row3_col2" class="data row3 col2">0.0283</td>
+<td id="T_a0572_row3_col3" class="data row3 col3">0.0283</td>
+<td id="T_a0572_row3_col4" class="data row3 col4">0.0276</td>
 </tr>
 <tr class="odd">
-<th id="T_f7487_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Nonreg. Realizable</th>
-<th id="T_f7487_level1_row4" class="row_heading level1 row4" data-quarto-table-cell-role="th">Ave</th>
-<td id="T_f7487_row4_col0" class="data row4 col0">0.0081</td>
-<td id="T_f7487_row4_col1" class="data row4 col1">0.0063</td>
-<td id="T_f7487_row4_col2" class="data row4 col2">0.0198</td>
-<td id="T_f7487_row4_col3" class="data row4 col3">-0.0163</td>
-<td id="T_f7487_row4_col4" class="data row4 col4">0.0063</td>
+<th id="T_a0572_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Nonreg. Realizable</th>
+<th id="T_a0572_level1_row4" class="row_heading level1 row4" data-quarto-table-cell-role="th">Ave</th>
+<td id="T_a0572_row4_col0" class="data row4 col0">0.0081</td>
+<td id="T_a0572_row4_col1" class="data row4 col1">0.0063</td>
+<td id="T_a0572_row4_col2" class="data row4 col2">0.0198</td>
+<td id="T_a0572_row4_col3" class="data row4 col3">-0.0163</td>
+<td id="T_a0572_row4_col4" class="data row4 col4">0.0063</td>
 </tr>
 <tr class="even">
-<th id="T_f7487_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th"></th>
-<th id="T_f7487_level1_row5" class="row_heading level1 row5" data-quarto-table-cell-role="th">Std</th>
-<td id="T_f7487_row5_col0" class="data row5 col0">0.0098</td>
-<td id="T_f7487_row5_col1" class="data row5 col1">0.0102</td>
-<td id="T_f7487_row5_col2" class="data row5 col2">0.0136</td>
-<td id="T_f7487_row5_col3" class="data row5 col3">0.0347</td>
-<td id="T_f7487_row5_col4" class="data row5 col4">0.0101</td>
+<th id="T_a0572_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th"></th>
+<th id="T_a0572_level1_row5" class="row_heading level1 row5" data-quarto-table-cell-role="th">Std</th>
+<td id="T_a0572_row5_col0" class="data row5 col0">0.0098</td>
+<td id="T_a0572_row5_col1" class="data row5 col1">0.0102</td>
+<td id="T_a0572_row5_col2" class="data row5 col2">0.0136</td>
+<td id="T_a0572_row5_col3" class="data row5 col3">0.0347</td>
+<td id="T_a0572_row5_col4" class="data row5 col4">0.0101</td>
 </tr>
 <tr class="odd">
-<th id="T_f7487_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">Nonreg. Unrealizable</th>
-<th id="T_f7487_level1_row6" class="row_heading level1 row6" data-quarto-table-cell-role="th">Ave</th>
-<td id="T_f7487_row6_col0" class="data row6 col0">0.0533</td>
-<td id="T_f7487_row6_col1" class="data row6 col1">0.0538</td>
-<td id="T_f7487_row6_col2" class="data row6 col2">0.0722</td>
-<td id="T_f7487_row6_col3" class="data row6 col3">0.0376</td>
-<td id="T_f7487_row6_col4" class="data row6 col4">0.0538</td>
+<th id="T_a0572_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">Nonreg. Unrealizable</th>
+<th id="T_a0572_level1_row6" class="row_heading level1 row6" data-quarto-table-cell-role="th">Ave</th>
+<td id="T_a0572_row6_col0" class="data row6 col0">0.0533</td>
+<td id="T_a0572_row6_col1" class="data row6 col1">0.0538</td>
+<td id="T_a0572_row6_col2" class="data row6 col2">0.0722</td>
+<td id="T_a0572_row6_col3" class="data row6 col3">0.0376</td>
+<td id="T_a0572_row6_col4" class="data row6 col4">0.0538</td>
 </tr>
 <tr class="even">
-<th id="T_f7487_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th"></th>
-<th id="T_f7487_level1_row7" class="row_heading level1 row7" data-quarto-table-cell-role="th">Std</th>
-<td id="T_f7487_row7_col0" class="data row7 col0">0.0064</td>
-<td id="T_f7487_row7_col1" class="data row7 col1">0.0252</td>
-<td id="T_f7487_row7_col2" class="data row7 col2">0.0254</td>
-<td id="T_f7487_row7_col3" class="data row7 col3">0.0468</td>
-<td id="T_f7487_row7_col4" class="data row7 col4">0.0252</td>
+<th id="T_a0572_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th"></th>
+<th id="T_a0572_level1_row7" class="row_heading level1 row7" data-quarto-table-cell-role="th">Std</th>
+<td id="T_a0572_row7_col0" class="data row7 col0">0.0064</td>
+<td id="T_a0572_row7_col1" class="data row7 col1">0.0252</td>
+<td id="T_a0572_row7_col2" class="data row7 col2">0.0254</td>
+<td id="T_a0572_row7_col3" class="data row7 col3">0.0468</td>
+<td id="T_a0572_row7_col4" class="data row7 col4">0.0252</td>
 </tr>
 <tr class="odd">
-<th id="T_f7487_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">Delicate</th>
-<th id="T_f7487_level1_row8" class="row_heading level1 row8" data-quarto-table-cell-role="th">Ave</th>
-<td id="T_f7487_row8_col0" class="data row8 col0">0.0079</td>
-<td id="T_f7487_row8_col1" class="data row8 col1">0.0090</td>
-<td id="T_f7487_row8_col2" class="data row8 col2">0.0190</td>
-<td id="T_f7487_row8_col3" class="data row8 col3">-0.0223</td>
-<td id="T_f7487_row8_col4" class="data row8 col4">0.0091</td>
+<th id="T_a0572_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">Delicate</th>
+<th id="T_a0572_level1_row8" class="row_heading level1 row8" data-quarto-table-cell-role="th">Ave</th>
+<td id="T_a0572_row8_col0" class="data row8 col0">0.0079</td>
+<td id="T_a0572_row8_col1" class="data row8 col1">0.0090</td>
+<td id="T_a0572_row8_col2" class="data row8 col2">0.0190</td>
+<td id="T_a0572_row8_col3" class="data row8 col3">-0.0223</td>
+<td id="T_a0572_row8_col4" class="data row8 col4">0.0091</td>
 </tr>
 <tr class="even">
-<th id="T_f7487_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th"></th>
-<th id="T_f7487_level1_row9" class="row_heading level1 row9" data-quarto-table-cell-role="th">Std</th>
-<td id="T_f7487_row9_col0" class="data row9 col0">0.0075</td>
-<td id="T_f7487_row9_col1" class="data row9 col1">0.0089</td>
-<td id="T_f7487_row9_col2" class="data row9 col2">0.0087</td>
-<td id="T_f7487_row9_col3" class="data row9 col3">0.0406</td>
-<td id="T_f7487_row9_col4" class="data row9 col4">0.0089</td>
+<th id="T_a0572_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th"></th>
+<th id="T_a0572_level1_row9" class="row_heading level1 row9" data-quarto-table-cell-role="th">Std</th>
+<td id="T_a0572_row9_col0" class="data row9 col0">0.0075</td>
+<td id="T_a0572_row9_col1" class="data row9 col1">0.0089</td>
+<td id="T_a0572_row9_col2" class="data row9 col2">0.0087</td>
+<td id="T_a0572_row9_col3" class="data row9 col3">0.0406</td>
+<td id="T_a0572_row9_col4" class="data row9 col4">0.0089</td>
 </tr>
 <tr class="odd">
-<th id="T_f7487_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">Unbalanced</th>
-<th id="T_f7487_level1_row10" class="row_heading level1 row10" data-quarto-table-cell-role="th">Ave</th>
-<td id="T_f7487_row10_col0" class="data row10 col0">0.0194</td>
-<td id="T_f7487_row10_col1" class="data row10 col1">0.0068</td>
-<td id="T_f7487_row10_col2" class="data row10 col2">0.0122</td>
-<td id="T_f7487_row10_col3" class="data row10 col3">-0.0317</td>
-<td id="T_f7487_row10_col4" class="data row10 col4">0.0067</td>
+<th id="T_a0572_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">Unbalanced</th>
+<th id="T_a0572_level1_row10" class="row_heading level1 row10" data-quarto-table-cell-role="th">Ave</th>
+<td id="T_a0572_row10_col0" class="data row10 col0">0.0194</td>
+<td id="T_a0572_row10_col1" class="data row10 col1">0.0068</td>
+<td id="T_a0572_row10_col2" class="data row10 col2">0.0122</td>
+<td id="T_a0572_row10_col3" class="data row10 col3">-0.0317</td>
+<td id="T_a0572_row10_col4" class="data row10 col4">0.0067</td>
 </tr>
 <tr class="even">
-<th id="T_f7487_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th"></th>
-<th id="T_f7487_level1_row11" class="row_heading level1 row11" data-quarto-table-cell-role="th">Std</th>
-<td id="T_f7487_row11_col0" class="data row11 col0">0.0123</td>
-<td id="T_f7487_row11_col1" class="data row11 col1">0.0143</td>
-<td id="T_f7487_row11_col2" class="data row11 col2">0.0124</td>
-<td id="T_f7487_row11_col3" class="data row11 col3">0.0873</td>
-<td id="T_f7487_row11_col4" class="data row11 col4">0.0143</td>
+<th id="T_a0572_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th"></th>
+<th id="T_a0572_level1_row11" class="row_heading level1 row11" data-quarto-table-cell-role="th">Std</th>
+<td id="T_a0572_row11_col0" class="data row11 col0">0.0123</td>
+<td id="T_a0572_row11_col1" class="data row11 col1">0.0143</td>
+<td id="T_a0572_row11_col2" class="data row11 col2">0.0124</td>
+<td id="T_a0572_row11_col3" class="data row11 col3">0.0873</td>
+<td id="T_a0572_row11_col4" class="data row11 col4">0.0143</td>
 </tr>
 </tbody>
 </table>
@@ -1137,8 +1147,8 @@ b_k \sim \mathcal{N}(b_k^*, (\sigma_k^*)^2)
 </ul>
 </section>
 </section>
-<section id="chapter-9.-phase-transition-in-a-hierarchical-model" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="chapter-9.-phase-transition-in-a-hierarchical-model">Chapter 9. Phase Transition in a Hierarchical Model</h2>
+<section id="chapter-9.-phase-transitions" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="chapter-9.-phase-transitions">Chapter 9. Phase Transitions</h2>
 <p>In Chapter 9, Watanabe describes a <strong>Phase Transition</strong> in Bayesian statistics. A phase transition occurs when the structure of the posterior distribution changes drastically depending on a generalized hyperparameter. At this critical point, the free energy is often discontinuous or non-differentiable.</p>
 <section id="example-67-normal-mixture-phase-transition" class="level3">
 <h3 class="anchored" data-anchor-id="example-67-normal-mixture-phase-transition">Example 67: Normal Mixture Phase Transition</h3>
@@ -1370,6 +1380,172 @@ b_k \sim \mathcal{N}(b_k^*, (\sigma_k^*)^2)
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="discovery-process" class="level2">
+<h2 class="anchored" data-anchor-id="discovery-process">9.5 Discovery Process</h2>
+<p>Hierarchical statistical models such as normal mixtures have several phases determined by the complexity of the model and the sample size <span class="math inline">\(n\)</span>. In general, a true distribution cannot be represented by any finite statistical model. However, if <span class="math inline">\(n\)</span> is small, the true distribution seems to be almost realizable by a statistical model. If <span class="math inline">\(n\)</span> is large, it seems to be unrealizable.</p>
+<p>If <span class="math inline">\(n\)</span> is fixed and model complexity is varied, this is a model selection process. Conversely, if the model is fixed and <span class="math inline">\(n\)</span> is controlled (increased), this is a <strong>discovery process</strong>. In a discovery process, a true distribution may initially act singular for a statistical model when <span class="math inline">\(n\)</span> is small, but eventually behave as regular and realizable (or unrealizable) when <span class="math inline">\(n\)</span> is large.</p>
+<p>To illustrate this, let us evaluate our 1D generalized model with: <span class="math display">\[ p(x|w) = (1 - a) \mathcal{N}(x|0, 1) + a \mathcal{N}(x|\mu, 1) \]</span> For a prior, we again use a Beta distribution (a generalized Dirichlet distribution) on <span class="math inline">\(a\)</span> with index <span class="math inline">\(\alpha=0.3\)</span> and a wide Gaussian prior on <span class="math inline">\(\mu\)</span> (<span class="math inline">\(\sigma=10\)</span>): <span class="math display">\[ \varphi(a) \propto (a(1 - a))^{\alpha - 1} \]</span> <span class="math display">\[ \varphi(\mu) \propto \exp\left(-\frac{\mu^2}{2\sigma^2}\right) \]</span></p>
+<p>We will investigate three cases of the true distribution <span class="math inline">\(q(x) = p(x|a_0, \mu_0)\)</span> with <span class="math inline">\(a_0=0.5\)</span> across different sample sizes (<span class="math inline">\(n \in \{5, 10, 20, 40, 80, 160, 320, 640\}\)</span>). To avoid expensive MCMC across thousands of trials, the errors below are averaged over 30 trials using exact calculation over a dense parameter grid.</p>
+<div id="discovery-process-data" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load pre-calculated results</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">'discovery_process_results.json'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        discovery_results <span class="op">=</span> json.load(f)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">FileNotFoundError</span>:</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Pre-calculated results discovery_process_results.json not found."</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Run `python3 run_discovery_process.py` to generate the data."</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    discovery_results <span class="op">=</span> {}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="case-1-regular-and-realizable" class="level3">
+<h3 class="anchored" data-anchor-id="case-1-regular-and-realizable">Case (1): Regular and Realizable</h3>
+<p>Let the true component center be <span class="math inline">\(\mu_0 = 4.0\)</span>. Here, <span class="math inline">\(q(x) = 0.5 \mathcal{N}(x|0, 1) + 0.5 \mathcal{N}(x|4.0, 1)\)</span>. Because the true parameters <span class="math inline">\((a=0.5, \mu=4.0)\)</span> are distinctly separate from the non-identifiable singularities (<span class="math inline">\(a=0\)</span> or <span class="math inline">\(\mu=0\)</span>), the model behaves as a completely <strong>regular model</strong>. The Real Log Canonical Threshold converges purely to <span class="math inline">\(\lambda = d/2 = 2/2 = 1.0\)</span>.</p>
+<div id="cell-fig-discovery-case1" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"1"</span> <span class="kw">in</span> discovery_results:</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    res1 <span class="op">=</span> discovery_results[<span class="st">"1"</span>]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    n_vals <span class="op">=</span> np.array([<span class="bu">int</span>(k) <span class="cf">for</span> k <span class="kw">in</span> res1.keys()])</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    n_vals.sort()</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    ge <span class="op">=</span> [res1[<span class="bu">str</span>(n)][<span class="st">'GE'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    iscv <span class="op">=</span> [res1[<span class="bu">str</span>(n)][<span class="st">'ISCV'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    waic <span class="op">=</span> [res1[<span class="bu">str</span>(n)][<span class="st">'WAIC'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    aic <span class="op">=</span> [res1[<span class="bu">str</span>(n)][<span class="st">'AIC'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    dic <span class="op">=</span> [res1[<span class="bu">str</span>(n)][<span class="st">'DIC'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, ge, <span class="st">'k+-'</span>, label<span class="op">=</span><span class="st">'GE'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, markersize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, iscv, <span class="st">'m^-'</span>, label<span class="op">=</span><span class="st">'ISCV'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, waic, <span class="st">'cs--'</span>, label<span class="op">=</span><span class="st">'WAIC'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, aic, <span class="st">'ro:'</span>, label<span class="op">=</span><span class="st">'AIC'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, dic, <span class="st">'b*-.'</span>, label<span class="op">=</span><span class="st">'DIC'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    plt.xscale(<span class="st">'log'</span>)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'n = DATA'</span>)</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'n * Errors'</span>)</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Case 1: Strict Regular Case'</span>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-discovery-case1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-discovery-case1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="slt_gaussian_mixture_files/figure-html/fig-discovery-case1-output-1.png" width="662" height="468" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-discovery-case1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Strict Regular Case. The horizontal and vertical lines show the sample size and <span class="math inline">\(n\times\)</span> errors respectively. A true distribution is set as regular and realizable. All criteria can properly estimate the Generalization Error, and all values neatly converge to <span class="math inline">\(n(G_n - S) \approx \lambda = 1.0\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="case-2-singular-and-realizable" class="level3">
+<h3 class="anchored" data-anchor-id="case-2-singular-and-realizable">Case (2): Singular and Realizable</h3>
+<p>Let the true component center be <span class="math inline">\(\mu_0 = 0.0\)</span>. Here, <span class="math inline">\(q(x) = \mathcal{N}(x|0, 1)\)</span>. Both components overlap exactly at zero, meaning the true parameter is trapped squarely on the singular manifold <span class="math inline">\(\mu=0\)</span>. The posterior is nonregular for all <span class="math inline">\(n\)</span>. Based on our calculation in Section 9.4, <span class="math inline">\(\lambda = \min(\alpha/2, 1/2) = 0.15\)</span>.</p>
+<div id="cell-fig-discovery-case2" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"2"</span> <span class="kw">in</span> discovery_results:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    res2 <span class="op">=</span> discovery_results[<span class="st">"2"</span>]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    ge <span class="op">=</span> [res2[<span class="bu">str</span>(n)][<span class="st">'GE'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    iscv <span class="op">=</span> [res2[<span class="bu">str</span>(n)][<span class="st">'ISCV'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    waic <span class="op">=</span> [res2[<span class="bu">str</span>(n)][<span class="st">'WAIC'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    aic <span class="op">=</span> [res2[<span class="bu">str</span>(n)][<span class="st">'AIC'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    dic <span class="op">=</span> [res2[<span class="bu">str</span>(n)][<span class="st">'DIC'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, ge, <span class="st">'k+-'</span>, label<span class="op">=</span><span class="st">'GE'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, markersize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, iscv, <span class="st">'m^-'</span>, label<span class="op">=</span><span class="st">'ISCV'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, waic, <span class="st">'cs--'</span>, label<span class="op">=</span><span class="st">'WAIC'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, aic, <span class="st">'ro:'</span>, label<span class="op">=</span><span class="st">'AIC'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, dic, <span class="st">'b*-.'</span>, label<span class="op">=</span><span class="st">'DIC'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    plt.xscale(<span class="st">'log'</span>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'n = DATA'</span>)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'n * Errors'</span>)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Case 2: Strict Singular Case'</span>)</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    plt.ylim(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">3.5</span>)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-discovery-case2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-discovery-case2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="slt_gaussian_mixture_files/figure-html/fig-discovery-case2-output-1.png" width="662" height="468" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-discovery-case2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Strict Singular Case. The true distribution behaves as singular for all sample sizes. Notice the errors converge near <span class="math inline">\(\lambda \approx 0.15\)</span> rather than 1.0. WAIC and ISCV accurately track the Generalization Error, while conventional AIC and DIC fail completely.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="case-3-discovery-process" class="level3">
+<h3 class="anchored" data-anchor-id="case-3-discovery-process">Case (3): Discovery Process</h3>
+<p>Let the true component center be <span class="math inline">\(\mu_0 = 1.0\)</span>. Here, <span class="math inline">\(q(x) = 0.5 \mathcal{N}(x|0, 1) + 0.5 \mathcal{N}(x|1.0, 1)\)</span>. The two components are theoretically distinct (regular), but they are very close together.</p>
+<div id="cell-fig-discovery-case3" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"3"</span> <span class="kw">in</span> discovery_results:</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    res3 <span class="op">=</span> discovery_results[<span class="st">"3"</span>]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    ge <span class="op">=</span> [res3[<span class="bu">str</span>(n)][<span class="st">'GE'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    iscv <span class="op">=</span> [res3[<span class="bu">str</span>(n)][<span class="st">'ISCV'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    waic <span class="op">=</span> [res3[<span class="bu">str</span>(n)][<span class="st">'WAIC'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    aic <span class="op">=</span> [res3[<span class="bu">str</span>(n)][<span class="st">'AIC'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    dic <span class="op">=</span> [res3[<span class="bu">str</span>(n)][<span class="st">'DIC'</span>] <span class="cf">for</span> n <span class="kw">in</span> n_vals]</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, ge, <span class="st">'k+-'</span>, label<span class="op">=</span><span class="st">'GE'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, markersize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, iscv, <span class="st">'m^-'</span>, label<span class="op">=</span><span class="st">'ISCV'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, waic, <span class="st">'cs--'</span>, label<span class="op">=</span><span class="st">'WAIC'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, aic, <span class="st">'ro:'</span>, label<span class="op">=</span><span class="st">'AIC'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    plt.plot(n_vals, dic, <span class="st">'b*-.'</span>, label<span class="op">=</span><span class="st">'DIC'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    plt.xscale(<span class="st">'log'</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'n = DATA'</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'n * Errors'</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Case 3: Discovery Process'</span>)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-discovery-case3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-discovery-case3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="slt_gaussian_mixture_files/figure-html/fig-discovery-case3-output-1.png" width="662" height="468" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-discovery-case3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Discovery Process. As <span class="math inline">\(n\)</span> increases, the hierarchical model discovers the true underlying regular structure. There is a phase transition where the system flips from singular-like behavior to regular approximation. As always, WAIC remains a valid estimator across the entire transition.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>When <span class="math inline">\(n &lt; 20\)</span>, the finite sample size isn’t large enough to resolve the tiny separation between the two components. Driven by statistical fluctuation, the posterior collapses onto the singular manifold <span class="math inline">\(\mu \approx 0\)</span>. Its errors are nearly identical to Case (2) (the singular case).</p>
+<p>When <span class="math inline">\(n &gt; 320\)</span>, the sample size provides overwhelming evidence that there are two distinct components. The posterior detaches from the singularity and correctly infers the regular distribution, and the errors transition to Case (1) (the regular case).</p>
+<p>In the intermediate region <span class="math inline">\(40 \leq n \leq 160\)</span>, the model undergoes a <strong>phase transition</strong> of knowledge discovery. The errors locally jump as the estimator structure forcefully shifts gears. Crucially, WAIC manages to track the generalization error accurately through this entire messy transition, while AIC and DIC fundamentally fail.</p>
 
 
 </section>
