@@ -15,11 +15,13 @@ website:
       - href: cheat_sheet.qmd
         text: Cheat Sheet
       - href: regular_and_singular_models.qmd
-        text: Regular and Singular Models
+        text: Regular vs Singular
       - href: slt_gaussian_mixture.qmd
         text: SLT Gaussian Mixture
+      - href: sgd_and_posterior.qmd
+        text: SGD vs Posterior
       - href: neural_network_figure_2_7.qmd
-        text: Neural Network (Figure 2.7)
+        text: Neural Network 
 
 format:
   html:
