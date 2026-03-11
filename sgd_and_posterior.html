@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>SGD as Approximate Bayesian Inference – Watanabe’s Singular Learning Theory</title>
+<title>Stochastic Gradient Descent Distribution versus Posterior – Watanabe’s Singular Learning Theory</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -164,7 +164,7 @@ window.Quarto = {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./regular_and_singular_models.html"> 
-<span class="menu-text">Regular and Singular Models</span></a>
+<span class="menu-text">Regular vs Singular</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./slt_gaussian_mixture.html"> 
@@ -172,11 +172,11 @@ window.Quarto = {
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./sgd_and_posterior.html" aria-current="page"> 
-<span class="menu-text">SGD as Bayesian Inference</span></a>
+<span class="menu-text">SGD vs Posterior</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./neural_network_figure_2_7.html"> 
-<span class="menu-text">Neural Network (Figure 2.7)</span></a>
+<span class="menu-text">Neural Network</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -223,7 +223,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">SGD as Approximate Bayesian Inference</h1>
+<h1 class="title">Stochastic Gradient Descent Distribution versus Posterior</h1>
 </div>
 
 
@@ -700,35 +700,61 @@ Figure&nbsp;2: SGD trajectory distribution (orange density) vs exact Bayesian po
 <span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>ax.imshow(hist, origin<span class="op">=</span><span class="st">'lower'</span>, extent<span class="op">=</span>[<span class="fl">0.01</span>, <span class="fl">0.99</span>, <span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.0</span>],</span>
 <span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>          aspect<span class="op">=</span><span class="st">'auto'</span>, cmap<span class="op">=</span><span class="st">'Oranges'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
 <span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a><span class="co"># Mark MLE and SGD mean</span></span>
-<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>ax.plot(a_mle, b_mle, <span class="st">'k+'</span>, markersize<span class="op">=</span><span class="dv">12</span>, markeredgewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'MLE'</span>)</span>
-<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>ax.plot(sgd_mean[<span class="dv">0</span>], sgd_mean[<span class="dv">1</span>], <span class="st">'rx'</span>, markersize<span class="op">=</span><span class="dv">10</span>, markeredgewidth<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">'SGD mean'</span>)</span>
-<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw eigenvector arrows from the SGD mean</span></span>
-<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> <span class="fl">0.15</span></span>
-<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a><span class="co"># Empirical major axis</span></span>
-<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> evecs_emp[:, <span class="dv">1</span>]</span>
-<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">''</span>, xy<span class="op">=</span>(sgd_mean[<span class="dv">0</span>]<span class="op">+</span>scale<span class="op">*</span>v[<span class="dv">0</span>], sgd_mean[<span class="dv">1</span>]<span class="op">+</span>scale<span class="op">*</span>v[<span class="dv">1</span>]),</span>
-<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>            xytext<span class="op">=</span>(sgd_mean[<span class="dv">0</span>], sgd_mean[<span class="dv">1</span>]),</span>
-<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>            arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'green'</span>, lw<span class="op">=</span><span class="fl">2.5</span>))</span>
-<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">''</span>, xy<span class="op">=</span>(sgd_mean[<span class="dv">0</span>]<span class="op">-</span>scale<span class="op">*</span>v[<span class="dv">0</span>], sgd_mean[<span class="dv">1</span>]<span class="op">-</span>scale<span class="op">*</span>v[<span class="dv">1</span>]),</span>
-<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>            xytext<span class="op">=</span>(sgd_mean[<span class="dv">0</span>], sgd_mean[<span class="dv">1</span>]),</span>
-<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>            arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'green'</span>, lw<span class="op">=</span><span class="fl">2.5</span>))</span>
-<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.03</span>, <span class="fl">0.97</span>, <span class="st">'Blue contours: posterior</span><span class="ch">\n</span><span class="st">'</span></span>
-<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Orange density: SGD trajectory</span><span class="ch">\n</span><span class="st">'</span></span>
-<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Green arrows: empirical major axis</span><span class="ch">\n</span><span class="st">'</span></span>
-<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>        <span class="st">'+ : MLE,  × : SGD mean'</span>,</span>
-<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>        transform<span class="op">=</span>ax.transAxes, fontsize<span class="op">=</span><span class="dv">9</span>, va<span class="op">=</span><span class="st">'top'</span>,</span>
-<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>        bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">'round'</span>, facecolor<span class="op">=</span><span class="st">'white'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>))</span>
-<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'lower right'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$a$'</span>)</span>
-<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'$b$'</span>)</span>
-<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'OU approximation failure: SGD mean ≠ MLE'</span>)</span>
-<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior mean from grid</span></span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>da2 <span class="op">=</span> a_grid2[<span class="dv">1</span>] <span class="op">-</span> a_grid2[<span class="dv">0</span>]</span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>db2 <span class="op">=</span> b_grid2[<span class="dv">1</span>] <span class="op">-</span> b_grid2[<span class="dv">0</span>]</span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>norm <span class="op">=</span> np.<span class="bu">sum</span>(posterior2) <span class="op">*</span> da2 <span class="op">*</span> db2</span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>post_mean_a <span class="op">=</span> np.<span class="bu">sum</span>(A_grid2 <span class="op">*</span> posterior2) <span class="op">*</span> da2 <span class="op">*</span> db2 <span class="op">/</span> norm</span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>post_mean_b <span class="op">=</span> np.<span class="bu">sum</span>(B_grid2 <span class="op">*</span> posterior2) <span class="op">*</span> da2 <span class="op">*</span> db2 <span class="op">/</span> norm</span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Posterior mean: a = </span><span class="sc">{</span>post_mean_a<span class="sc">:.4f}</span><span class="ss">,  b = </span><span class="sc">{</span>post_mean_b<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a><span class="co"># Mark MLE, posterior mean, and SGD mean</span></span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>ax.plot(a_mle, b_mle, <span class="st">'k+'</span>, markersize<span class="op">=</span><span class="dv">12</span>, markeredgewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'MLE'</span>)</span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>ax.plot(post_mean_a, post_mean_b, <span class="st">'D'</span>, color<span class="op">=</span><span class="st">'royalblue'</span>, markersize<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>        markeredgecolor<span class="op">=</span><span class="st">'white'</span>, markeredgewidth<span class="op">=</span><span class="dv">1</span>, label<span class="op">=</span><span class="st">'Posterior mean'</span>)</span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>ax.plot(sgd_mean[<span class="dv">0</span>], sgd_mean[<span class="dv">1</span>], <span class="st">'rx'</span>, markersize<span class="op">=</span><span class="dv">10</span>, markeredgewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">'SGD mean'</span>)</span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw eigenvector arrows</span></span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> <span class="fl">0.15</span></span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a><span class="co"># At MLE: H small-eigenvalue direction (posterior ridge) in blue</span></span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>evals_Hm, evecs_Hm <span class="op">=</span> np.linalg.eigh(H_mle)</span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>v_post <span class="op">=</span> evecs_Hm[:, <span class="dv">0</span>]  <span class="co"># small eigenvalue = flat/ridge direction</span></span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sign <span class="kw">in</span> [<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">''</span>, xy<span class="op">=</span>(a_mle <span class="op">+</span> sign<span class="op">*</span>scale<span class="op">*</span>v_post[<span class="dv">0</span>], b_mle <span class="op">+</span> sign<span class="op">*</span>scale<span class="op">*</span>v_post[<span class="dv">1</span>]),</span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>                xytext<span class="op">=</span>(a_mle, b_mle),</span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'blue'</span>, lw<span class="op">=</span><span class="fl">2.5</span>))</span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a><span class="co"># At MLE: OU-predicted Σ large-eigenvalue direction in orange</span></span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>v_ou <span class="op">=</span> evecs_mle[:, <span class="dv">1</span>]  <span class="co"># large eigenvalue = predicted SGD stretch</span></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sign <span class="kw">in</span> [<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">''</span>, xy<span class="op">=</span>(a_mle <span class="op">+</span> sign<span class="op">*</span>scale<span class="op">*</span>v_ou[<span class="dv">0</span>], b_mle <span class="op">+</span> sign<span class="op">*</span>scale<span class="op">*</span>v_ou[<span class="dv">1</span>]),</span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>                xytext<span class="op">=</span>(a_mle, b_mle),</span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'darkorange'</span>, lw<span class="op">=</span><span class="fl">2.5</span>))</span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a><span class="co"># At SGD mean: empirical major axis in green</span></span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a>v_emp <span class="op">=</span> evecs_emp[:, <span class="dv">1</span>]</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sign <span class="kw">in</span> [<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">''</span>, xy<span class="op">=</span>(sgd_mean[<span class="dv">0</span>] <span class="op">+</span> sign<span class="op">*</span>scale<span class="op">*</span>v_emp[<span class="dv">0</span>], sgd_mean[<span class="dv">1</span>] <span class="op">+</span> sign<span class="op">*</span>scale<span class="op">*</span>v_emp[<span class="dv">1</span>]),</span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a>                xytext<span class="op">=</span>(sgd_mean[<span class="dv">0</span>], sgd_mean[<span class="dv">1</span>]),</span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'green'</span>, lw<span class="op">=</span><span class="fl">2.5</span>))</span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.03</span>, <span class="fl">0.97</span>, <span class="st">'At MLE (+):</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a>        <span class="st">'  Blue arrows: posterior ridge (H small eigval)</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>        <span class="st">'  Orange arrows: OU-predicted SGD stretch</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a>        <span class="st">'At SGD mean (×):</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a>        <span class="st">'  Green arrows: empirical major axis</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Blue ◆: posterior mean'</span>,</span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a>        transform<span class="op">=</span>ax.transAxes, fontsize<span class="op">=</span><span class="fl">8.5</span>, va<span class="op">=</span><span class="st">'top'</span>,</span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a>        bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">'round'</span>, facecolor<span class="op">=</span><span class="st">'white'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>))</span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'lower right'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$a$'</span>)</span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'$b$'</span>)</span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'OU approximation failure: SGD mean ≠ MLE'</span>)</span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>MLE:            a* = 0.4852,  b* = 0.1440
@@ -743,7 +769,9 @@ OU prediction @ MLE:
   major axis angle = 179.2°
 OU prediction @ SGD mean:
   eigenvalues = 0.014830, 0.040280  (ratio 2.7:1)
-  major axis angle = -152.1°</code></pre>
+  major axis angle = -152.1°
+
+Posterior mean: a = 0.3423,  b = 0.2384</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div id="fig-ou-failure" class="quarto-float quarto-figure quarto-figure-center anchored">
